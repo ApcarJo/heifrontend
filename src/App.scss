@@ -6,7 +6,9 @@
 @import 'containers/Profile/Profile.scss';
 
 @import 'components/Header/Header.scss';
-@import 'containers/Calendar/Calendar.scss';
+@import 'components/Footer/Footer.scss';
+@import 'components/Datepicker/Datepicker.scss';
+@import 'components/Calendar/Calendar.scss';
 
 
 .App {
@@ -18,6 +20,7 @@
 html,
 body,
 #root {
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   margin: 0;
 }

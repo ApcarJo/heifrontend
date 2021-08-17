@@ -5,7 +5,7 @@ const Home = () => {
 
     return(
         <div className="viewHome">
-            Hello, this is Home
+            Hello, this is Home2
         </div>
     )
 }

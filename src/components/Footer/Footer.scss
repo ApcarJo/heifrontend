@@ -1,0 +1,8 @@
+
+.viewFooter {
+    @extend .center;
+    background-color: $pal-footer;
+    color: $pal-text-footer;
+    height: fit-content;
+    padding: 0.2% 0 0.2% 0;
+}
