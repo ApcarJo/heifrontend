@@ -16,7 +16,7 @@ const credentialsReducer = (state = initialState, action) => {
             return initialState;
 
         case UPDATE_USER:
-            return {...state, customer: action.payload}       
+            return {...state, update_user: action.payload}       
 
         default:
             return state

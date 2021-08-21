@@ -17,6 +17,7 @@ $pal-footer: #444444;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 .content {
@@ -76,4 +77,30 @@ $pal-footer: #444444;
 }
 .form input:focus + .lbl-nombre:after, .form input:valid + .lbl-nombre:after {
     transform: translateX(0%);
+}
+
+.sendButton {
+    @extend .center;
+    border: none;
+    background-color: $pal-main;
+    border-radius: 0.5em;
+    color: $pal-det;
+    height: 2em;
+    width: 6em;
+    // margin-right: 0.5em;
+    // margin-left: 0.5em;
+    align-items: space-evenly;
+    &:hover {
+        cursor: pointer;
+        background-color: $pal-footer;
+    }
+}
+
+.row {
+    @extend .center;
+    flex-direction: row;
+    padding: 0.5em;
+    width: 100%;
+    justify-content: space-between;
+    border-bottom: 0.1em solid $pal-main;
 }

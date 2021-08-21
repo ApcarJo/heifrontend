@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { LOGIN } from '../../redux/types';
-import { getDefaultNormalizer } from '@testing-library/react';
 
 const Login = (props) => {
 
