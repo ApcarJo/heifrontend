@@ -9,8 +9,8 @@
     overflow: hidden;
     background-color: white;
     color: $pal-text;
-    height: fit-content;
-    width: 32em;
+    height: 100vh;
+    width: 100vw;
     padding: 2em;
     border-radius: 0.5em;
 
@@ -21,11 +21,14 @@
 }
 
 .input {
-    all:unset;
     @extend .center;
-    justify-content: flex-start;
-    align-items: flex-start;
+    border:none;
     border-bottom: $pal-text 0.05em solid;
+    width: 20em;
+}
+
+.loginInput{
+    @extend .center;
     width: 100%;
-    margin: 1em;
+    padding: 1em;
 }

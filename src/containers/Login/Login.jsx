@@ -33,28 +33,11 @@ const Login = (props) => {
 
             case 'email':
 
-                if (credentials.email.length < 1) {
+                if (! /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(credentials.email)) {
                     setMensajeError({ ...msgError, eEmail: "Please, enter your email" });
                 } else {
                     setMensajeError({ ...msgError, eEmail: "" });
                 }
-
-                // let body = {
-                //     email: credentials.email
-                // }
-
-                // let role = await axios.post('http://localhost:3006/clients/email', body);
-
-                // if (role.data !== null){
-                //     setStatusRole({...statusRole, roleStatus: 'client'});
-                // }
-
-                // if (role.data == null){
-                //     role = await axios.post('http://localhost:3006/dentists/email', body);
-                //     if (role.data !== null) { 
-                //         setStatusRole({...statusRole, roleStatus: 'dentist'});
-                //     } 
-                // }
                 break;
 
             case 'password':
@@ -72,7 +55,7 @@ const Login = (props) => {
     }
 
     const logeame = async () => {
-        // if (! /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(this.state.email) ) {
+
         try {
             // A continuamos, generamos el body para enviar los datos por axios
             let body = {
@@ -97,22 +80,24 @@ const Login = (props) => {
 
     return (
         <div className="viewLogin">
-            <h3>Login</h3>
-            {/* <pre>{JSON.stringify(credentials, null,2)}</pre> */}
-            <div className="loginCard">
+            <div className="content">
+                <h3>Login</h3>
+                {/* <pre>{JSON.stringify(credentials, null,2)}</pre> */}
+                <div className="loginCard">
+                    <div className="errorsText">{msgError.eEmail}</div>
+                    <div className="loginInput">
+                        <input className="input" name="email" type="text" onChange={updateCredentials} onBlur={() => checkError("email")} placeholder="user" required />
+                        <div className="errorsText">{msgError.ePassword}</div>
+                    </div>
 
-                <div className="errorsText">{msgError.eEmail}</div>
+                    <div className="loginInput">
+                        <input className="input" name="password" type="password" onChange={updateCredentials} onBlur={() => checkError("password")} placeholder="password" required />
+                    </div>
 
-                <input className="input" name="email" type="text" onChange={updateCredentials} onBlur={() => checkError("email")} required />
-
-                <div className="errorsText">{msgError.ePassword}</div>
-
-                <input className="input" name="password" type="password" onChange={updateCredentials} onBlur={() => checkError("password")} required />
-
-                <div className="sendButton" onClick={() => logeame()}>Login</div>
-                <div>{msgError.eValidate}</div>
+                    <div className="sendButton" onClick={() => logeame()}>Login</div>
+                    <div>{msgError.eValidate}</div>
+                </div>
             </div>
-
         </div>
     )
 }

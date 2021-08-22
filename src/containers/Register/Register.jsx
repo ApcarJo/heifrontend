@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom'; 
+import { useHistory } from 'react-router-dom';
 import Calendar from '../../components/Datepicker/Datepicker';
 
 const Register = (props) => {
 
     let history = useHistory();
-    
+
 
     // Hook
     const [datosUser, setDatosUser] = useState(
@@ -39,25 +39,25 @@ const Register = (props) => {
 
         try {
 
-        let body = {
-            name: datosUser.name,
-            email: datosUser.email,
-            codename: datosUser.codename,
-            password: datosUser.password,
-        }
+            let body = {
+                name: datosUser.name,
+                email: datosUser.email,
+                codename: datosUser.codename,
+                password: datosUser.password,
+            }
 
-        if (datosUser.password === datosUser.password2) {
-        await axios.post('http://127.0.0.1:8000/api/register', body);
-        setTimeout(() => {
-            history.push(`/login`);
-        }, 250);
+            if (datosUser.password === datosUser.password2) {
+                await axios.post('http://127.0.0.1:8000/api/register', body);
+                setTimeout(() => {
+                    history.push(`/login`);
+                }, 250);
 
-        } else {
-            setErrors({...errors, eValidate: 'Register could not be completed., please try again.'});
+            } else {
+                setErrors({ ...errors, eValidate: 'Register could not be completed., please try again.' });
             }
 
         } catch {
-             setErrors({...errors, eValidate: 'Register could not be completed., please try again.'});
+            setErrors({ ...errors, eValidate: 'Register could not be completed., please try again.' });
         }
 
     }
@@ -109,78 +109,37 @@ const Register = (props) => {
                 break;
         }
     }
-    // const errorStyle = (arg) => {
 
-    //     let errorDefault = "name";
-    //     let errorWarning = "red";
-
-    //     if (errors.eName !== '') {
-    //         return errorWarning;
-    //     }
-
-    //     return errorDefault;
-    // }
     return (
-        <div className="RegisterView">
+        <div className="viewRegister">
             <div className="content">
+                <h3>Register</h3>
                 {/* <pre>{JSON.stringify(datosUser, null, 2)}</pre> */}
-                <div className="profileCard">
-                    <div className="box1">
-                        
-                        <form className="form">
-                            <input className="input" name="name" type="text" onChange={updateFormulario} onBlur={() => checkError("name")} required />
-
-                            <label className="lbl-nombre">
-                                <span className="text-nomb">Name</span>
-                            </label>
-                        </form>
+                <div className="registerCard">
+                    <div className="registerInput">
+                        <input className="input" name="name" type="text" onChange={updateFormulario} onBlur={() => checkError("name")} placeholder="name" required />
                         <div className="errorsText">{errors.eName}</div>
                     </div>
-                    <div className="box1">
-                        
-                        <form className="form">
-                            <input className="input" name="email" type="text" onChange={updateFormulario} onBlur={() => checkError("email")} required />
-                            <label className="lbl-nombre">
-                                <span className="text-nomb">Email</span>
-                            </label>
-                        </form>
+                    <div className="registerInput">
+                        <input className="input" name="email" type="text" onChange={updateFormulario} onBlur={() => checkError("email")} placeholder="email" required />
                         <div className="errorsText">{errors.eEmail}</div>
                     </div>
-                    <div className="box1">
-                        
-                        <form className="form">
-                            <input className="input" name="codename" type="text" onChange={updateFormulario} onBlur={() => checkError("phone")} required />
-                            <label className="lbl-nombre">
-                                <span className="text-nomb">Codename</span>
-                            </label>
-                        </form>
+
+                    <div className="registerInput">
+                        <input className="input" name="codename" type="text" onChange={updateFormulario} onBlur={() => checkError("phone")} placeholder="codename" required />
+
                         <div className="errorsText">{errors.eCodename}</div>
                     </div>
-                    <div className="box1">
-                        
-                        <form className="form">
-                            <input className="input" name="password" type="password" onChange={updateFormulario} onBlur={() => checkError("password")} required />
-                            <label className="lbl-nombre">
-                                <span className="text-nomb">Password</span>
-                            </label>
-                        </form>
-                        <div className="errorsText">{errors.ePassword}</div>
+                    <div className="registerInput">
+                        <input className="input" name="password" type="password" onChange={updateFormulario} onBlur={() => checkError("password")} placeholder="password"required />
+                        <div className="errorsText">{errors.ePassword}
+                        </div>
                     </div>
-                    <div className="box1">
-                        
-                        <form className="form">
-                            <input className="input" name="password2" type="password" onChange={updateFormulario} onBlur={() => checkError("password2")} required />
-                            <label className="lbl-nombre">
-                                <span className="text-nomb">Repeat Password</span>
-                            </label>
-                        </form>
+                    <div className="registerInput">
+                        <input className="input" name="password2" type="password" onChange={updateFormulario} onBlur={() => checkError("password2")} placeholder="repeat password"required />
+
                         <div className="errorsText">{errors.ePassword2}</div>
                     </div>
-
-                    {/* <input className="name2" name="iDate" type="date" onChange={updateFormulario} onBlur={()=>checkError("iDate")} placeholder="postal code"></input><br></br>
-                <div>{errors.eIDate}</div> */}
-                    {/* onBlur={()=>checkError("password")} */}
-
                     <button className="sendButton" onClick={() => applyRegister()}>Register</button>
                 </div>
             </div>
