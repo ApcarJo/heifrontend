@@ -11,6 +11,7 @@ import Schedule from './containers/Schedule/Schedule';
 import Login from './containers/Login/Login';
 import Datepicker from './components/Datepicker/Datepicker';
 import GWupdate from './components/GWupdate/GWupdate';
+import GWupdateCreate from './components/GWupdate/GWupdateCreate';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/header" exact component={Header} />
           <Route path="/schedule" exact component={Schedule} />
           <Route path="/gwupdate" exact component={GWupdate} />
+          <Route path="/gwupdatecreate" exact component={GWupdateCreate} />
 
 
         </Switch>

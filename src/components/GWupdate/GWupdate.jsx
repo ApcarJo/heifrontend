@@ -30,11 +30,8 @@ const GWupdate = (props) => {
     }
 
     const deleteGWU = async (id) => {
-
-
-
         try {
-            let token = props.credentials.token;
+            let token = props.credentials?.token;
 
             let body = {
                 Gwupdate_id: id,
@@ -64,6 +61,7 @@ const GWupdate = (props) => {
 
                                 <div>{val.infoUpdate}</div>
                                 <button className="sendButton" onClick={() => deleteGWU(val.id)}>Delete</button>
+                                
                             </div>
                         </div>
                     ))}

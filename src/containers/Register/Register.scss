@@ -1,37 +1,13 @@
 
 .formulario{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @extend .center;
 
     padding-top: 2em;
 
     height: fit-content;
-    width: 35em;
+    width: 32em;
     border-radius: 0.1em;
     /* border: solid #31326f; */
     background-color: #dfeaf7;
     
-}
-
-.registerButton{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 2em;
-    border-radius: 0.2em;
-    padding: 1em;
-    border: solid 0.2em rgb(59, 59, 59);
-    cursor: pointer;
-    transition: 0.3s;
-    color: grey;
-}
-
-.registerButton:hover{
-    background-color: white;
-    transition: 0.3s ease;
-    border: solid 0.2em white;
-    color: black;
 }

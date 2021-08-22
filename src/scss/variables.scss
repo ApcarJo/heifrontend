@@ -22,6 +22,7 @@ $pal-footer: #444444;
 
 .content {
     @extend .center;
+    height: 100vh;
     padding: 2%;
 }
 
@@ -31,11 +32,11 @@ $pal-footer: #444444;
     overflow: hidden;
     width: 100%;
     height: fit-content;
-    max-width: 25em;
+    max-width: 32em;
     top: -2em;
 }
 .form input {
-    width: 100%;
+    width: 32%;
     height: fit-content;
     background: none;
     color: black;
@@ -94,6 +95,10 @@ $pal-footer: #444444;
         cursor: pointer;
         background-color: $pal-footer;
     }
+}
+
+.box1 {
+    margin: 1em;
 }
 
 .row {

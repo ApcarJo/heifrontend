@@ -15,56 +15,56 @@ const Login = (props) => {
 
     // Handler
     const updateCredentials = (e) => {
-        setCredentials({...credentials, [e.target.name]: e.target.value})
+        setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
 
-    },[]);
+    }, []);
 
 
-    useEffect(()=>{
-        
+    useEffect(() => {
+
     });
 
     const checkError = async (arg) => {
 
-        switch (arg){
+        switch (arg) {
 
             case 'email':
 
-                if (credentials.email.length < 1){
-                    setMensajeError({...msgError, eEmail: "Please, enter your email"});
-                }else {
-                    setMensajeError({...msgError, eEmail: ""});
+                if (credentials.email.length < 1) {
+                    setMensajeError({ ...msgError, eEmail: "Please, enter your email" });
+                } else {
+                    setMensajeError({ ...msgError, eEmail: "" });
                 }
 
                 // let body = {
                 //     email: credentials.email
                 // }
-        
+
                 // let role = await axios.post('http://localhost:3006/clients/email', body);
-        
+
                 // if (role.data !== null){
                 //     setStatusRole({...statusRole, roleStatus: 'client'});
                 // }
-        
+
                 // if (role.data == null){
                 //     role = await axios.post('http://localhost:3006/dentists/email', body);
                 //     if (role.data !== null) { 
                 //         setStatusRole({...statusRole, roleStatus: 'dentist'});
                 //     } 
                 // }
-            break;
+                break;
 
             case 'password':
 
-                if (credentials.password.length < 1){
-                    setMensajeError({...msgError, ePassword: "Please, enter your password"});
-                }else {
-                    setMensajeError({...msgError, ePassword: ""});
+                if (credentials.password.length < 1) {
+                    setMensajeError({ ...msgError, ePassword: "Please, enter your password" });
+                } else {
+                    setMensajeError({ ...msgError, ePassword: "" });
                 }
-            break;
+                break;
 
             default:
                 break;
@@ -97,33 +97,17 @@ const Login = (props) => {
 
     return (
         <div className="viewLogin">
-            Hello, this is Login
-
+            <h3>Login</h3>
             {/* <pre>{JSON.stringify(credentials, null,2)}</pre> */}
             <div className="loginCard">
 
-                <h2>L O G I N</h2>
-                <br />
+                <div className="errorsText">{msgError.eEmail}</div>
 
-                <div className="box1">
-                    <div className="errorsText">{msgError.eEmail}</div>
-                    <form className="form1">
-                        <input className="input1" name="email" type="text" onChange={updateCredentials} onBlur={() => checkError("email")} required />
-                        <label className="lbl-nombre1">
-                            <span className="text-nomb1">Email</span>
-                        </label>
-                    </form>
-                </div>
+                <input className="input" name="email" type="text" onChange={updateCredentials} onBlur={() => checkError("email")} required />
 
-                <div className="box1">
-                    <div className="errorsText">{msgError.ePassword}</div>
-                    <form className="form3">
-                        <input className="input3" name="password" type="password" onChange={updateCredentials} onBlur={() => checkError("password")} required />
-                        <label className="lbl-nombre3">
-                            <span className="text-nomb3">Password</span>
-                        </label>
-                    </form>
-                </div>
+                <div className="errorsText">{msgError.ePassword}</div>
+
+                <input className="input" name="password" type="password" onChange={updateCredentials} onBlur={() => checkError("password")} required />
 
                 <div className="sendButton" onClick={() => logeame()}>Login</div>
                 <div>{msgError.eValidate}</div>

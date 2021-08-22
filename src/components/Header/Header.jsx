@@ -17,7 +17,7 @@ const Header = (props) => {
         history.push("/")
     }
 
-    if (props.credentials?.user.name) {
+    if (props.credentials?.user) {
 
         return (
             <div className="headerView">

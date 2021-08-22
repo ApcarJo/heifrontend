@@ -66,14 +66,14 @@ const Profile = (props) => {
 
             let res = await axios.put(`http://127.0.0.1:8000/api/modifyuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
-            sendModify();
+            modifyBack();
 
         } catch (error) {
             console.log(error);
         }
     }
 
-    const sendModify = () => {
+    const modifyBack = () => {
 
         // Switch view implemented
 
@@ -109,7 +109,7 @@ const Profile = (props) => {
                     <div className="labelData">Email</div>
                     <div className="profileData">{userData.email}</div>
                     <br></br>
-                    <button className="sendButton" onClick={sendModify}>Modify</button>
+                    <button className="sendButton" onClick={modifyBack}>Modify</button>
                 </div>
                 <div className={view.modifyView}>
                     <div className="labelData">Name</div><input className="profileData" name="name" onChange={updateUserData} defaultValue={userData.name} />
@@ -124,7 +124,7 @@ const Profile = (props) => {
                     <div className="labelData">Phone</div><input className="profileData" name="phone" onChange={updateUserData} defaultValue={userData.phone} />
                     <br></br>
                     <div className="row">
-                        <button className="sendButton" onClick={sendModify}>BACK</button>
+                        <button className="sendButton" onClick={modifyBack}>BACK</button>
                         <button className="sendButton" onClick={modifyProfile}>SAVE</button>
 
                     </div>
