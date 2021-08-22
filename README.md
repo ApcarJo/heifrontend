@@ -13,4 +13,4 @@ Backend realizado en PHP con Laravel
 ** Falla el delete
 
 // Jornadas
-
+** Creacion de jornadas, equipos para la jornada, empleados para la jornada, van para la jornada.

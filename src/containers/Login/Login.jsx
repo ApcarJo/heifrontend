@@ -84,16 +84,15 @@ const Login = (props) => {
                 <h3>Login</h3>
                 {/* <pre>{JSON.stringify(credentials, null,2)}</pre> */}
                 <div className="loginCard">
-                    <div className="errorsText">{msgError.eEmail}</div>
+
                     <div className="loginInput">
                         <input className="input" name="email" type="text" onChange={updateCredentials} onBlur={() => checkError("email")} placeholder="user" required />
-                        <div className="errorsText">{msgError.ePassword}</div>
                     </div>
-
+                    <div className="errorsText">{msgError.eEmail}</div>
                     <div className="loginInput">
                         <input className="input" name="password" type="password" onChange={updateCredentials} onBlur={() => checkError("password")} placeholder="password" required />
                     </div>
-
+                    <div className="errorsText">{msgError.ePassword}</div>
                     <div className="sendButton" onClick={() => logeame()}>Login</div>
                     <div>{msgError.eValidate}</div>
                 </div>
