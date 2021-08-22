@@ -9,8 +9,6 @@ const Header = (props) => {
 
     let history = useHistory();
 
-    console.log(props.credentials)
-
     const logOut = () => {
 
         props.dispatch({ type: LOGOUT });
@@ -26,6 +24,8 @@ const Header = (props) => {
                     <Button path="/" destination="HOME" />
                     <Button path="/profile" destination="PROFILE" />
                     <Button path="/calendar" destination="CALENDAR" />
+                    <Button path="/gwupdate" destination="gwupdate" />
+                    <Button path="/gwupdatecreate" destination="gwupdatecreate" />
 
                 </div>
 

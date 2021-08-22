@@ -123,7 +123,7 @@ const Profile = (props) => {
                     <div className="labelData">Address</div><input className="profileData" name="address" onChange={updateUserData} defaultValue={userData.address} />
                     <div className="labelData">Phone</div><input className="profileData" name="phone" onChange={updateUserData} defaultValue={userData.phone} />
                     <br></br>
-                    <div className="row">
+                    <div className="buttons">
                         <button className="sendButton" onClick={modifyBack}>BACK</button>
                         <button className="sendButton" onClick={modifyProfile}>SAVE</button>
 

@@ -12,6 +12,7 @@ const GWupdateCreate = (props) => {
     // Hook
     const [card, setCard] = useState(
         {
+            date: '',
             title: '',
             roles: '',
             infoUpdate: '',
@@ -31,6 +32,7 @@ const GWupdateCreate = (props) => {
             let token = props.credentials.token;
 
             let body = {
+                date: "2021-09-21",
                 title: card.title,
                 roles: card.roles,
                 infoUpdate: card.infoUpdate,
