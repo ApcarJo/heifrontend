@@ -1,0 +1,16 @@
+
+
+.viewRegister {
+    @extend .center;
+    height: 100vh;
+}
+
+.AssetCard {
+    @extend .loginCard;
+}
+
+.AssetInput{
+    @extend .center;
+    width: 100%;
+    padding: 1em;
+}

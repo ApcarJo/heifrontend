@@ -52,6 +52,7 @@ const Header = (props) => {
                     <Button path="/gwupdate" destination="gwupdate" />
                     <Button path="/gwschedule" destination="GWSCHEDULE" />
                     <Button path="/gwupdatecreate" destination="gwupdatecreate" />
+                    <Button path="/asset" destination="Asset" />
                 </div>
 
                 <div className="headerUser">

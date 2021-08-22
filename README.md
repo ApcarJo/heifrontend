@@ -14,3 +14,5 @@ Backend realizado en PHP con Laravel
 
 // Jornadas
 ** Creacion de jornadas, equipos para la jornada, empleados para la jornada, van para la jornada.
+
+// Inventario, garantías
