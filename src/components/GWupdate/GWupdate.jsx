@@ -58,7 +58,8 @@ const GWupdate = (props) => {
             let body = {
                 Gwupdate_id: id,
             }
-            await axios.delete(`http://127.0.0.1:8000/api/deletegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            console.log("esto es id en delete", id, body.Gwupdate_id)
+            let res = await axios.delete(`http://127.0.0.1:8000/api/deletegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
             // viewGWUpdates();
         } catch (error) {
