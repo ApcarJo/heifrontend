@@ -44,7 +44,6 @@ const GWupdate = (props) => {
     }, []);
 
 
-
     const viewGWUpdates = async (val) => {
 
         switch (val) {
@@ -93,7 +92,7 @@ const GWupdate = (props) => {
                 try {
                     let token = props.credentials?.token;
 
-                    let res = await axios.get(`http://127.0.0.1:8000/api/archivegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.get(`http://127.0.0.1:8000/api/findarchivegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setGwUpdateData(res.data);
 
@@ -115,6 +114,23 @@ const GWupdate = (props) => {
             let res = await axios.delete(`http://127.0.0.1:8000/api/deletegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
             // viewGWUpdates();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const archiveGWU = async (id) => {
+
+        try {
+            let token = props.credentials?.token;
+            let body = {
+                gwupdate_id: id
+            }
+
+            let res = await axios.put(`http://127.0.0.1:8000/api/archivegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
+
+            viewGWUpdates();
+
         } catch (error) {
             console.log(error);
         }
@@ -165,9 +181,9 @@ const GWupdate = (props) => {
                 isActive: card.isActive
             }
 
-
             let res = await axios.put('http://127.0.0.1:8000/api/modifygwupdate', body, { headers: { 'authorization': 'Bearer ' + token } });
-            console.log(res);
+
+            viewGWUpdates();
 
             setTimeout(() => {
                 history.push(`/gwupdate`);
@@ -204,7 +220,7 @@ const GWupdate = (props) => {
 
                                     <div>{val.infoUpdate}</div>
                                     <button className="sendButton" onClick={() => deleteGWU(val.id)}>Delete</button>
-                                    <button className="sendButton" onClick={() => archiveGWU(val.id)}>Delete</button>
+                                    <button className="sendButton" onClick={() => archiveGWU(val.id)}>Archive</button>
                                     <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
                                 </div>
                             </div>
