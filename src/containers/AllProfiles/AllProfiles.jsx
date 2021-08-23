@@ -11,6 +11,7 @@ const AllProfiles = (props) => {
 
     // HOOKS
     const [profileData, setProfileData] = useState({})
+    // const [allNames, setAllNames] = useState({})
     const [deleteCard, setDeleteCard] = useState({})
     const [modify, setModify] = useState({})
     const [card, setCard] = useState('');
@@ -29,7 +30,7 @@ const AllProfiles = (props) => {
     }
 
     useEffect(() => {
-        viewAssetViews();
+        viewUsers();
     }, []);
 
     const updateSelector = (e) => {
@@ -47,7 +48,7 @@ const AllProfiles = (props) => {
 
                     let res = await axios.get(`http://127.0.0.1:8000/api/allusers`, { headers: { 'authorization': 'Bearer ' + token } });
 
-                    setAssetData(res.data);
+                    setProfileData(res.data);
 
                 } catch (error) {
                     console.log(error);
@@ -64,7 +65,7 @@ const AllProfiles = (props) => {
 
                     let res = await axios.post(`http://127.0.0.1:8000/api/finduser`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
-                    setAssetData(res.data);
+                    setProfileData(res.data);
 
                 } catch (error) {
                     console.log(error);
@@ -74,27 +75,40 @@ const AllProfiles = (props) => {
                 try {
                     let token = props.credentials?.token;
 
-                    let res = await axios.post(`http://127.0.0.1:8000/api/activeusers`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.get(`http://127.0.0.1:8000/api/activeusers`, { headers: { 'authorization': 'Bearer ' + token } });
 
-                    setAssetData(res.data);
+                    setProfileData(res.data);
 
                 } catch (error) {
                     console.log(error);
                 }
                 break;
+
             case "4":
                 try {
                     let token = props.credentials?.token;
 
-                    let res = await axios.post(`http://127.0.0.1:8000/api/archiveuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.get(`http://127.0.0.1:8000/api/archiveuser`, { headers: { 'authorization': 'Bearer ' + token } });
 
-                    setAssetData(res.data);
+                    setProfileData(res.data);
 
                 } catch (error) {
                     console.log(error);
                 }
                 break;
-                case "3":
+            // case "5":
+            //     try {
+            //         let token = props.credentials?.token;
+
+            //         let res = await axios.get(`http://127.0.0.1:8000/api/findarchiveuser`, { headers: { 'authorization': 'Bearer ' + token } });
+
+            //         setProfileData(res.data);
+
+            //     } catch (error) {
+            //         console.log(error);
+            //     }
+            //     break;
+            case "6":
                 try {
                     let token = props.credentials?.token;
 
@@ -104,7 +118,7 @@ const AllProfiles = (props) => {
 
                     let res = await axios.post(`http://127.0.0.1:8000/api/selectuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
-                    setAssetData(res.data);
+                    setProfileData(res.data);
 
                 } catch (error) {
                     console.log(error);
@@ -117,17 +131,16 @@ const AllProfiles = (props) => {
 
     }
 
-    const deleteAsset = async (id) => {
+    const deleteUser = async (id) => {
         try {
             let token = props.credentials?.token;
 
             let body = {
-                user_id: id,
+                id: id,
             }
 
             let res = await axios.delete(`http://127.0.0.1:8000/api/deleteuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
-            // viewAssets();
         } catch (error) {
             console.log(error);
         }
@@ -138,12 +151,11 @@ const AllProfiles = (props) => {
         if (id) {
             try {
                 let body = {
-                    Asset_id: id
+                    user_id: id
                 }
                 let token = props.credentials?.token;
-                console.log(token, "es el token", id, "la id es ")
 
-                let res = await axios.post(`http://127.0.0.1:8000/api/chooseasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                let res = await axios.post(`http://127.0.0.1:8000/api/chooseuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
                 setModify(res.data.data);
 
             } catch (error) {
@@ -158,8 +170,7 @@ const AllProfiles = (props) => {
 
         (view.modifyViewP === 'profileCard') ? view.modifyViewP = 'modifyCard' : view.modifyViewP = 'profileCard';
 
-        //console.log(view.modifyView, view.modifyViewP);
-        viewAssetViews();
+        viewUsers();
 
     }
 
@@ -170,31 +181,37 @@ const AllProfiles = (props) => {
             let token = props.credentials.token;
 
             let body = {
-                Asset_id: id,
+                user_id: id,
                 name: card.name,
-                model: card.model,
-                type: card.type,
-                year: card.year,
-                serialNumber: card.sn,
-                warrantyExpiracyDate: card.warranty,
-                crossCheckCode: card.ccc,
-                quantity: card.quantity,
+                surname1: card.surname1,
+                surname2: card.surname2,
+                email: card.email,
+                codename: card.codename,
+                phone: card.phone,
+                picture: card.picture,
+                nif: card.nif,
+                license: card.license,
+                postalcode: card.postalcode,
+                address: card.address,
+                city: card.city,
+                role: card.role,
+                isAdmin: card.isAdmin,
+                isArchive: card.isArchive,
                 isActive: card.isActive
             }
 
 
-            let res = await axios.put('http://127.0.0.1:8000/api/modifyasset', body, { headers: { 'authorization': 'Bearer ' + token } });
-            console.log(res);
+            let res = await axios.put('http://127.0.0.1:8000/api/modifyuser', body, { headers: { 'authorization': 'Bearer ' + token } });
 
             setTimeout(() => {
-                history.push(`/assetview`);
+                history.push(`/allprofiles`);
             }, 250);
         } catch (error) {
             console.log(error);
         }
     }
 
-    // if ((props.credentials.user?.isAdmin == true) && (assetData.data)) {
+    // if ((props.credentials.user?.isAdmin == true) && (profileData.data)) {
     return (
         <div className="viewAsset">
             <div className="content">
@@ -202,28 +219,32 @@ const AllProfiles = (props) => {
 
                 </div>
                 <div className={view.modifyViewP}>
-                    <div className="newsCard">Asset View
+                    <div className="newsCard">Profiles List View
                         <div className="row">
                             Filter:
                             <input className="gwuData" name="name" onChange={updateSelector}></input>
-                            <button className="sendButton" onClick={viewAssetViews("2")}>By Name</button>
-
+                            <button className="sendButton" onClick={viewUsers("2")}>By Name</button>
                             <input className="gwuData" name="model" onChange={updateSelector}></input>
-                            <button className="sendButton" onClick={viewAssetViews("3")}>By Model</button>
+                            <button className="sendButton" onClick={viewUsers("3")}>By Model</button>
                         </div>
                     </div>
 
-                    {/* {assetData.data.map((val, index) => (
+                    {/* {profileData.data.map((val, index) => (
                                 <div className="gwupdatecards" key={index}>
                                     <div className="bbottom row">
                                         <div>Name: {val.name}</div>
-                                        <div>Model: {val.model}</div>
+                                        <div>Name: {val.surname1}</div>
+                                        <div>Name: {val.codename}</div>
+                                        <div>Name: {val.email}</div>
+                                        <div>Name: {val.phone}</div>
+                                        <div>Name: {val.city}</div>
+                                        <div>role: {val.role}</div>
                                         <div>Type: {val.type}</div>
                                     </div>
                                     <div className="gwInfo">
 
                                         <div>{val.infoUpdate}</div>
-                                        <button className="sendButton" onClick={() => deleteAsset(val.id)}>Delete</button>
+                                        <button className="sendButton" onClick={() => deleteUser(val.id)}>Delete</button>
                                         <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
                                     </div>
                                 </div>

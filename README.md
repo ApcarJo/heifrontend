@@ -6,7 +6,10 @@ Backend realizado en PHP con Laravel
 
 //Usuarios
 - Registro de usuarios, login y modificación del perfil.
-** Falta crear un listado y el delete
+** Falta añadir en Backend al modelo, isArchive, ruta: findarchiveusers.
+
+En backend cambiar userSelector where to find y eliminar el get
+Añadir opcion a busqueda por archive users.
 
 //GWupdates
 - Creación, listado, modificación.

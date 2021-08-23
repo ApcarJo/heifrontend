@@ -59,7 +59,7 @@ const GWupdate = (props) => {
                 id: id,
             }
  
-            let res = await axios.delete(`http://127.0.0.1:8000/api/deleteasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.delete(`http://127.0.0.1:8000/api/deletegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
             // viewGWUpdates();
         } catch (error) {
@@ -73,14 +73,13 @@ const GWupdate = (props) => {
             try {
 
                 let body = {
-                    asset_id: id
+                    gwupdate_id: id
                 }
                 let token = props.credentials?.token;
-                console.log(token, "es el token", id, "la id es ")
 
-                let res = await axios.post(`http://127.0.0.1:8000/api/chooseasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                let res = await axios.post(`http://127.0.0.1:8000/api/choosegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
                 setModify(res.data.data);
-                console.log(res.data.data, "esto es modify id", modify.id)
+
             } catch (error) {
                 console.log(error);
             }
