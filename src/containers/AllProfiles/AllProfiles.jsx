@@ -96,12 +96,13 @@ const AllProfiles = (props) => {
                     console.log(error);
                 }
                 break;
+
             case "role":
                 try {
                     let token = props.credentials?.token;
 
                     let body = {
-                        name: selector.role,
+                        role: selector.role,
                     }
 
                     let res = await axios.post(`http://127.0.0.1:8000/api/userrole`, body, { headers: { 'authorization': 'Bearer ' + token } });
@@ -230,13 +231,13 @@ const AllProfiles = (props) => {
                                     <div>Phone: {val.phone}</div>
                                     <div>City: {val.city}</div>
                                     <div>Role: {val.role}</div>
-                                    <div>Type: {val.type}</div>
                                 </div>
                                 <div className="gwInfo">
 
-                                    <div>{val.infoUpdate}</div>
-                                    <button className="sendButton" onClick={() => deleteUser(val.id)}>Delete</button>
-                                    <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
+                                    <div className="row">
+                                        <button className="sendButton" onClick={() => deleteUser(val.id)}>Delete</button>
+                                        <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
+                                    </div>
                                 </div>
                             </div>
                         ))}
@@ -271,7 +272,7 @@ const AllProfiles = (props) => {
 
         )
 
-    } else if((props.credentials.user?.isAdmin == false) && (profileData.data)) {
+    } else if ((props.credentials.user?.isAdmin == false) && (profileData.data)) {
 
         return (
             <div className="viewGWupdate">
