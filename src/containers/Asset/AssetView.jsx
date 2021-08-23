@@ -39,44 +39,64 @@ const AssetView = (props) => {
     }, []);
 
     const updateSelector = (e) => {
-        setSelector({...selector, [e.target.name]: e.target.value })
+        setSelector({ ...selector, [e.target.name]: e.target.value })
     }
 
-    const viewAssetViews = async () => {
+    const viewAssetViews = async (val) => {
 
-        try {
-            let token = props.credentials?.token;
+        switch (val) {
 
-            let res = await axios.get(`http://127.0.0.1:8000/api/allassets`, { headers: { 'authorization': 'Bearer ' + token } });
+            case "1":
 
-            setAssetData(res.data);
+                try {
+                    let token = props.credentials?.token;
 
-        } catch (error) {
-            console.log(error);
+                    let res = await axios.get(`http://127.0.0.1:8000/api/allassets`, { headers: { 'authorization': 'Bearer ' + token } });
+
+                    setAssetData(res.data);
+
+                } catch (error) {
+                    console.log(error);
+                }
+                break;
+
+            case "2":
+                try {
+                    let token = props.credentials?.token;
+
+                    let body = {
+                        name: selector.name,
+                    }
+
+                    let res = await axios.post(`http://127.0.0.1:8000/api/findasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
+
+                    setAssetData(res.data);
+
+                } catch (error) {
+                    console.log(error);
+                }
+                break;
+            case "3":
+                try {
+                    let token = props.credentials?.token;
+
+                    let body = {
+                        model: selector.model,
+                    }
+
+                    let res = await axios.post(`http://127.0.0.1:8000/api/bymodel`, body, { headers: { 'authorization': 'Bearer ' + token } });
+
+                    setAssetData(res.data);
+
+                } catch (error) {
+                    console.log(error);
+                }
+
+            default:
         }
 
 
     }
-
-    const viewAssetByName = async () => {
-
-        try {
-            let token = props.credentials?.token;
-            let body = {
-                name: selector.name,
-            }
-
-            let res = await axios.post(`http://127.0.0.1:8000/api/findasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
-
-            setAssetData(res.data);
-
-        } catch (error) {
-            console.log(error);
-        }
-
-
-    }
-
 
     const deleteAsset = async (id) => {
         try {
@@ -132,10 +152,14 @@ const AssetView = (props) => {
 
             let body = {
                 Asset_id: id,
-                title: card.title,
-                roles: card.roles,
-                infoUpdate: card.infoUpdate,
-                img: card.img,
+                name: card.name,
+                model: card.model,
+                type: card.type,
+                year: card.year,
+                serialNumber: card.sn,
+                warrantyExpiracyDate: card.warranty,
+                crossCheckCode: card.ccc,
+                quantity: card.quantity,
                 isActive: card.isActive
             }
 
@@ -151,74 +175,92 @@ const AssetView = (props) => {
         }
     }
 
-    if ((props.credentials.user?.isAdmin == true) && (assetData.data)) {
-        return (
-            <div className="viewAsset">
-                <div className="content">
-                    <div className={view.modifyViewP}>
-                        <div className="newsCard">Last GameWeek2 Updates</div>
-                        {assetData.data.map((val, index) => (
-                            <div className="gwupdatecards" key={index}>
-                                <div className="bbottom row">
-                                    <div>Name: {val.name}</div>
-                                    <div>Model: {val.model}</div>
-                                    <div>Type: {val.type}</div>
-                                </div>
-                                <div className="gwInfo">
+    // if ((props.credentials.user?.isAdmin == true) && (assetData.data)) {
+    return (
+        <div className="viewAsset">
+            <div className="content">
+                <div className="subHeader">
 
-                                    <div>{val.infoUpdate}</div>
-                                    <button className="sendButton" onClick={() => deleteAsset(val.id)}>Delete</button>
-                                    <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    <div className={view.modifyView}>
-                        <input className="gwuData" name="title" type="text" onChange={updateCard} defaultValue={modify.name} />
+                </div>
+                <div className={view.modifyViewP}>
+                    <div className="newsCard">Asset View
+                        <div className="row">
+                            Filter: 
+                            <input className="gwuData" name="name" onChange={updateSelector}></input>
+                            <button className="sendButton" onClick={viewAssetViews("2")}>By Name</button>
 
-                        <input className="gwuData" name="roles" type="text" onChange={updateCard} defaultValue={modify.model} />
-
-                        <input className="gwuData" name="infoUpdate" type="text" onChange={updateCard} defaultValue={modify.type} />
-
-                        <input className="gwuData" name="img" type="text" onChange={updateCard} defaultValue={modify.img} />
-                        <br></br>
-                        <div className="buttons">
-                            <div><button className="sendButton" onClick={modifyBack}>BACK</button></div>
-                            <div><button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button></div>
+                            <input className="gwuData" name="model" onChange={updateSelector}></input>
+                            <button className="sendButton" onClick={viewAssetViews("3")}>By Model</button>
                         </div>
                     </div>
+
+                    {/* {assetData.data.map((val, index) => (
+                                <div className="gwupdatecards" key={index}>
+                                    <div className="bbottom row">
+                                        <div>Name: {val.name}</div>
+                                        <div>Model: {val.model}</div>
+                                        <div>Type: {val.type}</div>
+                                    </div>
+                                    <div className="gwInfo">
+
+                                        <div>{val.infoUpdate}</div>
+                                        <button className="sendButton" onClick={() => deleteAsset(val.id)}>Delete</button>
+                                        <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
+                                    </div>
+                                </div>
+                            ))} */}
                 </div>
+                <div className="profileCard">
+                {/* <div className={view.modifyView}> */}
+                    <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
 
+                    <input className="gwuData" name="model" type="text" onChange={updateCard} placeholder="Model" defaultValue={modify.model} />
 
+                    <input className="gwuData" name="type" type="text" onChange={updateCard} placeholder="Type" defaultValue={modify.type} />
+                    <input className="gwuData" name="serialNumber" type="text" onChange={updateCard} placeholder="Serial Number" defaultValue={modify.sn} />
+                    <input className="gwuData" name="warranty" type="date" onChange={updateCard} placeholder="Warranty Expiracy Date" defaultValue={modify.warranty} />
+                    <input className="gwuData" name="ccc" type="text" onChange={updateCard} placeholder="CrossCheckCode" defaultValue={modify.ccc} />
+                    <input className="gwuData" name="quantity" type="text" onChange={updateCard} placeholder="Quantity" defaultValue={modify.quantity} />
+                    <input className="gwuData" name="year" type="text" onChange={updateCard} placeholder="Purchase Year" defaultValue={modify.year} />
+
+                    <br></br>
+                    <div className="buttons">
+                        <div><button className="sendButton" onClick={modifyBack}>BACK</button></div>
+                        <div><button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button></div>
+                    </div>
+                </div>
             </div>
 
-        )
 
-    } else if (assetData.data) {
+        </div>
 
-        return (
-            <div className="viewGWupdate">
-                <div className="content">
-                    <div className="newsCard">Last GameWeek 3 Updates</div>
-                    {assetData.data.map((val, index) => (
-                        <div className="gwupdatecards" key={index}>
-                            <div className="row">
-                                <div>Name: {val.name}</div>
-                                <div>Model: {val.model}</div>
-                                <div>Type: {val.type}</div>
-                            </div>
-                            <div className="gwInfo">
+    )
 
-                                <div>{val.infoUpdate}</div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        )
-    } else {
-        return "Loading";
-    }
+    // } else if (assetData.data) {
+
+    //     return (
+    //         <div className="viewGWupdate">
+    //             <div className="content">
+    //                 <div className="newsCard">Last GameWeek 3 Updates</div>
+    //                 {assetData.data.map((val, index) => (
+    //                     <div className="gwupdatecards" key={index}>
+    //                         <div className="row">
+    //                             <div>Name: {val.name}</div>
+    //                             <div>Model: {val.model}</div>
+    //                             <div>Type: {val.type}</div>
+    //                         </div>
+    //                         <div className="gwInfo">
+
+    //                             <div>{val.infoUpdate}</div>
+    //                         </div>
+    //                     </div>
+    //                 ))}
+    //             </div>
+    //         </div>
+    //     )
+    // } else {
+    //     return "Loading";
+    // }
 }
 
 export default connect((state) => ({
