@@ -42,7 +42,7 @@ const GWupdate = (props) => {
         try {
             let token = props.credentials?.token;
 
-            let res = await axios.get(`http://127.0.0.1:8000/api/allgwupdates`, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.get(`http://127.0.0.1:8000/api/allassets`, { headers: { 'authorization': 'Bearer ' + token } });
 
             setGwUpdateData(res.data);
 

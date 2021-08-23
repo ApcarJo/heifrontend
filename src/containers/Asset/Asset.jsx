@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Calendar from '../../components/Datepicker/Datepicker';
 
 const Asset = (props) => {
 
@@ -16,14 +15,31 @@ const Asset = (props) => {
             name: '',
             model: '',
             type: '',
+            serialNumer: '',
+            year: '',
+            warrantyExpiracyDate: '',
+            quantity: '',
+            crossCheckCode: '',
         });
+
+    const [msg, setMsg] = useState('');
 
     // Handler
     const updateitem = (e) => {
         setitem({ ...item, [e.target.name]: e.target.value })
     }
 
-    const saveAsset = async () => {
+    useEffect(() => {
+
+    }, []);
+
+
+    useEffect(() => {
+
+    });
+
+
+    const createAsset = async () => {
         // e.preventDefault();
 
         try {
@@ -41,23 +57,21 @@ const Asset = (props) => {
 
             }
 
-                let res = await axios.post('http://127.0.0.1:8000/api/createasset', body, { headers: { 'authorization': 'Bearer ' + token }});
-                setTimeout(() => {
-                    history.push(`/Asset`);
-                }, 250)
+            await axios.post('http://127.0.0.1:8000/api/createasset', body, { headers: { 'authorization': 'Bearer ' + token } });
 
+            setMsg("conseguido");
+            setTimeout(() => {
+                history.push(`/Asset`);
+            }, 250)
         } catch (error) {
             console.log(error);
         }
-
     }
-
 
     return (
         <div className="viewAsset">
             <div className="content">
                 <h3>Asset</h3>
-                {/* <pre>{JSON.stringify(item, null, 2)}</pre> */}
                 <div className="AssetCard">
                     <div className="AssetInput">
                         <input className="input" name="name" type="text" onChange={updateitem} placeholder="name" required />
@@ -67,21 +81,27 @@ const Asset = (props) => {
                     </div>
 
                     <div className="AssetInput">
-                        <input className="input" name="type" type="text" onChange={updateitem}  placeholder="type" required />
+                        <input className="input" name="type" type="text" onChange={updateitem} placeholder="type" required />
                     </div>
                     <div className="AssetInput">
-                        <input className="input" name="serialNumber" type="text" onChange={updateitem}  placeholder="serialNumer"required />
+                        <input className="input" name="serialNumber" type="text" onChange={updateitem} placeholder="serialNumer" required />
                     </div>
                     <div className="AssetInput">
-                        <input className="input" name="ccc" type="text" onChange={updateitem}  placeholder="CrossCheckCode" required />
+                        <input className="input" name="ccc" type="text" onChange={updateitem} placeholder="CrossCheckCode" required />
                     </div>
                     <div className="AssetInput">
-                        <input className="input" name="warranty" type="date" onChange={updateitem}  placeholder="Warranty Expiration Date" required />
+                        <input className="input" name="year" type="string" onChange={updateitem} placeholder="Purchase Year Date" required />
                     </div>
                     <div className="AssetInput">
-                        <input className="input" name="quantity" type="text" onChange={updateitem}  placeholder="quantity" required />
+                        Warranty Expiration Date
+                        <input className="input" name="warranty" type="date" onChange={updateitem} placeholder="Warranty Expiration Date" required />
                     </div>
-                    <button className="sendButton" onClick={() => saveAsset()}>Save</button>
+                    <div className="AssetInput">
+                        <input className="input" name="quantity" type="number" onChange={updateitem} placeholder="quantity" required />
+                    </div>
+                    <br></br>
+                    <button className="sendButton" onClick={() => createAsset()}>Save</button>
+                    <div className="msg">{msg}</div>
                 </div>
             </div>
         </div>
@@ -89,5 +109,6 @@ const Asset = (props) => {
 }
 
 export default connect((state) => ({
+    credentials: state.credentials,
     calendar: state.calendar
 }))(Asset);

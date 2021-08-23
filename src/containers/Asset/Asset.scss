@@ -7,10 +7,16 @@
 
 .AssetCard {
     @extend .loginCard;
+    color: $pal-det;
 }
 
 .AssetInput{
     @extend .center;
     width: 100%;
     padding: 1em;
+}
+
+.msg{
+    padding: 1em;
+    color: $pal-det;
 }

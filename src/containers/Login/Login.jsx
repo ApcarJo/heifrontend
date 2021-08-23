@@ -64,8 +64,6 @@ const Login = (props) => {
             }
             // Envío por axios
             let res = await axios.post(`http://127.0.0.1:8000/api/login`, body);
-            // let token = res.data.token;
-            //
             props.dispatch({ type: LOGIN, payload: res.data });
 
             // redirección

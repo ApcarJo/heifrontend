@@ -13,9 +13,10 @@ const Header = (props) => {
 
         props.dispatch({ type: LOGOUT });
         history.push("/")
+        console.log(props.credentials?.user)
     }
 
-    if (props.credentials?.user) {
+    if (props.credentials?.user.name) {
 
         return (
             <div className="headerView">
@@ -26,6 +27,7 @@ const Header = (props) => {
                     <Button path="/calendar" destination="CALENDAR" />
                     <Button path="/gwupdate" destination="gwupdate" />
                     <Button path="/gwupdatecreate" destination="gwupdatecreate" />
+                    <Button path="/asset" destination="asset" />
 
                 </div>
 
