@@ -135,7 +135,7 @@ const AllProfiles = (props) => {
     }
 
     const modifyBack = async (id) => {
-
+        console.log("a modify se venir")
         if (id) {
             try {
                 let body = {
@@ -188,7 +188,6 @@ const AllProfiles = (props) => {
                 isActive: card.isActive
             }
 
-
             let res = await axios.put('http://127.0.0.1:8000/api/modifyuser', body, { headers: { 'authorization': 'Bearer ' + token } });
 
             setTimeout(() => {
@@ -210,14 +209,14 @@ const AllProfiles = (props) => {
                         <div className="newsCard">Profiles List View
                             <div className="row">
                                 Filter:
-                                <button className="sendButton" name="isActive" onClick={viewUsers("active")}>Active Users</button>
-                                <button className="sendButton" onClick={viewUsers("archive")}>Archive Users</button>
+                                <button className="sendButton" name="isActive" onClick={() => viewUsers("active")}>Active Users</button>
+                                <button className="sendButton" onClick={() => viewUsers("archive")}>Archive Users</button>
 
                                 <input className="gwuData" name="name" onChange={updateSelector}></input>
-                                <button className="sendButton" onClick={viewUsers("name")}>User's Name</button>
+                                <button className="sendButton" onClick={() => viewUsers("name")}>User's Name</button>
                                 <input className="gwuData" name="role" onChange={updateSelector}></input>
-                                <button className="sendButton" onClick={viewUsers("role")}>User's Role</button>
-                                
+                                <button className="sendButton" onClick={() => viewUsers("role")}>User's Role</button>
+
                             </div>
                         </div>
 
@@ -225,12 +224,12 @@ const AllProfiles = (props) => {
                             <div className="gwupdatecards" key={index}>
                                 <div className="bbottom row">
                                     <div>Name: {val.name}</div>
-                                    <div>Name: {val.surname1}</div>
-                                    <div>Name: {val.codename}</div>
-                                    <div>Name: {val.email}</div>
-                                    <div>Name: {val.phone}</div>
-                                    <div>Name: {val.city}</div>
-                                    <div>role: {val.role}</div>
+                                    <div>Surname: {val.surname1}</div>
+                                    <div>CodeName: {val.codename}</div>
+                                    <div>Email: {val.email}</div>
+                                    <div>Phone: {val.phone}</div>
+                                    <div>City: {val.city}</div>
+                                    <div>Role: {val.role}</div>
                                     <div>Type: {val.type}</div>
                                 </div>
                                 <div className="gwInfo">
@@ -244,19 +243,24 @@ const AllProfiles = (props) => {
                     </div>
                     <div className={view.modifyView}>
                         <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
-
-                        <input className="gwuData" name="model" type="text" onChange={updateCard} placeholder="Model" defaultValue={modify.model} />
-
-                        <input className="gwuData" name="type" type="text" onChange={updateCard} placeholder="Type" defaultValue={modify.type} />
-                        <input className="gwuData" name="serialNumber" type="text" onChange={updateCard} placeholder="Serial Number" defaultValue={modify.sn} />
-                        <input className="gwuData" name="warranty" type="date" onChange={updateCard} placeholder="Warranty Expiracy Date" defaultValue={modify.warranty} />
-                        <input className="gwuData" name="ccc" type="text" onChange={updateCard} placeholder="CrossCheckCode" defaultValue={modify.ccc} />
-                        <input className="gwuData" name="quantity" type="text" onChange={updateCard} placeholder="Quantity" defaultValue={modify.quantity} />
-                        <input className="gwuData" name="year" type="text" onChange={updateCard} placeholder="Purchase Year" defaultValue={modify.year} />
+                        <input className="gwuData" name="surname1" type="text" onChange={updateCard} placeholder="Surname2" defaultValue={modify.surname1} />
+                        <input className="gwuData" name="surname2" type="text" onChange={updateCard} placeholder="Surname2" defaultValue={modify.surname2} />
+                        <input className="gwuData" name="codename" type="text" onChange={updateCard} placeholder="Codename" defaultValue={modify.codename} />
+                        <input className="gwuData" name="email" type="text" onChange={updateCard} placeholder="Email" defaultValue={modify.email} />
+                        <input className="gwuData" name="phone" type="text" onChange={updateCard} placeholder="Phone" defaultValue={modify.phone} />
+                        <input className="gwuData" name="nif" type="text" onChange={updateCard} placeholder="NIF" defaultValue={modify.nif} />
+                        <input className="gwuData" name="license" type="text" onChange={updateCard} placeholder="Drive License" defaultValue={modify.license} />
+                        <input className="gwuData" name="postalcode" type="text" onChange={updateCard} placeholder="Postal Code" defaultValue={modify.postalcode} />
+                        <input className="gwuData" name="address" type="text" onChange={updateCard} placeholder="Address" defaultValue={modify.address} />
+                        <input className="gwuData" name="city" type="text" onChange={updateCard} placeholder="City" defaultValue={modify.city} />
+                        <input className="gwuData" name="role" type="text" onChange={updateCard} placeholder="Role" defaultValue={modify.role} />
+                        <input className="gwuData" name="isAdmin" type="text" onChange={updateCard} placeholder="isAdmin" defaultValue={modify.isAdmin} />
+                        <input className="gwuData" name="isArchive" type="text" onChange={updateCard} placeholder="isArchive" defaultValue={modify.isArchive} />
+                        <input className="gwuData" name="isActive" type="text" onChange={updateCard} placeholder="isActive" defaultValue={modify.isActive} />
 
                         <br></br>
                         <div className="buttons">
-                            <div><button className="sendButton" onClick={modifyBack}>BACK</button></div>
+                            <div><button className="sendButton" onClick={() => modifyBack()}>BACK</button></div>
                             <div><button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button></div>
                         </div>
                     </div>
@@ -267,27 +271,28 @@ const AllProfiles = (props) => {
 
         )
 
-    } else if (profileData.data) {
+    } else if((props.credentials.user?.isAdmin == false) && (profileData.data)) {
 
         return (
             <div className="viewGWupdate">
                 <div className="content">
-                    <div className="newsCard">Last GameWeek 3 Updates</div>
+                    <div className="newsCard">Last GameWeek Updates</div>
                     {profileData.data.map((val, index) => (
                         <div className="gwupdatecards" key={index}>
-                            <div className="row">
+                            <div className="bbottom row">
                                 <div>Name: {val.name}</div>
-                                <div>Model: {val.model}</div>
+                                <div>Surname: {val.surname1}</div>
+                                <div>CodeName: {val.codename}</div>
+                                <div>Email: {val.email}</div>
+                                <div>Phone: {val.phone}</div>
+                                <div>City: {val.city}</div>
+                                <div>Role: {val.role}</div>
                                 <div>Type: {val.type}</div>
-                            </div>
-                            <div className="gwInfo">
-
-                                <div>{val.infoUpdate}</div>
                             </div>
                         </div>
                     ))}
                 </div>
-            </div>
+            </div >
         )
     } else {
         return "Loading";
