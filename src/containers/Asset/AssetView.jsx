@@ -174,11 +174,11 @@ const AssetView = (props) => {
                         ))}
                     </div>
                     <div className={view.modifyView}>
-                        <input className="gwuData" name="title" type="text" onChange={updateCard} defaultValue={modify.title} />
+                        <input className="gwuData" name="title" type="text" onChange={updateCard} defaultValue={modify.name} />
 
-                        <input className="gwuData" name="roles" type="text" onChange={updateCard} defaultValue={modify.roles} />
+                        <input className="gwuData" name="roles" type="text" onChange={updateCard} defaultValue={modify.model} />
 
-                        <textarea className="gwuData" name="infoUpdate" type="text" onChange={updateCard} defaultValue={modify.infoUpdate} />
+                        <input className="gwuData" name="infoUpdate" type="text" onChange={updateCard} defaultValue={modify.type} />
 
                         <input className="gwuData" name="img" type="text" onChange={updateCard} defaultValue={modify.img} />
                         <br></br>
