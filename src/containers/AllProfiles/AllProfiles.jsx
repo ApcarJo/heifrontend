@@ -21,7 +21,7 @@ const AllProfiles = (props) => {
         modifyViewP: 'profileCard'
     })
 
-    
+    const [selector, setSelector] = useState('');
 
 
     // Handler
@@ -267,13 +267,13 @@ const AllProfiles = (props) => {
 
         )
 
-    } else if (assetData.data) {
+    } else if (profileData.data) {
 
         return (
             <div className="viewGWupdate">
                 <div className="content">
                     <div className="newsCard">Last GameWeek 3 Updates</div>
-                    {assetData.data.map((val, index) => (
+                    {profileData.data.map((val, index) => (
                         <div className="gwupdatecards" key={index}>
                             <div className="row">
                                 <div>Name: {val.name}</div>

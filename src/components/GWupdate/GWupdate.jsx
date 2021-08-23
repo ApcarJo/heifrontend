@@ -39,6 +39,7 @@ const GWupdate = (props) => {
         setSelector({ ...selector, [e.target.name]: e.target.value })
     }
 
+
     useEffect(() => {
         viewGWUpdates("all");
     }, []);
@@ -92,7 +93,7 @@ const GWupdate = (props) => {
                 try {
                     let token = props.credentials?.token;
 
-                    let res = await axios.get(`http://127.0.0.1:8000/api/findarchivegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.get(`http://127.0.0.1:8000/api/findarchivegwupdate`, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setGwUpdateData(res.data);
 
@@ -201,11 +202,11 @@ const GWupdate = (props) => {
                         <div className="newsCard">Last GameWeek Updates
                             <div className="row">
                                 Filter:
-                                <button className="sendButton" name="isActive" onClick={viewUsers("active")}>Active GWU</button>
-                                <button className="sendButton" onClick={viewUsers("archive")}>Archive GWU</button>
+                                <button className="sendButton" name="isActive" onClick={viewGWUpdates("active")}>Active GWU</button>
+                                <button className="sendButton" onClick={viewGWUpdates("archive")}>Archive GWU</button>
 
                                 <input className="gwuData" name="title" onChange={updateSelector}></input>
-                                <button className="sendButton" onClick={viewUsers("title")}>GWU's Title</button>
+                                <button className="sendButton" onClick={viewGWUpdates("title")}>GWU's Title</button>
 
                             </div>
                         </div>
