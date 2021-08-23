@@ -27,27 +27,80 @@ const GWupdate = (props) => {
         modifyViewP: 'profileCard'
     })
 
+    const [selector, setSelector] = useState('');
+
 
     // Handler
     const updateCard = (e) => {
         setCard({ ...card, [e.target.name]: e.target.value })
     }
 
+    const updateSelector = (e) => {
+        setSelector({ ...selector, [e.target.name]: e.target.value })
+    }
+
     useEffect(() => {
-        viewGWUpdates();
+        viewGWUpdates("all");
     }, []);
 
-    const viewGWUpdates = async () => {
 
-        try {
-            let token = props.credentials?.token;
 
-            let res = await axios.get(`http://127.0.0.1:8000/api/allgwupdates`, { headers: { 'authorization': 'Bearer ' + token } });
+    const viewGWUpdates = async (val) => {
 
-            setGwUpdateData(res.data);
+        switch (val) {
+            case "all":
+                try {
+                    let token = props.credentials?.token;
 
-        } catch (error) {
-            console.log(error);
+                    let res = await axios.get(`http://127.0.0.1:8000/api/allgwupdates`, { headers: { 'authorization': 'Bearer ' + token } });
+
+                    setGwUpdateData(res.data);
+
+                } catch (error) {
+                    console.log(error);
+                }
+                break;
+            case "active":
+                try {
+                    let token = props.credentials?.token;
+
+                    let res = await axios.get(`http://127.0.0.1:8000/api/activegwupdate`, { headers: { 'authorization': 'Bearer ' + token } });
+
+                    setGwUpdateData(res.data);
+
+                } catch (error) {
+                    console.log(error);
+                }
+                break;
+
+            case "title":
+                try {
+                    let token = props.credentials?.token;
+
+                    let body = {
+                        title: selector.title,
+                    }
+
+                    let res = await axios.post(`http://127.0.0.1:8000/api/findgwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
+
+                    setGwUpdateData(res.data);
+
+                } catch (error) {
+                    console.log(error);
+                }
+                break;
+            case "archive":
+                try {
+                    let token = props.credentials?.token;
+
+                    let res = await axios.get(`http://127.0.0.1:8000/api/archivegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
+
+                    setGwUpdateData(res.data);
+
+                } catch (error) {
+                    console.log(error);
+                }
+                break;
         }
     }
 
@@ -58,7 +111,7 @@ const GWupdate = (props) => {
             let body = {
                 id: id,
             }
- 
+
             let res = await axios.delete(`http://127.0.0.1:8000/api/deletegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
             // viewGWUpdates();
@@ -83,18 +136,18 @@ const GWupdate = (props) => {
             } catch (error) {
                 console.log(error);
             }
-        } 
+        }
 
 
-            // Switch view implemented
+        // Switch view implemented
 
-            (view.modifyView === 'profileCard') ? view.modifyView = 'modifyCard' : view.modifyView = 'profileCard';
+        (view.modifyView === 'profileCard') ? view.modifyView = 'modifyCard' : view.modifyView = 'profileCard';
 
-            (view.modifyViewP === 'profileCard') ? view.modifyViewP = 'modifyCard' : view.modifyViewP = 'profileCard';
+        (view.modifyViewP === 'profileCard') ? view.modifyViewP = 'modifyCard' : view.modifyViewP = 'profileCard';
 
-            //console.log(view.modifyView, view.modifyViewP);
-            viewGWUpdates();
-        
+        //console.log(view.modifyView, view.modifyViewP);
+        viewGWUpdates();
+
     }
 
     const modifyCard = async (id) => {
@@ -102,8 +155,6 @@ const GWupdate = (props) => {
 
         try {
             let token = props.credentials.token;
-            console.log("esto es card", card)
-            console.log("esto es id", id)
 
             let body = {
                 Gwupdate_id: id,
@@ -131,7 +182,17 @@ const GWupdate = (props) => {
             <div className="viewGWupdate">
                 <div className="content">
                     <div className={view.modifyViewP}>
-                        <div className="newsCard">Last GameWeek2 Updates</div>
+                        <div className="newsCard">Last GameWeek Updates
+                            <div className="row">
+                                Filter:
+                                <button className="sendButton" name="isActive" onClick={viewUsers("active")}>Active GWU</button>
+                                <button className="sendButton" onClick={viewUsers("archive")}>Archive GWU</button>
+
+                                <input className="gwuData" name="title" onChange={updateSelector}></input>
+                                <button className="sendButton" onClick={viewUsers("title")}>GWU's Title</button>
+
+                            </div>
+                        </div>
                         {gwUpdateData.data.map((val, index) => (
                             <div className="gwupdatecards" key={index}>
                                 <div className="bbottom row">
@@ -143,6 +204,7 @@ const GWupdate = (props) => {
 
                                     <div>{val.infoUpdate}</div>
                                     <button className="sendButton" onClick={() => deleteGWU(val.id)}>Delete</button>
+                                    <button className="sendButton" onClick={() => archiveGWU(val.id)}>Delete</button>
                                     <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
                                 </div>
                             </div>
@@ -159,7 +221,7 @@ const GWupdate = (props) => {
                         <br></br>
                         <div className="buttons">
                             <button className="sendButton" onClick={modifyBack}>BACK</button>
-                            <button className="sendButton" onClick={()=>modifyCard(modify.id)}>SAVE</button>
+                            <button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button>
 
                         </div>
                     </div>

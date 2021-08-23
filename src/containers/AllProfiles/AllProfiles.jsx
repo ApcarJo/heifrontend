@@ -21,7 +21,7 @@ const AllProfiles = (props) => {
         modifyViewP: 'profileCard'
     })
 
-    const [selector, setSelector] = useState('');
+    
 
 
     // Handler
@@ -30,7 +30,7 @@ const AllProfiles = (props) => {
     }
 
     useEffect(() => {
-        viewUsers();
+        viewUsers("all");
     }, []);
 
     const updateSelector = (e) => {
@@ -41,7 +41,7 @@ const AllProfiles = (props) => {
 
         switch (val) {
 
-            case "1":
+            case "all":
 
                 try {
                     let token = props.credentials?.token;
@@ -55,7 +55,7 @@ const AllProfiles = (props) => {
                 }
                 break;
 
-            case "2":
+            case "name":
                 try {
                     let token = props.credentials?.token;
 
@@ -71,7 +71,7 @@ const AllProfiles = (props) => {
                     console.log(error);
                 }
                 break;
-            case "3":
+            case "active":
                 try {
                     let token = props.credentials?.token;
 
@@ -84,11 +84,11 @@ const AllProfiles = (props) => {
                 }
                 break;
 
-            case "4":
+            case "archive":
                 try {
                     let token = props.credentials?.token;
 
-                    let res = await axios.get(`http://127.0.0.1:8000/api/archiveuser`, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.get(`http://127.0.0.1:8000/api/findarchiveuser`, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setProfileData(res.data);
 
@@ -96,27 +96,15 @@ const AllProfiles = (props) => {
                     console.log(error);
                 }
                 break;
-            // case "5":
-            //     try {
-            //         let token = props.credentials?.token;
-
-            //         let res = await axios.get(`http://127.0.0.1:8000/api/findarchiveuser`, { headers: { 'authorization': 'Bearer ' + token } });
-
-            //         setProfileData(res.data);
-
-            //     } catch (error) {
-            //         console.log(error);
-            //     }
-            //     break;
-            case "6":
+            case "role":
                 try {
                     let token = props.credentials?.token;
 
                     let body = {
-                        name: selector.name,
+                        name: selector.role,
                     }
 
-                    let res = await axios.post(`http://127.0.0.1:8000/api/selectuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.post(`http://127.0.0.1:8000/api/userrole`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setProfileData(res.data);
 
@@ -211,96 +199,99 @@ const AllProfiles = (props) => {
         }
     }
 
-    // if ((props.credentials.user?.isAdmin == true) && (profileData.data)) {
-    return (
-        <div className="viewAsset">
-            <div className="content">
-                <div className="subHeader">
+    if ((props.credentials.user?.isAdmin == true) && (profileData.data)) {
+        return (
+            <div className="viewAsset">
+                <div className="content">
+                    <div className="subHeader">
 
-                </div>
-                <div className={view.modifyViewP}>
-                    <div className="newsCard">Profiles List View
-                        <div className="row">
-                            Filter:
-                            <input className="gwuData" name="name" onChange={updateSelector}></input>
-                            <button className="sendButton" onClick={viewUsers("2")}>By Name</button>
-                            <input className="gwuData" name="model" onChange={updateSelector}></input>
-                            <button className="sendButton" onClick={viewUsers("3")}>By Model</button>
+                    </div>
+                    <div className={view.modifyViewP}>
+                        <div className="newsCard">Profiles List View
+                            <div className="row">
+                                Filter:
+                                <button className="sendButton" name="isActive" onClick={viewUsers("active")}>Active Users</button>
+                                <button className="sendButton" onClick={viewUsers("archive")}>Archive Users</button>
+
+                                <input className="gwuData" name="name" onChange={updateSelector}></input>
+                                <button className="sendButton" onClick={viewUsers("name")}>User's Name</button>
+                                <input className="gwuData" name="role" onChange={updateSelector}></input>
+                                <button className="sendButton" onClick={viewUsers("role")}>User's Role</button>
+                                
+                            </div>
+                        </div>
+
+                        {profileData.data.map((val, index) => (
+                            <div className="gwupdatecards" key={index}>
+                                <div className="bbottom row">
+                                    <div>Name: {val.name}</div>
+                                    <div>Name: {val.surname1}</div>
+                                    <div>Name: {val.codename}</div>
+                                    <div>Name: {val.email}</div>
+                                    <div>Name: {val.phone}</div>
+                                    <div>Name: {val.city}</div>
+                                    <div>role: {val.role}</div>
+                                    <div>Type: {val.type}</div>
+                                </div>
+                                <div className="gwInfo">
+
+                                    <div>{val.infoUpdate}</div>
+                                    <button className="sendButton" onClick={() => deleteUser(val.id)}>Delete</button>
+                                    <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className={view.modifyView}>
+                        <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
+
+                        <input className="gwuData" name="model" type="text" onChange={updateCard} placeholder="Model" defaultValue={modify.model} />
+
+                        <input className="gwuData" name="type" type="text" onChange={updateCard} placeholder="Type" defaultValue={modify.type} />
+                        <input className="gwuData" name="serialNumber" type="text" onChange={updateCard} placeholder="Serial Number" defaultValue={modify.sn} />
+                        <input className="gwuData" name="warranty" type="date" onChange={updateCard} placeholder="Warranty Expiracy Date" defaultValue={modify.warranty} />
+                        <input className="gwuData" name="ccc" type="text" onChange={updateCard} placeholder="CrossCheckCode" defaultValue={modify.ccc} />
+                        <input className="gwuData" name="quantity" type="text" onChange={updateCard} placeholder="Quantity" defaultValue={modify.quantity} />
+                        <input className="gwuData" name="year" type="text" onChange={updateCard} placeholder="Purchase Year" defaultValue={modify.year} />
+
+                        <br></br>
+                        <div className="buttons">
+                            <div><button className="sendButton" onClick={modifyBack}>BACK</button></div>
+                            <div><button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button></div>
                         </div>
                     </div>
-
-                    {/* {profileData.data.map((val, index) => (
-                                <div className="gwupdatecards" key={index}>
-                                    <div className="bbottom row">
-                                        <div>Name: {val.name}</div>
-                                        <div>Name: {val.surname1}</div>
-                                        <div>Name: {val.codename}</div>
-                                        <div>Name: {val.email}</div>
-                                        <div>Name: {val.phone}</div>
-                                        <div>Name: {val.city}</div>
-                                        <div>role: {val.role}</div>
-                                        <div>Type: {val.type}</div>
-                                    </div>
-                                    <div className="gwInfo">
-
-                                        <div>{val.infoUpdate}</div>
-                                        <button className="sendButton" onClick={() => deleteUser(val.id)}>Delete</button>
-                                        <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
-                                    </div>
-                                </div>
-                            ))} */}
                 </div>
-                <div className="profileCard">
-                    {/* <div className={view.modifyView}> */}
-                    <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
 
-                    <input className="gwuData" name="model" type="text" onChange={updateCard} placeholder="Model" defaultValue={modify.model} />
 
-                    <input className="gwuData" name="type" type="text" onChange={updateCard} placeholder="Type" defaultValue={modify.type} />
-                    <input className="gwuData" name="serialNumber" type="text" onChange={updateCard} placeholder="Serial Number" defaultValue={modify.sn} />
-                    <input className="gwuData" name="warranty" type="date" onChange={updateCard} placeholder="Warranty Expiracy Date" defaultValue={modify.warranty} />
-                    <input className="gwuData" name="ccc" type="text" onChange={updateCard} placeholder="CrossCheckCode" defaultValue={modify.ccc} />
-                    <input className="gwuData" name="quantity" type="text" onChange={updateCard} placeholder="Quantity" defaultValue={modify.quantity} />
-                    <input className="gwuData" name="year" type="text" onChange={updateCard} placeholder="Purchase Year" defaultValue={modify.year} />
-
-                    <br></br>
-                    <div className="buttons">
-                        <div><button className="sendButton" onClick={modifyBack}>BACK</button></div>
-                        <div><button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button></div>
-                    </div>
-                </div>
             </div>
 
+        )
 
-        </div>
+    } else if (assetData.data) {
 
-    )
+        return (
+            <div className="viewGWupdate">
+                <div className="content">
+                    <div className="newsCard">Last GameWeek 3 Updates</div>
+                    {assetData.data.map((val, index) => (
+                        <div className="gwupdatecards" key={index}>
+                            <div className="row">
+                                <div>Name: {val.name}</div>
+                                <div>Model: {val.model}</div>
+                                <div>Type: {val.type}</div>
+                            </div>
+                            <div className="gwInfo">
 
-    // } else if (assetData.data) {
-
-    //     return (
-    //         <div className="viewGWupdate">
-    //             <div className="content">
-    //                 <div className="newsCard">Last GameWeek 3 Updates</div>
-    //                 {assetData.data.map((val, index) => (
-    //                     <div className="gwupdatecards" key={index}>
-    //                         <div className="row">
-    //                             <div>Name: {val.name}</div>
-    //                             <div>Model: {val.model}</div>
-    //                             <div>Type: {val.type}</div>
-    //                         </div>
-    //                         <div className="gwInfo">
-
-    //                             <div>{val.infoUpdate}</div>
-    //                         </div>
-    //                     </div>
-    //                 ))}
-    //             </div>
-    //         </div>
-    //     )
-    // } else {
-    //     return "Loading";
-    // }
+                                <div>{val.infoUpdate}</div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )
+    } else {
+        return "Loading";
+    }
 }
 
 export default connect((state) => ({

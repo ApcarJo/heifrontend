@@ -28,7 +28,7 @@ const AssetView = (props) => {
     }
 
     useEffect(() => {
-        viewAssetViews();
+        viewAssetViews("all");
     }, []);
 
     const updateSelector = (e) => {
@@ -39,7 +39,7 @@ const AssetView = (props) => {
 
         switch (val) {
 
-            case "1":
+            case "all":
 
                 try {
                     let token = props.credentials?.token;
@@ -53,7 +53,7 @@ const AssetView = (props) => {
                 }
                 break;
 
-            case "2":
+            case "name":
                 try {
                     let token = props.credentials?.token;
 
@@ -69,7 +69,7 @@ const AssetView = (props) => {
                     console.log(error);
                 }
                 break;
-            case "3":
+            case "model":
                 try {
                     let token = props.credentials?.token;
 
@@ -168,7 +168,7 @@ const AssetView = (props) => {
         }
     }
 
-    // if ((props.credentials.user?.isAdmin == true) && (assetData.data)) {
+    if ((props.credentials.user?.isAdmin == true) && (assetData.data)) {
     return (
         <div className="viewAsset">
             <div className="content">
@@ -180,14 +180,14 @@ const AssetView = (props) => {
                         <div className="row">
                             Filter: 
                             <input className="gwuData" name="name" onChange={updateSelector}></input>
-                            <button className="sendButton" onClick={viewAssetViews("2")}>By Name</button>
+                            <button className="sendButton" onClick={viewAssetViews("name")}>By Name</button>
 
                             <input className="gwuData" name="model" onChange={updateSelector}></input>
-                            <button className="sendButton" onClick={viewAssetViews("3")}>By Model</button>
+                            <button className="sendButton" onClick={viewAssetViews("model")}>By Model</button>
                         </div>
                     </div>
 
-                    {/* {assetData.data.map((val, index) => (
+                    {assetData.data.map((val, index) => (
                                 <div className="gwupdatecards" key={index}>
                                     <div className="bbottom row">
                                         <div>Name: {val.name}</div>
@@ -201,10 +201,9 @@ const AssetView = (props) => {
                                         <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
                                     </div>
                                 </div>
-                            ))} */}
+                            ))}
                 </div>
-                <div className="profileCard">
-                {/* <div className={view.modifyView}> */}
+                <div className={view.modifyView}>
                     <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
 
                     <input className="gwuData" name="model" type="text" onChange={updateCard} placeholder="Model" defaultValue={modify.model} />
@@ -229,31 +228,31 @@ const AssetView = (props) => {
 
     )
 
-    // } else if (assetData.data) {
+    } else if (assetData.data) {
 
-    //     return (
-    //         <div className="viewGWupdate">
-    //             <div className="content">
-    //                 <div className="newsCard">Last GameWeek 3 Updates</div>
-    //                 {assetData.data.map((val, index) => (
-    //                     <div className="gwupdatecards" key={index}>
-    //                         <div className="row">
-    //                             <div>Name: {val.name}</div>
-    //                             <div>Model: {val.model}</div>
-    //                             <div>Type: {val.type}</div>
-    //                         </div>
-    //                         <div className="gwInfo">
+        return (
+            <div className="viewGWupdate">
+                <div className="content">
+                    <div className="newsCard">Last GameWeek 3 Updates</div>
+                    {assetData.data.map((val, index) => (
+                        <div className="gwupdatecards" key={index}>
+                            <div className="row">
+                                <div>Name: {val.name}</div>
+                                <div>Model: {val.model}</div>
+                                <div>Type: {val.type}</div>
+                            </div>
+                            <div className="gwInfo">
 
-    //                             <div>{val.infoUpdate}</div>
-    //                         </div>
-    //                     </div>
-    //                 ))}
-    //             </div>
-    //         </div>
-    //     )
-    // } else {
-    //     return "Loading";
-    // }
+                                <div>{val.infoUpdate}</div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )
+    } else {
+        return "Loading";
+    }
 }
 
 export default connect((state) => ({
