@@ -56,7 +56,7 @@ const GWupdate = (props) => {
             let token = props.credentials?.token;
 
             let body = {
-                Gwupdate_id: id,
+                id: id,
             }
  
             let res = await axios.delete(`http://127.0.0.1:8000/api/deleteasset`, body, { headers: { 'authorization': 'Bearer ' + token } });

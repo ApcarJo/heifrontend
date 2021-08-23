@@ -11,10 +11,11 @@ Backend realizado en PHP con Laravel
 //GWupdates
 - Creación, listado, modificación.
 ** Falla el delete
+ - Update, cambiado el nombre de la variable de gwupdate_id a id, hay que cambiar en backend y en front ya está cambiado
 
 //Assets
 - Registro de assets
-** Error 401 para la creación del asset.
+** Error 401 para la creación del asset, cambiar en el controlador el request type a simplemente id.
 
 // Jornadas
 ** Creacion de jornadas, equipos para la jornada, empleados para la jornada, van para la jornada.

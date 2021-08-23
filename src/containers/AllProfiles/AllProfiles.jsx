@@ -1,15 +1,16 @@
 
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-const AssetView = (props) => {
+const AllProfiles = (props) => {
 
     let history = useHistory();
 
     // HOOKS
-    const [assetData, setAssetData] = useState({})
+    const [profileData, setProfileData] = useState({})
     const [deleteCard, setDeleteCard] = useState({})
     const [modify, setModify] = useState({})
     const [card, setCard] = useState('');
@@ -35,7 +36,7 @@ const AssetView = (props) => {
         setSelector({ ...selector, [e.target.name]: e.target.value })
     }
 
-    const viewAssetViews = async (val) => {
+    const viewUsers = async (val) => {
 
         switch (val) {
 
@@ -44,7 +45,7 @@ const AssetView = (props) => {
                 try {
                     let token = props.credentials?.token;
 
-                    let res = await axios.get(`http://127.0.0.1:8000/api/allassets`, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.get(`http://127.0.0.1:8000/api/allusers`, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setAssetData(res.data);
 
@@ -61,7 +62,7 @@ const AssetView = (props) => {
                         name: selector.name,
                     }
 
-                    let res = await axios.post(`http://127.0.0.1:8000/api/findasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.post(`http://127.0.0.1:8000/api/finduser`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setAssetData(res.data);
 
@@ -73,17 +74,42 @@ const AssetView = (props) => {
                 try {
                     let token = props.credentials?.token;
 
-                    let body = {
-                        model: selector.model,
-                    }
-
-                    let res = await axios.post(`http://127.0.0.1:8000/api/bymodel`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.post(`http://127.0.0.1:8000/api/activeusers`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setAssetData(res.data);
 
                 } catch (error) {
                     console.log(error);
                 }
+                break;
+            case "4":
+                try {
+                    let token = props.credentials?.token;
+
+                    let res = await axios.post(`http://127.0.0.1:8000/api/archiveuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
+
+                    setAssetData(res.data);
+
+                } catch (error) {
+                    console.log(error);
+                }
+                break;
+                case "3":
+                try {
+                    let token = props.credentials?.token;
+
+                    let body = {
+                        name: selector.name,
+                    }
+
+                    let res = await axios.post(`http://127.0.0.1:8000/api/selectuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
+
+                    setAssetData(res.data);
+
+                } catch (error) {
+                    console.log(error);
+                }
+                break;
 
             default:
         }
@@ -96,10 +122,10 @@ const AssetView = (props) => {
             let token = props.credentials?.token;
 
             let body = {
-                Asset_id: id,
+                user_id: id,
             }
 
-            let res = await axios.delete(`http://127.0.0.1:8000/api/deleteasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.delete(`http://127.0.0.1:8000/api/deleteuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
             // viewAssets();
         } catch (error) {
@@ -178,7 +204,7 @@ const AssetView = (props) => {
                 <div className={view.modifyViewP}>
                     <div className="newsCard">Asset View
                         <div className="row">
-                            Filter: 
+                            Filter:
                             <input className="gwuData" name="name" onChange={updateSelector}></input>
                             <button className="sendButton" onClick={viewAssetViews("2")}>By Name</button>
 
@@ -204,7 +230,7 @@ const AssetView = (props) => {
                             ))} */}
                 </div>
                 <div className="profileCard">
-                {/* <div className={view.modifyView}> */}
+                    {/* <div className={view.modifyView}> */}
                     <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
 
                     <input className="gwuData" name="model" type="text" onChange={updateCard} placeholder="Model" defaultValue={modify.model} />
@@ -258,4 +284,4 @@ const AssetView = (props) => {
 
 export default connect((state) => ({
     credentials: state.credentials
-}))(AssetView);
+}))(AllProfiles);

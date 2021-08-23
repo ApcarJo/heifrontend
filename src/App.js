@@ -14,6 +14,7 @@ import GWupdate from './components/GWupdate/GWupdate';
 import GWupdateCreate from './components/GWupdate/GWupdateCreate';
 import Asset from './containers/Asset/Asset';
 import AssetView from './containers/Asset/AssetView';
+import AllProfiles from './containers/AllProfiles/AllProfiles';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/gwupdatecreate" exact component={GWupdateCreate} />
           <Route path="/asset" exact component={Asset} />
           <Route path="/assetview" exact component={AssetView} />
+          <Route path="/allprofiles" exact component={AllProfiles} />
 
 
         </Switch>

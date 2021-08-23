@@ -29,6 +29,7 @@ const Header = (props) => {
                     <Button path="/gwupdatecreate" destination="gwupdatecreate" />
                     <Button path="/asset" destination="asset" />
                     <Button path="/assetview" destination="assetview" />
+                    <Button path="/allprofiles" destination="allprofiles" />
 
                 </div>
 
@@ -57,6 +58,7 @@ const Header = (props) => {
                     <Button path="/gwupdatecreate" destination="gwupdatecreate" />
                     <Button path="/asset" destination="Asset" />
                     <Button path="/assetview" destination="assetview" />
+                    <Button path="/allprofiles" destination="allprofiles" />
                 </div>
 
                 <div className="headerUser">
