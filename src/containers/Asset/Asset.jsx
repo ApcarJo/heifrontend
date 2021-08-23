@@ -49,7 +49,8 @@ const Asset = (props) => {
                 name: item.name,
                 model: item.model,
                 type: item.type,
-                serialNumer: item.serialNumber,
+                // kit_van_id: item.kit_van_id,
+                serialNumber: item.serialNumber,
                 year: item.year,
                 warrantyExpiracyDate: item.warranty,
                 quantity: item.quantity,
@@ -61,7 +62,7 @@ const Asset = (props) => {
 
             setMsg("conseguido");
             setTimeout(() => {
-                history.push(`/Asset`);
+                history.push(`/assetview`);
             }, 250)
         } catch (error) {
             console.log(error);
@@ -79,12 +80,14 @@ const Asset = (props) => {
                     <div className="AssetInput">
                         <input className="input" name="model" type="text" onChange={updateitem} placeholder="model" required />
                     </div>
-
                     <div className="AssetInput">
                         <input className="input" name="type" type="text" onChange={updateitem} placeholder="type" required />
                     </div>
                     <div className="AssetInput">
-                        <input className="input" name="serialNumber" type="text" onChange={updateitem} placeholder="serialNumer" required />
+                        <input className="input" name="kit_van_id" onChange={updateitem} placeholder="kit_van_id" required />
+                    </div>
+                    <div className="AssetInput">
+                        <input className="input" name="serialNumber" type="text" onChange={updateitem} placeholder="serialNumber" required />
                     </div>
                     <div className="AssetInput">
                         <input className="input" name="ccc" type="text" onChange={updateitem} placeholder="CrossCheckCode" required />

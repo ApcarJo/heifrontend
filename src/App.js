@@ -13,6 +13,7 @@ import Datepicker from './components/Datepicker/Datepicker';
 import GWupdate from './components/GWupdate/GWupdate';
 import GWupdateCreate from './components/GWupdate/GWupdateCreate';
 import Asset from './containers/Asset/Asset';
+import AssetView from './containers/Asset/AssetView';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/gwupdate" exact component={GWupdate} />
           <Route path="/gwupdatecreate" exact component={GWupdateCreate} />
           <Route path="/asset" exact component={Asset} />
+          <Route path="/assetview" exact component={AssetView} />
 
 
         </Switch>

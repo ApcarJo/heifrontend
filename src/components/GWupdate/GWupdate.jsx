@@ -58,8 +58,8 @@ const GWupdate = (props) => {
             let body = {
                 Gwupdate_id: id,
             }
-            console.log("esto es id en delete", id, body.Gwupdate_id)
-            let res = await axios.delete(`http://127.0.0.1:8000/api/deletegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
+ 
+            let res = await axios.delete(`http://127.0.0.1:8000/api/deleteasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
             // viewGWUpdates();
         } catch (error) {
@@ -73,12 +73,12 @@ const GWupdate = (props) => {
             try {
 
                 let body = {
-                    Gwupdate_id: id
+                    asset_id: id
                 }
                 let token = props.credentials?.token;
                 console.log(token, "es el token", id, "la id es ")
 
-                let res = await axios.post(`http://127.0.0.1:8000/api/choosegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                let res = await axios.post(`http://127.0.0.1:8000/api/chooseasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
                 setModify(res.data.data);
                 console.log(res.data.data, "esto es modify id", modify.id)
             } catch (error) {
@@ -158,7 +158,7 @@ const GWupdate = (props) => {
 
                         <input className="gwuData" name="img" type="text" onChange={updateCard} defaultValue={modify.img} />
                         <br></br>
-                        <div className="row">
+                        <div className="buttons">
                             <button className="sendButton" onClick={modifyBack}>BACK</button>
                             <button className="sendButton" onClick={()=>modifyCard(modify.id)}>SAVE</button>
 
