@@ -52,7 +52,7 @@ const GWupdate = (props) => {
                 try {
                     let token = props.credentials?.token;
 
-                    let res = await axios.get(`http://127.0.0.1:8000/api/allgwupdates`, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.get(`https://heibackend.herokuapp.com/api/allgwupdates`, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setGwUpdateData(res.data);
 
@@ -64,7 +64,7 @@ const GWupdate = (props) => {
                 try {
                     let token = props.credentials?.token;
 
-                    let res = await axios.get(`http://127.0.0.1:8000/api/activegwupdate`, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.get(`https://heibackend.herokuapp.com/api/activegwupdate`, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setGwUpdateData(res.data);
 
@@ -81,7 +81,7 @@ const GWupdate = (props) => {
                         title: selector.title,
                     }
 
-                    let res = await axios.post(`http://127.0.0.1:8000/api/findgwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.post(`https://heibackend.herokuapp.com/api/findgwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setGwUpdateData(res.data);
 
@@ -93,7 +93,7 @@ const GWupdate = (props) => {
                 try {
                     let token = props.credentials?.token;
 
-                    let res = await axios.get(`http://127.0.0.1:8000/api/showarchived`, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.get(`https://heibackend.herokuapp.com/api/showarchived`, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setGwUpdateData(res.data);
 
@@ -112,7 +112,7 @@ const GWupdate = (props) => {
                 id: id,
             }
 
-            let res = await axios.delete(`http://127.0.0.1:8000/api/deletegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.delete(`https://heibackend.herokuapp.com/api/deletegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
             viewGWUpdates("active");
         } catch (error) {
@@ -129,7 +129,7 @@ const GWupdate = (props) => {
                 id: id
             }
 
-            let res = await axios.put(`http://127.0.0.1:8000/api/archivegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.put(`https://heibackend.herokuapp.com/api/archivegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
             viewGWUpdates();
 
@@ -148,7 +148,7 @@ const GWupdate = (props) => {
                 }
                 let token = props.credentials?.token;
 
-                let res = await axios.post(`http://127.0.0.1:8000/api/choosegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                let res = await axios.post(`https://heibackend.herokuapp.com/api/choosegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
                 setModify(res.data.data);
 
             } catch (error) {
@@ -181,7 +181,7 @@ const GWupdate = (props) => {
                 isActive: card.isActive
             }
 
-            let res = await axios.put('http://127.0.0.1:8000/api/modifygwupdate', body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.put('https://heibackend.herokuapp.com/api/modifygwupdate', body, { headers: { 'authorization': 'Bearer ' + token } });
 
             viewGWUpdates();
 

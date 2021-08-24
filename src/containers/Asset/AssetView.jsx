@@ -44,7 +44,7 @@ const AssetView = (props) => {
                 try {
                     let token = props.credentials?.token;
 
-                    let res = await axios.get(`http://127.0.0.1:8000/api/allassets`, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.get(`https://heibackend.herokuapp.com/api/allassets`, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setAssetData(res.data);
 
@@ -61,7 +61,7 @@ const AssetView = (props) => {
                         name: selector.name,
                     }
 
-                    let res = await axios.post(`http://127.0.0.1:8000/api/findasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.post(`https://heibackend.herokuapp.com/api/findasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setAssetData(res.data);
 
@@ -77,7 +77,7 @@ const AssetView = (props) => {
                         model: selector.model,
                     }
 
-                    let res = await axios.post(`http://127.0.0.1:8000/api/bymodel`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.post(`https://heibackend.herokuapp.com/api/bymodel`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setAssetData(res.data);
 
@@ -99,7 +99,7 @@ const AssetView = (props) => {
                 Asset_id: id,
             }
 
-            let res = await axios.delete(`http://127.0.0.1:8000/api/deleteasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.delete(`https://heibackend.herokuapp.com/api/deleteasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
             // viewAssets();
         } catch (error) {
@@ -117,7 +117,7 @@ const AssetView = (props) => {
                 let token = props.credentials?.token;
                 console.log(token, "es el token", id, "la id es ")
 
-                let res = await axios.post(`http://127.0.0.1:8000/api/chooseasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                let res = await axios.post(`https://heibackend.herokuapp.com/api/chooseasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
                 setModify(res.data.data);
 
             } catch (error) {
@@ -157,7 +157,7 @@ const AssetView = (props) => {
             }
 
 
-            let res = await axios.put('http://127.0.0.1:8000/api/modifyasset', body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.put('https://heibackend.herokuapp.com/api/modifyasset', body, { headers: { 'authorization': 'Bearer ' + token } });
             console.log(res);
 
             setTimeout(() => {

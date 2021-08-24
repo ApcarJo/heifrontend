@@ -15,6 +15,8 @@ import GWupdateCreate from './components/GWupdate/GWupdateCreate';
 import Asset from './containers/Asset/Asset';
 import AssetView from './containers/Asset/AssetView';
 import AllProfiles from './containers/AllProfiles/AllProfiles';
+import Team from './containers/Team/Team';
+import TeamCreate from './containers/Team/TeamCreate';
 
 function App() {
   return (

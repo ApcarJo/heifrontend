@@ -40,7 +40,7 @@ const Profile = (props) => {
                 user_id: props.credentials.user?.id,
             }
 
-            let res = await axios.post(`http://127.0.0.1:8000/api/chooseuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.post(`https://heibackend.herokuapp.com/api/chooseuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
             setUserData(res?.data.data);
 
         } catch (error) {
@@ -71,7 +71,7 @@ const Profile = (props) => {
                 password: userData.password
             }
 
-            let res = await axios.put(`http://127.0.0.1:8000/api/modifyuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.put(`https://heibackend.herokuapp.com/api/modifyuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
             modifyBack();
 

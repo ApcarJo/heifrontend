@@ -46,7 +46,7 @@ const AllProfiles = (props) => {
                 try {
                     let token = props.credentials?.token;
 
-                    let res = await axios.get(`http://127.0.0.1:8000/api/allusers`, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.get(`https://heibackend.herokuapp.com/api/allusers`, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setProfileData(res.data);
 
@@ -63,7 +63,7 @@ const AllProfiles = (props) => {
                         name: selector.name,
                     }
 
-                    let res = await axios.post(`http://127.0.0.1:8000/api/finduser`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.post(`https://heibackend.herokuapp.com/api/finduser`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setProfileData(res.data);
 
@@ -75,7 +75,7 @@ const AllProfiles = (props) => {
                 try {
                     let token = props.credentials?.token;
 
-                    let res = await axios.get(`http://127.0.0.1:8000/api/activeusers`, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.get(`https://heibackend.herokuapp.com/api/activeusers`, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setProfileData(res.data);
 
@@ -88,7 +88,7 @@ const AllProfiles = (props) => {
                 try {
                     let token = props.credentials?.token;
 
-                    let res = await axios.get(`http://127.0.0.1:8000/api/findarchiveuser`, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.get(`https://heibackend.herokuapp.com/api/findarchiveuser`, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setProfileData(res.data);
 
@@ -105,7 +105,7 @@ const AllProfiles = (props) => {
                         role: selector.role,
                     }
 
-                    let res = await axios.post(`http://127.0.0.1:8000/api/userrole`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.post(`https://heibackend.herokuapp.com/api/userrole`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setProfileData(res.data);
 
@@ -128,7 +128,7 @@ const AllProfiles = (props) => {
                 id: id,
             }
 
-            let res = await axios.delete(`http://127.0.0.1:8000/api/deleteuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.delete(`https://heibackend.herokuapp.com/api/deleteuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
         } catch (error) {
             console.log(error);
@@ -143,7 +143,7 @@ const AllProfiles = (props) => {
                 id: id,
             }
 
-            let res = await axios.post(`http://127.0.0.1:8000/api/archiveuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.post(`https://heibackend.herokuapp.com/api/archiveuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
         } catch (error) {
             console.log(error);
@@ -159,7 +159,7 @@ const AllProfiles = (props) => {
                 }
                 let token = props.credentials?.token;
 
-                let res = await axios.post(`http://127.0.0.1:8000/api/chooseuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
+                let res = await axios.post(`https://heibackend.herokuapp.com/api/chooseuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
                 setModify(res.data.data);
 
             } catch (error) {
@@ -204,7 +204,7 @@ const AllProfiles = (props) => {
                 isActive: card.isActive
             }
 
-            let res = await axios.put('http://127.0.0.1:8000/api/modifyuser', body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.put('https://heibackend.herokuapp.com/api/modifyuser', body, { headers: { 'authorization': 'Bearer ' + token } });
 
             setTimeout(() => {
                 history.push(`/allprofiles`);

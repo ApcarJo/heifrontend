@@ -58,7 +58,7 @@ const Asset = (props) => {
 
             }
 
-            await axios.post('http://127.0.0.1:8000/api/createasset', body, { headers: { 'authorization': 'Bearer ' + token } });
+            await axios.post('https://heibackend.herokuapp.com/api/createasset', body, { headers: { 'authorization': 'Bearer ' + token } });
 
             setMsg("conseguido");
             setTimeout(() => {

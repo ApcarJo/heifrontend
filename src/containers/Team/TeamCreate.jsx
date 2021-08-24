@@ -40,7 +40,7 @@ const GWupdateCreate = (props) => {
                 isActive: card.isActive
             }
 
-            await axios.post('https://heibackend.herokuapp.com/api/creategwupdate', body, { headers: { 'authorization': 'Bearer ' + token } });
+            await axios.post('http://127.0.0.1:8000/api/creategwupdate', body, { headers: { 'authorization': 'Bearer ' + token } });
 
             setTimeout(() => {
                 history.push(`/gwupdate`);
