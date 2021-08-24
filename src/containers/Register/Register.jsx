@@ -90,7 +90,7 @@ const Register = (props) => {
                 break;
 
             case 'codename':
-                if (datosUser.codename.length < 3) {
+                if (datosUser.codename.length < 2) {
                     setErrors({ ...errors, ePhone: 'Wrong codename' });
                 } else {
                     setErrors({ ...errors, ePhone: '' });

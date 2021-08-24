@@ -169,64 +169,66 @@ const AssetView = (props) => {
     }
 
     if ((props.credentials.user?.isAdmin == true) && (assetData.data)) {
-    return (
-        <div className="viewAsset">
-            <div className="content">
-                <div className="subHeader">
+        return (
+            <div className="viewAsset">
+                <div className="content">
+                    <div className="subHeader">
 
-                </div>
-                <div className={view.modifyViewP}>
-                    <div className="newsCard">Asset View
-                        <div className="row">
-                            Filter: 
-                            <input className="gwuData" name="name" onChange={updateSelector}></input>
-                            <button className="sendButton" onClick={viewAssetViews("name")}>By Name</button>
-
-                            <input className="gwuData" name="model" onChange={updateSelector}></input>
-                            <button className="sendButton" onClick={viewAssetViews("model")}>By Model</button>
-                        </div>
                     </div>
+                    <div className={view.modifyViewP}>
+                        <div className="newsCard">Asset View
+                            <div className="row">
+                                Filter:
+                                <input className="gwuData" name="name" onChange={updateSelector}></input>
+                                <button className="sendButton" onClick={() => viewAssetViews("name")}>By Name</button>
 
-                    {assetData.data.map((val, index) => (
-                                <div className="gwupdatecards" key={index}>
-                                    <div className="bbottom row">
-                                        <div>Name: {val.name}</div>
-                                        <div>Model: {val.model}</div>
-                                        <div>Type: {val.type}</div>
-                                    </div>
-                                    <div className="gwInfo">
+                                <input className="gwuData" name="model" onChange={updateSelector}></input>
+                                <button className="sendButton" onClick={() => viewAssetViews("model")}>By Model</button>
+                            </div>
+                        </div>
 
-                                        <div>{val.infoUpdate}</div>
+                        {assetData.data.map((val, index) => (
+                            <div className="gwupdatecards" key={index}>
+                                <div className="bbottom row">
+                                    <div>Name: {val.name}</div>
+                                    <div>Model: {val.model}</div>
+                                    <div>Type: {val.type}</div>
+                                </div>
+                                <div className="gwInfo">
+
+                                    <div>{val.infoUpdate}</div>
+                                    <div className="row">
                                         <button className="sendButton" onClick={() => deleteAsset(val.id)}>Delete</button>
                                         <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
                                     </div>
                                 </div>
-                            ))}
-                </div>
-                <div className={view.modifyView}>
-                    <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
+                            </div>
+                        ))}
+                    </div>
+                    <div className={view.modifyView}>
+                        <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
 
-                    <input className="gwuData" name="model" type="text" onChange={updateCard} placeholder="Model" defaultValue={modify.model} />
+                        <input className="gwuData" name="model" type="text" onChange={updateCard} placeholder="Model" defaultValue={modify.model} />
 
-                    <input className="gwuData" name="type" type="text" onChange={updateCard} placeholder="Type" defaultValue={modify.type} />
-                    <input className="gwuData" name="serialNumber" type="text" onChange={updateCard} placeholder="Serial Number" defaultValue={modify.sn} />
-                    <input className="gwuData" name="warranty" type="date" onChange={updateCard} placeholder="Warranty Expiracy Date" defaultValue={modify.warranty} />
-                    <input className="gwuData" name="ccc" type="text" onChange={updateCard} placeholder="CrossCheckCode" defaultValue={modify.ccc} />
-                    <input className="gwuData" name="quantity" type="text" onChange={updateCard} placeholder="Quantity" defaultValue={modify.quantity} />
-                    <input className="gwuData" name="year" type="text" onChange={updateCard} placeholder="Purchase Year" defaultValue={modify.year} />
+                        <input className="gwuData" name="type" type="text" onChange={updateCard} placeholder="Type" defaultValue={modify.type} />
+                        <input className="gwuData" name="serialNumber" type="text" onChange={updateCard} placeholder="Serial Number" defaultValue={modify.sn} />
+                        <input className="gwuData" name="warranty" type="date" onChange={updateCard} placeholder="Warranty Expiracy Date" defaultValue={modify.warranty} />
+                        <input className="gwuData" name="ccc" type="text" onChange={updateCard} placeholder="CrossCheckCode" defaultValue={modify.ccc} />
+                        <input className="gwuData" name="quantity" type="text" onChange={updateCard} placeholder="Quantity" defaultValue={modify.quantity} />
+                        <input className="gwuData" name="year" type="text" onChange={updateCard} placeholder="Purchase Year" defaultValue={modify.year} />
 
-                    <br></br>
-                    <div className="buttons">
-                        <div><button className="sendButton" onClick={modifyBack}>BACK</button></div>
-                        <div><button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button></div>
+                        <br></br>
+                        <div className="buttons">
+                            <div><button className="sendButton" onClick={() => modifyBack()}>BACK</button></div>
+                            <div><button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button></div>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
 
-
-        </div>
-
-    )
+        )
 
     } else if (assetData.data) {
 

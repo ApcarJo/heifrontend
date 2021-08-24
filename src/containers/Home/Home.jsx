@@ -20,7 +20,7 @@ const Home = (props) => {
 
     return(
         <div className="viewHome">
-            <div className="content">Hello, this is Home2</div>
+            <div className="content">Hello, this is Home</div>
         </div>
     )
 }

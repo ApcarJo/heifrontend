@@ -116,7 +116,7 @@ const Profile = (props) => {
                     <div className="labelData">Email</div>
                     <div className="profileData">{userData.email}</div>
                     <br></br>
-                    <button className="sendButton" onClick={modifyBack}>Modify</button>
+                    <button className="sendButton" onClick={()=>modifyBack()}>Modify</button>
                 </div>
                 <div className={view.modifyView}>
                     <div className="labelData">Name</div><input className="profileData" name="name" onChange={updateUserData} defaultValue={userData.name} />
@@ -146,8 +146,8 @@ const Profile = (props) => {
                     <input className="gwuData" name="isActive" type="text" onChange={updateUserData} placeholder="isActive" defaultValue={userData.isActive} />
                     <br></br>
                     <div className="buttons">
-                        <button className="sendButton" onClick={modifyBack}>BACK</button>
-                        <button className="sendButton" onClick={modifyProfile}>SAVE</button>
+                        <button className="sendButton" onClick={()=>modifyBack()}>BACK</button>
+                        <button className="sendButton" onClick={()=>modifyProfile()}>SAVE</button>
 
                     </div>
                 </div>
