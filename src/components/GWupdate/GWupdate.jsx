@@ -93,7 +93,7 @@ const GWupdate = (props) => {
                 try {
                     let token = props.credentials?.token;
 
-                    let res = await axios.get(`http://127.0.0.1:8000/api/findarchivegwupdate`, { headers: { 'authorization': 'Bearer ' + token } });
+                    let res = await axios.get(`http://127.0.0.1:8000/api/showarchived`, { headers: { 'authorization': 'Bearer ' + token } });
 
                     setGwUpdateData(res.data);
 
@@ -114,7 +114,7 @@ const GWupdate = (props) => {
 
             let res = await axios.delete(`http://127.0.0.1:8000/api/deletegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
-            // viewGWUpdates();
+            viewGWUpdates();
         } catch (error) {
             console.log(error);
         }
@@ -124,8 +124,9 @@ const GWupdate = (props) => {
 
         try {
             let token = props.credentials?.token;
+
             let body = {
-                gwupdate_id: id
+                id: id
             }
 
             let res = await axios.put(`http://127.0.0.1:8000/api/archivegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
@@ -162,13 +163,11 @@ const GWupdate = (props) => {
 
         (view.modifyViewP === 'profileCard') ? view.modifyViewP = 'modifyCard' : view.modifyViewP = 'profileCard';
 
-        //console.log(view.modifyView, view.modifyViewP);
         viewGWUpdates();
 
     }
 
     const modifyCard = async (id) => {
-        // e.preventDefault();
 
         try {
             let token = props.credentials.token;
@@ -202,11 +201,11 @@ const GWupdate = (props) => {
                         <div className="newsCard">Last GameWeek Updates
                             <div className="row">
                                 Filter:
-                                <button className="sendButton" name="isActive" onClick={viewGWUpdates("active")}>Active GWU</button>
-                                <button className="sendButton" onClick={viewGWUpdates("archive")}>Archive GWU</button>
+                                <button className="sendButton" name="isActive" onClick={()=>viewGWUpdates("active")}>Active GWU</button>
+                                <button className="sendButton" onClick={()=>viewGWUpdates("archive")}>Archive GWU</button>
 
                                 <input className="gwuData" name="title" onChange={updateSelector}></input>
-                                <button className="sendButton" onClick={viewGWUpdates("title")}>GWU's Title</button>
+                                <button className="sendButton" onClick={()=>viewGWUpdates("title")}>GWU's Title</button>
 
                             </div>
                         </div>
@@ -218,11 +217,12 @@ const GWupdate = (props) => {
                                     <div>{val.id}</div>
                                 </div>
                                 <div className="gwInfo">
-
-                                    <div>{val.infoUpdate}</div>
-                                    <button className="sendButton" onClick={() => deleteGWU(val.id)}>Delete</button>
-                                    <button className="sendButton" onClick={() => archiveGWU(val.id)}>Archive</button>
-                                    <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
+                                    <div className="row">
+                                        <div>{val.infoUpdate}</div>
+                                        <button className="sendButton" onClick={() => deleteGWU(val.id)}>Delete</button>
+                                        <button className="sendButton" onClick={() => archiveGWU(val.id)}>Archive</button>
+                                        <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
+                                    </div>
                                 </div>
                             </div>
                         ))}
@@ -237,7 +237,7 @@ const GWupdate = (props) => {
                         <input className="gwuData" name="img" type="text" onChange={updateCard} defaultValue={modify.img} />
                         <br></br>
                         <div className="buttons">
-                            <button className="sendButton" onClick={modifyBack}>BACK</button>
+                            <button className="sendButton" onClick={()=>modifyBack}>BACK</button>
                             <button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button>
 
                         </div>

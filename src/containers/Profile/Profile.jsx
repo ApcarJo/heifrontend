@@ -57,10 +57,17 @@ const Profile = (props) => {
                 name: userData.name,
                 surname1: userData.surname1,
                 surname2: userData.surname2,
+                email: userData.email,
                 phone: userData.phone,
+                picture: userData.picture,
+                nif: userData.nif,
+                license: userData.license,
+                postalcode: userData.postalcode,
                 address: userData.address,
                 city: userData.city,
                 postalcode: userData.postalcode,
+                role: userData.role,
+                isActive: userData.isActive,
                 password: userData.password
             }
 
@@ -122,6 +129,21 @@ const Profile = (props) => {
 
                     <div className="labelData">Address</div><input className="profileData" name="address" onChange={updateUserData} defaultValue={userData.address} />
                     <div className="labelData">Phone</div><input className="profileData" name="phone" onChange={updateUserData} defaultValue={userData.phone} />
+                    <input className="gwuData" name="name" type="text" onChange={updateUserData} placeholder="Name" defaultValue={userData.name} />
+                    <input className="gwuData" name="surname1" type="text" onChange={updateUserData} placeholder="Surname2" defaultValue={userData.surname1} />
+                    <input className="gwuData" name="surname2" type="text" onChange={updateUserData} placeholder="Surname2" defaultValue={userData.surname2} />
+                    <input className="gwuData" name="codename" type="text" onChange={updateUserData} placeholder="Codename" defaultValue={userData.codename} />
+                    <input className="gwuData" name="email" type="text" onChange={updateUserData} placeholder="Email" defaultValue={userData.email} />
+                    <input className="gwuData" name="phone" type="text" onChange={updateUserData} placeholder="Phone" defaultValue={userData.phone} />
+                    <input className="gwuData" name="nif" type="text" onChange={updateUserData} placeholder="NIF" defaultValue={userData.nif} />
+                    <input className="gwuData" name="license" type="text" onChange={updateUserData} placeholder="Drive License" defaultValue={userData.license} />
+                    <input className="gwuData" name="postalcode" type="text" onChange={updateUserData} placeholder="Postal Code" defaultValue={userData.postalcode} />
+                    <input className="gwuData" name="address" type="text" onChange={updateUserData} placeholder="Address" defaultValue={userData.address} />
+                    <input className="gwuData" name="city" type="text" onChange={updateUserData} placeholder="City" defaultValue={userData.city} />
+                    <input className="gwuData" name="role" type="text" onChange={updateUserData} placeholder="Role" defaultValue={userData.role} />
+                    <input className="gwuData" name="isAdmin" type="text" onChange={updateUserData} placeholder="isAdmin" defaultValue={userData.isAdmin} />
+                    <input className="gwuData" name="isArchive" type="text" onChange={updateUserData} placeholder="isArchive" defaultValue={userData.isArchive} />
+                    <input className="gwuData" name="isActive" type="text" onChange={updateUserData} placeholder="isActive" defaultValue={userData.isActive} />
                     <br></br>
                     <div className="buttons">
                         <button className="sendButton" onClick={modifyBack}>BACK</button>

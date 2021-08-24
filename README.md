@@ -8,25 +8,21 @@ Backend realizado en PHP con Laravel
 - Registro de usuario
 - Login de usuario
 - Modificación del perfil
-Funciones Admin:
+
+//Admin Funciones:
 - Modificación de perfiles
 - Listado de todos los usuarios
 - Búsqueda por nombre de usuario
 - Búsqueda de usuarios activos
 - Búsqueda de usuarios archivados
-
-- Registro de usuarios, login y modificación del perfil.
-** Falta añadir en Backend al modelo, isArchive, ruta: findarchiveusers y findbyrole
-
-En backend cambiar userSelector where to find y eliminar el get
-Añadir opcion a busqueda por archive users.
+- Archivar usuarios
 
 
 //GWupdates - Funciones Admin
 - Creación del Game Week Update semanal (GWU)
 - Listado de GWUs
 - Modificación de GWU
-- Eliminación de GWU - Testear
+- Archivar GWU
 
 ** Crear api para archivar en backend ruta: findarchivegwupdate
 ** Falla el delete

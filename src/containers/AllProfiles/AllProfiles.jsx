@@ -135,6 +135,21 @@ const AllProfiles = (props) => {
         }
     }
 
+    const archiveUser = async (id) => {
+        try {
+            let token = props.credentials?.token;
+
+            let body = {
+                id: id,
+            }
+
+            let res = await axios.post(`http://127.0.0.1:8000/api/archiveuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const modifyBack = async (id) => {
         console.log("a modify se venir")
         if (id) {
@@ -201,7 +216,7 @@ const AllProfiles = (props) => {
 
     if ((props.credentials.user?.isAdmin == true) && (profileData.data)) {
         return (
-            <div className="viewAsset">
+            <div className="viewAllProfiles">
                 <div className="content">
                     <div className="subHeader">
 
@@ -236,6 +251,7 @@ const AllProfiles = (props) => {
 
                                     <div className="row">
                                         <button className="sendButton" onClick={() => deleteUser(val.id)}>Delete</button>
+                                        <button className="sendButton" onClick={() => archiveUser(val.id)}>Archive</button>
                                         <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
                                     </div>
                                 </div>
