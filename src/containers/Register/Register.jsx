@@ -57,6 +57,7 @@ const Register = (props) => {
             }
 
         } catch {
+            status_header(200);
             setErrors({ ...errors, eValidate: 'Register could not be completed., please try again.' });
         }
 
