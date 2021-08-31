@@ -63,7 +63,7 @@ const Login = (props) => {
                 password: credentials.password
             }
             // Envío por axios
-            let res = await axios.post(`https://heibackend.herokuapp.com/api/login`, body);
+            let res = await axios.post(`heibackend.herokuapp.com/api/login`, body);
             props.dispatch({ type: LOGIN, payload: res.data });
 
             // redirección
