@@ -61,6 +61,8 @@ const Login = (props) => {
             let body = {
                 email: credentials.email,
                 password: credentials.password
+
+                console.log(credentials);
             }
             // Envío por axios
             let res = await axios.post(`heibackend.herokuapp.com/api/login`, body);
