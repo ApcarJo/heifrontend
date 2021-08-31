@@ -46,6 +46,10 @@ const Register = (props) => {
                 password: datosUser.password,
             }
 
+            console.log("esto es body", body);
+            console.log("esto es datosUser", datosUser);
+
+
             if (datosUser.password === datosUser.password2) {
                 await axios.post('https://heibackend.herokuapp.com/api/register', body);
                 setTimeout(() => {
