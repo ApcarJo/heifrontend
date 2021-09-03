@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import './Datepicker.scss';
-import { DRAW_CAL, DATE_CAL } from '../../redux/types';
+import {  DATE_CAL } from '../../redux/types';
 import { connect } from 'react-redux';
 
 
@@ -24,12 +24,6 @@ const Datepicker = (props) => {
 			actualDate: ''
 		});
 
-	const [errors, setErrors] = useState({
-		eDia: '',
-		eMes: '',
-		eAnyo: ''
-	});
-
 	//HANDLER
 	const updateFormulario = (e) => {
 		setDatosUser({ ...datosUser, [e.target.name]: e.target.value })
@@ -37,19 +31,12 @@ const Datepicker = (props) => {
 
 	useEffect(() => {
 		initiateDate();
-		// traductor();
 	}, []);
-
-	useEffect(() => {
-		// initiateDate();
-		// traductor();
-	});
 
 	const men20 = (a) => {
 		a = a - 1;
 		let numwrite = ["uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce", "quince", "dieciseis", "diecisiete", "dieciocho", "diecinueve", "veinte"]
 		arrayDate += numwrite[a];
-		// setDatosUser({...datosUser, arrayDate: numwrite[a]});
 	}
 
 	const dec = (decenas) => {
@@ -117,24 +104,6 @@ const Datepicker = (props) => {
 		resto1 = resto1 * -1;
 	}
 
-	let a;
-
-	const calendarConsole = () => {
-		for (i = 1; i <= mesi[mes - 1]; i++) {
-			if (dia === i)
-				// console.log(i + '*');
-
-			if (dia !== i)
-				// console.log(i);
-
-			if (a % 7 === 0)
-				// console.log(" ");
-			a++;
-		}
-	}
-
-	// let calendarConsole2 = calendarConsole();
-
 	let diasMes = [];
 	let mesDias = [];
 	if (resto1 !== 0) {
@@ -170,56 +139,7 @@ const Datepicker = (props) => {
 		}
 	}
 	let arrayMes = [" de Enero", " de Febrero", " de Marzo", " de Abril", " de Mayo", " de Junio", " de Julio", " de Agosto", " de Septiembre", " de Octubre", " de Noviembre", " de Diciembre"];
-	let arrayMes2 = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 	arrayDate += (arrayMes[mes - 1]);
-
-
-	// DRAW IN ROME NUMBERS THE YEAR
-	const cifra = (num, c1, c2, c3) => {
-		let j, romanoNum = [];
-
-		if (num === 9) {
-			romanoNum += (c1, c3);
-			// console.log(c1, c3);
-		} else if (num > 4) {
-			romanoNum += (c2);
-			// console.log(c2);
-
-			for (j = 1; j <= num - 5; j++) {
-				romanoNum += (c1);
-				// console.log(c1);
-			}
-
-		} else if (num === 4) {
-			romanoNum += (c1, c2);
-			// console.log(c1, c2);
-		} else {
-			for (j = 1; j <= num; j++) {
-				romanoNum += (c1);
-				// console.log(c1);
-			}
-		}
-		return romanoNum;
-	}
-
-	const romano = (num) => {
-
-		// Separar cada cifra del numero introducido
-		let mil = num / 1000;
-		let cen = (num % 1000) / 100;
-		let dec = (num % 100) / 10;
-		let uni = num % 10;
-		let romanoNum2 = []
-		// Hacer una llamada a la funcion por cada cifra del numero
-		romanoNum2.push(cifra(mil, 'M', '', ''));
-		romanoNum2.push(cifra(cen, 'C', 'D', 'M'));
-		romanoNum2.push(cifra(dec, 'X', 'L', 'C'));
-		romanoNum2.push(cifra(uni, 'I', 'V', 'X'));
-
-		// console.log(romanoNum2);
-	}
-
-	let romanoNum = romano(anyo);
 
 	const selectMonthArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
@@ -230,9 +150,6 @@ const Datepicker = (props) => {
 
 	const initiateDate = () => {
 		const actualDate = {
-			// year: newDate.getFullYear(),
-			// monthy: newDate.getMonth()+1,
-			// day: newDate.getDate(),
 			year: anyo,
 			day: dia,
 			monthy: mes,
@@ -245,16 +162,12 @@ const Datepicker = (props) => {
 		props.dispatch({ type: DATE_CAL, payload: actualDate });
 	}
 
-	const selectAnyo = [year, (year + 1)];
-
 	const saveData = (dia, mes, anyo) => {
 		// mes = traductor(datosUser.mesW);
 		if (dia !== '') {
 			let date = anyo + '-' + mes + '-' + dia;
-			// let date= dia+'-'+mes+'-'+anyo;
 			let newDate = new Date(date);
 
-			// setDatosUser({...datosUser, date: date});	
 			setDatosUser({ ...datosUser, date: date, dia: dia, mes: mes, anyo: anyo, semana: semana2, diasMes: diasMes, day: day, monthy: monthy, year: year });
 
 			let datePicker = {
@@ -262,7 +175,6 @@ const Datepicker = (props) => {
 				day: dia,
 				month: mes,
 				year: anyo,
-				// actualDate: datosUser.actualDate,
 				diasMes: diasMes,
 				semana: semana2
 			}
@@ -286,8 +198,6 @@ const Datepicker = (props) => {
 							<span className="text-nomb7">Month</span>
 						</label>
 					</form>
-
-					<div>{errors.eAnyo}</div>
 
 					<form className="form8">
 						<input type='text' className='input8' name='anyo' onChange={updateFormulario} defaultValue="2021" required></input>

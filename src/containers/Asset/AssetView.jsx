@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 const AssetView = (props) => {
@@ -10,7 +10,6 @@ const AssetView = (props) => {
 
     // HOOKS
     const [assetData, setAssetData] = useState({})
-    const [deleteCard, setDeleteCard] = useState({})
     const [modify, setModify] = useState({})
     const [card, setCard] = useState('');
 
@@ -84,7 +83,7 @@ const AssetView = (props) => {
                 } catch (error) {
                     console.log(error);
                 }
-
+                break;
             default:
         }
 
@@ -99,7 +98,7 @@ const AssetView = (props) => {
                 asset_id: id,
             }
 
-            let res = await axios.delete(`https://heibackend.herokuapp.com/api/deleteasset`, {data: body, headers: { 'authorization': 'Bearer ' + token } });
+            await axios.delete(`https://heibackend.herokuapp.com/api/deleteasset`, { data: body, headers: { 'authorization': 'Bearer ' + token } });
 
             viewAssetViews("all");
         } catch (error) {
@@ -124,17 +123,10 @@ const AssetView = (props) => {
                 console.log(error);
             }
         }
-
-
         // Switch view implemented
-
-        (view.modifyView === 'profileCard') ? view.modifyView = 'modifyCard' : view.modifyView = 'profileCard';
-
-        (view.modifyViewP === 'profileCard') ? view.modifyViewP = 'modifyCard' : view.modifyViewP = 'profileCard';
-
-        //console.log(view.modifyView, view.modifyViewP);
-        viewAssetViews();
-
+        const newModifyview = (view.modifyView === 'profileCard') ? 'modifyCard' : 'profileCard';
+        const newModifyviewP = (view.modifyViewP === 'profileCard') ? 'modifyCard' : 'profileCard';
+        setView({ modifyViewP: newModifyviewP, modifyView: newModifyview })
     }
 
     const modifyCard = async (id) => {
@@ -168,7 +160,7 @@ const AssetView = (props) => {
         }
     }
 
-    if ((props.credentials.user?.isAdmin == true) && (assetData.data)) {
+    if ((props.credentials.user?.isAdmin) && (assetData.data)) {
         return (
             <div className="viewAsset">
                 <div className="content">

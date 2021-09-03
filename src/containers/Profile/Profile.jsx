@@ -1,17 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
 
 const Profile = (props) => {
 
-    let history = useHistory();
-
     // HOOKS
     const [userData, setUserData] = useState({})
-    const [userDataId, setUserDataId] = useState({})
 
     const [view, setView] = useState({
         modifyView: 'modifyCard',
@@ -27,10 +23,6 @@ const Profile = (props) => {
     useEffect(() => {
         viewProfile();
     }, []);
-
-    useEffect(() => {
-
-    });
 
     const viewProfile = async () => {
         try {
@@ -65,13 +57,12 @@ const Profile = (props) => {
                 postalcode: userData.postalcode,
                 address: userData.address,
                 city: userData.city,
-                postalcode: userData.postalcode,
                 role: userData.role,
                 isActive: userData.isActive,
                 password: userData.password
             }
 
-            let res = await axios.put(`https://heibackend.herokuapp.com/api/modifyuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            await axios.put(`https://heibackend.herokuapp.com/api/modifyuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
             modifyBack();
 
@@ -83,14 +74,11 @@ const Profile = (props) => {
     const modifyBack = () => {
 
         // Switch view implemented
-
-        (view.modifyView === 'profileCard') ? view.modifyView = 'modifyCard' : view.modifyView = 'profileCard';
-
-        (view.modifyViewP === 'profileCard') ? view.modifyViewP = 'modifyCard' : view.modifyViewP = 'profileCard';
-
-        //console.log(view.modifyView, view.modifyViewP);
-        viewProfile();
+            const newModifyview = (view.modifyView === 'profileCard') ? 'modifyCard' : 'profileCard';
+            const newModifyviewP = (view.modifyViewP === 'profileCard') ? 'modifyCard' : 'profileCard';
+            setView({modifyViewP: newModifyviewP, modifyView: newModifyview})
     }
+
     if (props.credentials?.user) {
         return (
             <div className="viewProfile">

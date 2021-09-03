@@ -1,75 +1,68 @@
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+// import React, { useState } from 'react';
+// import axios from 'axios';
+// import { connect } from 'react-redux';
+// import { useHistory } from 'react-router-dom';
 
-const GWupdateCreate = (props) => {
+// const TeamCreate = (props) => {
 
-    let history = useHistory();
-
-
-    // Hook
-    const [card, setCard] = useState(
-        {
-            date: '',
-            title: '',
-            roles: '',
-            infoUpdate: '',
-            img: ''
-        });
+//     let history = useHistory();
 
 
-    // Handler
-    const updateCard = (e) => {
-        setCard({ ...card, [e.target.name]: e.target.value })
-    }
+//     // Hook
+//     const [team, setTeam] = useState({})
 
-    const createCard = async () => {
-        // e.preventDefault();
 
-        try {
-            let token = props.credentials.token;
+//     // Handler
+//     const updateCard = (e) => {
+//         setCard({ ...card, [e.target.name]: e.target.value })
+//     }
 
-            let body = {
-                date: "2021-09-21",
-                title: card.title,
-                roles: card.roles,
-                infoUpdate: card.infoUpdate,
-                img: card.img,
-                isActive: card.isActive
-            }
+//     const createCard = async () => {
+//         // e.preventDefault();
 
-            await axios.post('http://127.0.0.1:8000/api/creategwupdate', body, { headers: { 'authorization': 'Bearer ' + token } });
+//         try {
+//             let token = props.credentials.token;
 
-            setTimeout(() => {
-                history.push(`/gwupdate`);
-            }, 250);
-        } catch (error) {
-            console.log(error);
-        }
-    }
+//             let body = {
+//                 date: "2021-09-21",
+//                 title: card.title,
+//                 roles: card.roles,
+//                 infoUpdate: card.infoUpdate,
+//                 img: card.img,
+//                 isActive: card.isActive
+//             }
 
-    return (
-        <div className="createGwuView">
-            <div className="content">
-                <div className="profileCard">
-                    <input className="gwuData" name="title" type="text" onChange={updateCard} placeholder="Title" required />
+//             await axios.post('http://127.0.0.1:8000/api/creategwupdate', body, { headers: { 'authorization': 'Bearer ' + token } });
 
-                    <input className="gwuData" name="roles" type="text" onChange={updateCard} placeholder="Roles" />
+//             setTimeout(() => {
+//                 history.push(`/gwupdate`);
+//             }, 250);
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
 
-                    <textarea className="gwuData" name="infoUpdate" type="text" onChange={updateCard} placeholder="Info" required />
+//     return (
+//         <div className="createGwuView">
+//             <div className="content">
+//                 <div className="profileCard">
+//                     <input className="gwuData" name="title" type="text" onChange={updateCard} placeholder="Title" required />
 
-                    <input className="gwuData" name="img" type="text" onChange={updateCard} placeholder="Img link" required />
-                    <br></br>
-                    <button className="sendButton" onClick={() => createCard()}>Create GWU</button>
-                </div>
-            </div>
-        </div>
+//                     <input className="gwuData" name="roles" type="text" onChange={updateCard} placeholder="Roles" />
 
-    )
-}
+//                     <textarea className="gwuData" name="infoUpdate" type="text" onChange={updateCard} placeholder="Info" required />
 
-export default connect((state) => ({
-    credentials: state.credentials
-}))(GWupdateCreate);
+//                     <input className="gwuData" name="img" type="text" onChange={updateCard} placeholder="Img link" required />
+//                     <br></br>
+//                     <button className="sendButton" onClick={() => createCard()}>Create GWU</button>
+//                 </div>
+//             </div>
+//         </div>
+
+//     )
+// }
+
+// export default connect((state) => ({
+//     credentials: state.credentials
+// }))(TeamCreate);

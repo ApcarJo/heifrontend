@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import Button from '../Button/Button';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -11,7 +10,6 @@ const GWupdate = (props) => {
 
     // HOOKS
     const [gwUpdateData, setGwUpdateData] = useState({})
-    const [deleteCard, setDeleteCard] = useState({})
     const [modify, setModify] = useState({})
     const [card, setCard] = useState(
         {
@@ -101,6 +99,7 @@ const GWupdate = (props) => {
                     console.log(error);
                 }
                 break;
+                default:
         }
     }
 
@@ -112,7 +111,7 @@ const GWupdate = (props) => {
                 gwupdate_id: id,
             }
 
-            let res = await axios.delete(`https://heibackend.herokuapp.com/api/deletegwupdate`,  {data: body, headers: { 'authorization': 'Bearer ' + token } });
+            await axios.delete(`https://heibackend.herokuapp.com/api/deletegwupdate`,  {data: body, headers: { 'authorization': 'Bearer ' + token } });
 
             viewGWUpdates("all");
         } catch (error) {
@@ -129,7 +128,7 @@ const GWupdate = (props) => {
                 id: id
             }
 
-            let res = await axios.put(`https://heibackend.herokuapp.com/api/archivegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            await axios.put(`https://heibackend.herokuapp.com/api/archivegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
             viewGWUpdates();
 
@@ -147,7 +146,6 @@ const GWupdate = (props) => {
                     gwupdate_id: id
                 }
                 let token = props.credentials?.token;
-                console.log(props.credentials, "esto es credentials de modify");
 
                 let res = await axios.post(`https://heibackend.herokuapp.com/api/choosegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
                 setModify(res.data.data);
@@ -157,11 +155,8 @@ const GWupdate = (props) => {
             }
         }
 
-
         // Switch view implemented
-
         (view.modifyView === 'profileCard') ? view.modifyView = 'modifyCard' : view.modifyView = 'profileCard';
-
         (view.modifyViewP === 'profileCard') ? view.modifyViewP = 'modifyCard' : view.modifyViewP = 'profileCard';
 
         viewGWUpdates();
@@ -182,7 +177,7 @@ const GWupdate = (props) => {
                 isActive: card.isActive
             }
 
-            let res = await axios.put('https://heibackend.herokuapp.com/api/modifygwupdate', body, { headers: { 'authorization': 'Bearer ' + token } });
+            await axios.put('https://heibackend.herokuapp.com/api/modifygwupdate', body, { headers: { 'authorization': 'Bearer ' + token } });
 
             viewGWUpdates();
 
@@ -194,7 +189,7 @@ const GWupdate = (props) => {
         }
     }
 
-    if ((props.credentials.user?.isAdmin == true) && (gwUpdateData.data)) {
+    if ((props.credentials.user?.isAdmin) && (gwUpdateData.data)) {
         return (
             <div className="viewGWupdate">
                 <div className="content">

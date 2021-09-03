@@ -1,15 +1,8 @@
 
 
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import axios from 'axios';
-import { connect } from 'react-redux';
 
-const Schedule = (props) => {
+const Schedule = () => {
 
-    let history = useHistory();
-
-    //HOOKS
 
     return(
         <div classNamee="viewSchedule">
@@ -18,4 +11,4 @@ const Schedule = (props) => {
     )
 }
 
-export default connect(Schedule);
+export default Schedule;

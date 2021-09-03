@@ -40,6 +40,8 @@ function App() {
           <Route path="/asset" exact component={Asset} />
           <Route path="/assetview" exact component={AssetView} />
           <Route path="/allprofiles" exact component={AllProfiles} />
+          <Route path="/team" exact component={Team} />
+          <Route path="/teamcreate" exact component={TeamCreate} />
 
 
         </Switch>

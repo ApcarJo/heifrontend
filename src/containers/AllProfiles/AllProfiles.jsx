@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 const AllProfiles = (props) => {
@@ -11,8 +11,6 @@ const AllProfiles = (props) => {
 
     // HOOKS
     const [profileData, setProfileData] = useState({})
-    // const [allNames, setAllNames] = useState({})
-    const [deleteCard, setDeleteCard] = useState({})
     const [modify, setModify] = useState({})
     const [card, setCard] = useState('');
 
@@ -128,12 +126,12 @@ const AllProfiles = (props) => {
                 user_id: id,
             }
 
-            await axios.delete(`https://heibackend.herokuapp.com/api/deleteuser`,  {data: body, headers: { 'authorization': 'Bearer ' + token }});
+            await axios.delete(`https://heibackend.herokuapp.com/api/deleteuser`, { data: body, headers: { 'authorization': 'Bearer ' + token } });
             viewUsers("all");
         } catch (error) {
             console.log(error);
         }
-        
+
     }
 
     const archiveUser = async (id) => {
@@ -144,7 +142,7 @@ const AllProfiles = (props) => {
                 user_id: id,
             }
 
-            let res = await axios.put(`https://heibackend.herokuapp.com/api/archiveuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            await axios.put(`https://heibackend.herokuapp.com/api/archiveuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
         } catch (error) {
             console.log(error);
@@ -169,13 +167,9 @@ const AllProfiles = (props) => {
         }
 
         // Switch view implemented
-
-        (view.modifyView === 'profileCard') ? view.modifyView = 'modifyCard' : view.modifyView = 'profileCard';
-
-        (view.modifyViewP === 'profileCard') ? view.modifyViewP = 'modifyCard' : view.modifyViewP = 'profileCard';
-
-        viewUsers("all");
-
+        const newModifyview = (view.modifyView === 'profileCard') ? 'modifyCard' : 'profileCard';
+        const newModifyviewP = (view.modifyViewP === 'profileCard') ? 'modifyCard' : 'profileCard';
+        setView({ modifyViewP: newModifyviewP, modifyView: newModifyview })
     }
 
     const modifyCard = async (id) => {
@@ -204,7 +198,7 @@ const AllProfiles = (props) => {
                 isActive: card.isActive
             }
 
-            let res = await axios.put('https://heibackend.herokuapp.com/api/modifyuser', body, { headers: { 'authorization': 'Bearer ' + token } });
+            await axios.put('https://heibackend.herokuapp.com/api/modifyuser', body, { headers: { 'authorization': 'Bearer ' + token } });
 
             setTimeout(() => {
                 history.push(`/allprofiles`);
@@ -214,7 +208,7 @@ const AllProfiles = (props) => {
         }
     }
 
-    if ((props.credentials.user?.isAdmin == true) && (profileData.data)) {
+    if ((props.credentials.user?.isAdmin) && (profileData.data)) {
         return (
             <div className="viewAllProfiles">
                 <div className="content">
@@ -288,7 +282,7 @@ const AllProfiles = (props) => {
 
         )
 
-    } else if ((props.credentials.user?.isAdmin == false) && (profileData.data)) {
+    } else if ((props.credentials.user?.isAdmin) && (profileData.data)) {
 
         return (
             <div className="viewGWupdate">
