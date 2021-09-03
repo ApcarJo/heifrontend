@@ -26,6 +26,7 @@ const AssetView = (props) => {
         setCard({ ...card, [e.target.name]: e.target.value })
     }
 
+    // eslint-disable-line react-hooks/exhaustive-deps
     useEffect(() => {
         viewAssetViews("all");
     }, []);

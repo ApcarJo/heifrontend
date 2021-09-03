@@ -23,8 +23,22 @@ $pal-footer: #444444;
 .content {
     @extend .center;
     height: fit-content;
-    padding: 2%;
+    padding: 2em;
 }
+
+.gwuData {
+    // all:unset;
+    overflow: hidden;
+    @extend .center;
+    align-items: flex-start;
+    justify-content: left;
+    border: $pal-text 0.05em solid;
+    width: 30em;
+    padding: 1%;
+    margin-bottom: 1em;
+    border-radius: 0.2em;
+}
+
 
 // FORM
 .form {

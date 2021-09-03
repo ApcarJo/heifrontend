@@ -169,7 +169,7 @@ const GWupdate = (props) => {
             let token = props.credentials.token;
 
             let body = {
-                Gwupdate_id: id,
+                gwupdate_id: id,
                 title: card.title,
                 roles: card.roles,
                 infoUpdate: card.infoUpdate,

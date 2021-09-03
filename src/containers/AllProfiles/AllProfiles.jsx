@@ -200,9 +200,11 @@ const AllProfiles = (props) => {
 
             await axios.put('https://heibackend.herokuapp.com/api/modifyuser', body, { headers: { 'authorization': 'Bearer ' + token } });
 
-            setTimeout(() => {
-                history.push(`/allprofiles`);
-            }, 250);
+            const newModifyview = (view.modifyView === 'profileCard') ? 'modifyCard' : 'profileCard';
+            const newModifyviewP = (view.modifyViewP === 'profileCard') ? 'modifyCard' : 'profileCard';
+            setView({ modifyViewP: newModifyviewP, modifyView: newModifyview })
+
+
         } catch (error) {
             console.log(error);
         }
@@ -252,6 +254,7 @@ const AllProfiles = (props) => {
                             </div>
                         ))}
                     </div>
+                    {/* Conmuta visibilidad */}
                     <div className={view.modifyView}>
                         <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
                         <input className="gwuData" name="surname1" type="text" onChange={updateCard} placeholder="Surname2" defaultValue={modify.surname1} />
