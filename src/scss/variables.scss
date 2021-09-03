@@ -22,7 +22,7 @@ $pal-footer: #444444;
 
 .content {
     @extend .center;
-    height: 100vh;
+    height: fit-content;
     padding: 2%;
 }
 
