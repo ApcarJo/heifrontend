@@ -16,6 +16,7 @@
 
 .profileCard {
     @extend .center;
+    justify-content: flex-start;
     overflow: hidden;
     background-color: white;
     color: $pal-text;

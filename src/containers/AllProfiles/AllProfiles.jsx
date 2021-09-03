@@ -151,7 +151,7 @@ const AllProfiles = (props) => {
     }
 
     const modifyBack = async (id) => {
-        console.log("a modify se venir")
+
         if (id) {
             try {
                 let body = {
@@ -277,7 +277,7 @@ const AllProfiles = (props) => {
 
                         <br></br>
                         <div className="buttons">
-                            <div><button className="sendButton" onClick={() => modifyBack()}>BACK</button></div>
+                            <div><button className="sendButton" onClick={() => modifyBack("all")}>BACK</button></div>
                             <div><button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button></div>
                         </div>
                     </div>

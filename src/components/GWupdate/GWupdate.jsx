@@ -107,6 +107,8 @@ const GWupdate = (props) => {
     const deleteGWU = async (id) => {
         try {
             let token = props.credentials?.token;
+            debugger
+            console.log("esto es credentials en delete", props.credentials);
 
             let body = {
                 id: id,
@@ -147,6 +149,7 @@ const GWupdate = (props) => {
                     gwupdate_id: id
                 }
                 let token = props.credentials?.token;
+                console.log(props.credentials, "esto es credentials de modify");
 
                 let res = await axios.post(`https://heibackend.herokuapp.com/api/choosegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
                 setModify(res.data.data);
