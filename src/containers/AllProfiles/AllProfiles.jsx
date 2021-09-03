@@ -127,6 +127,7 @@ const AllProfiles = (props) => {
             let body = {
                 id: id,
             }
+            console.log("esto es delete", body, props.credentials?.token)
 
             let res = await axios.delete(`https://heibackend.herokuapp.com/api/deleteuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
@@ -166,7 +167,6 @@ const AllProfiles = (props) => {
                 console.log(error);
             }
         }
-
 
         // Switch view implemented
 
