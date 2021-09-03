@@ -144,7 +144,7 @@ const AllProfiles = (props) => {
                 id: id,
             }
 
-            let res = await axios.post(`https://heibackend.herokuapp.com/api/archiveuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.put(`https://heibackend.herokuapp.com/api/archiveuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
         } catch (error) {
             console.log(error);
