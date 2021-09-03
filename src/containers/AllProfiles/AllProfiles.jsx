@@ -174,7 +174,7 @@ const AllProfiles = (props) => {
 
         (view.modifyViewP === 'profileCard') ? view.modifyViewP = 'modifyCard' : view.modifyViewP = 'profileCard';
 
-        viewUsers();
+        viewUsers("all");
 
     }
 
@@ -277,7 +277,7 @@ const AllProfiles = (props) => {
 
                         <br></br>
                         <div className="buttons">
-                            <div><button className="sendButton" onClick={() => modifyBack("all")}>BACK</button></div>
+                            <div><button className="sendButton" onClick={() => modifyBack()}>BACK</button></div>
                             <div><button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button></div>
                         </div>
                     </div>
