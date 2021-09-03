@@ -165,7 +165,7 @@ const AllProfiles = (props) => {
                 console.log(error);
             }
         }
-
+        // setProfileData();
         // Switch view implemented
         const newModifyview = (view.modifyView === 'profileCard') ? 'modifyCard' : 'profileCard';
         const newModifyviewP = (view.modifyViewP === 'profileCard') ? 'modifyCard' : 'profileCard';
@@ -210,7 +210,7 @@ const AllProfiles = (props) => {
         }
     }
 
-    if ((props.credentials.user?.isAdmin) && (profileData.data)) {
+    if ((props.credentials.user?.isAdmin) && (profileData?.data)) {
         return (
             <div className="viewAllProfiles">
                 <div className="content">
@@ -285,7 +285,7 @@ const AllProfiles = (props) => {
 
         )
 
-    } else if ((props.credentials.user?.isAdmin) && (profileData.data)) {
+    } else if ((props.credentials.user?.isAdmin) && (profileData?.data)) {
 
         return (
             <div className="viewGWupdate">
