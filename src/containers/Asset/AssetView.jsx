@@ -96,12 +96,12 @@ const AssetView = (props) => {
             let token = props.credentials?.token;
 
             let body = {
-                Asset_id: id,
+                asset_id: id,
             }
 
-            let res = await axios.delete(`https://heibackend.herokuapp.com/api/deleteasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.delete(`https://heibackend.herokuapp.com/api/deleteasset`, {data: body, headers: { 'authorization': 'Bearer ' + token } });
 
-            // viewAssets();
+            viewAssetViews("all");
         } catch (error) {
             console.log(error);
         }

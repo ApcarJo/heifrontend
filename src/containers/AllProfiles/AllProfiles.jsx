@@ -125,15 +125,15 @@ const AllProfiles = (props) => {
             let token = props.credentials?.token;
 
             let body = {
-                id: id,
+                user_id: id,
             }
-            console.log("esto es delete", body, props.credentials?.token)
 
-            let res = await axios.delete(`https://heibackend.herokuapp.com/api/deleteuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
-
+            await axios.delete(`https://heibackend.herokuapp.com/api/deleteuser`,  {data: body, headers: { 'authorization': 'Bearer ' + token }});
+            viewUsers("all");
         } catch (error) {
             console.log(error);
         }
+        
     }
 
     const archiveUser = async (id) => {
@@ -141,7 +141,7 @@ const AllProfiles = (props) => {
             let token = props.credentials?.token;
 
             let body = {
-                id: id,
+                user_id: id,
             }
 
             let res = await axios.put(`https://heibackend.herokuapp.com/api/archiveuser`, body, { headers: { 'authorization': 'Bearer ' + token } });

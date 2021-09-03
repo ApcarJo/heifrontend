@@ -107,16 +107,14 @@ const GWupdate = (props) => {
     const deleteGWU = async (id) => {
         try {
             let token = props.credentials?.token;
-            debugger
-            console.log("esto es credentials en delete", props.credentials);
 
             let body = {
-                id: id,
+                gwupdate_id: id,
             }
 
-            let res = await axios.delete(`https://heibackend.herokuapp.com/api/deletegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
+            let res = await axios.delete(`https://heibackend.herokuapp.com/api/deletegwupdate`,  {data: body, headers: { 'authorization': 'Bearer ' + token } });
 
-            viewGWUpdates("active");
+            viewGWUpdates("all");
         } catch (error) {
             console.log(error);
         }

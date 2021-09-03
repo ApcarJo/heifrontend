@@ -29,16 +29,6 @@ const Asset = (props) => {
         setitem({ ...item, [e.target.name]: e.target.value })
     }
 
-    useEffect(() => {
-
-    }, []);
-
-
-    useEffect(() => {
-
-    });
-
-
     const createAsset = async () => {
         // e.preventDefault();
 
