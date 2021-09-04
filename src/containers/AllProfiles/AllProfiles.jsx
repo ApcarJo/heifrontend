@@ -3,21 +3,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 const AllProfiles = (props) => {
-
-    let history = useHistory();
 
     // HOOKS
     const [profileData, setProfileData] = useState({})
     const [modify, setModify] = useState({})
     const [card, setCard] = useState('');
+    const [buttons, setButtons] = useState({
+        show: [],
+        bId: '',
+    });
 
     const [view, setView] = useState({
-        modifyView: 'modifyCard',
-        modifyViewP: 'profileCard'
+        modifyView: 'hideCard',
+        modifyViewP: 'showCard',
     })
+
+    const [showHide, setShowHide] = useState(false)
 
     const [selector, setSelector] = useState('');
 
@@ -167,12 +170,12 @@ const AllProfiles = (props) => {
         }
         // setProfileData();
         // Switch view implemented
-        const newModifyview = (view.modifyView === 'profileCard') ? 'modifyCard' : 'profileCard';
-        const newModifyviewP = (view.modifyViewP === 'profileCard') ? 'modifyCard' : 'profileCard';
+        const newModifyview = (view.modifyView === 'showCard') ? 'hideCard' : 'showCard';
+        const newModifyviewP = (view.modifyViewP === 'showCard') ? 'hideCard' : 'showCard';
         setView({ modifyViewP: newModifyviewP, modifyView: newModifyview })
     }
 
-    const modifyCard = async (id) => {
+    const hideCard = async (id) => {
         // e.preventDefault();
 
         try {
@@ -200,8 +203,8 @@ const AllProfiles = (props) => {
 
             await axios.put('https://heibackend.herokuapp.com/api/modifyuser', body, { headers: { 'authorization': 'Bearer ' + token } });
 
-            const newModifyview = (view.modifyView === 'profileCard') ? 'modifyCard' : 'profileCard';
-            const newModifyviewP = (view.modifyViewP === 'profileCard') ? 'modifyCard' : 'profileCard';
+            const newModifyview = (view.modifyView === 'showCard') ? 'hideCard' : 'showCard';
+            const newModifyviewP = (view.modifyViewP === 'showCard') ? 'hideCard' : 'showCard';
             setView({ modifyViewP: newModifyviewP, modifyView: newModifyview })
 
 
@@ -209,6 +212,17 @@ const AllProfiles = (props) => {
             console.log(error);
         }
     }
+
+    const showFunc = (id) => {
+        buttons.bId = id;
+        buttons.show = [];
+        buttons.show.push(<div className="row flexEnd">
+                    <button className="sendButton" onClick={() => deleteUser(id)}>Delete</button>
+                    <button className="sendButton" onClick={() => archiveUser(id)}>Archive</button>
+                    <button className="sendButton" onClick={() => modifyBack(id)}>Modify</button></div>);
+        setShowHide(!showHide)
+    }
+
 
     if ((props.credentials.user?.isAdmin) && (profileData?.data)) {
         return (
@@ -221,36 +235,42 @@ const AllProfiles = (props) => {
                         <div className="newsCard">Profiles List View
                             <div className="row">
                                 Filter:
+                                <button className="sendButton" name="allUsers" onClick={() => viewUsers("all")}>All Users</button>
                                 <button className="sendButton" name="isActive" onClick={() => viewUsers("active")}>Active Users</button>
                                 <button className="sendButton" onClick={() => viewUsers("archive")}>Archive Users</button>
 
-                                <input className="gwuData" name="name" onChange={updateSelector}></input>
+                                <input className="userData" name="name" onChange={updateSelector}></input>
                                 <button className="sendButton" onClick={() => viewUsers("name")}>User's Name</button>
-                                <input className="gwuData" name="role" onChange={updateSelector}></input>
+                                <input className="userData" name="role" onChange={updateSelector}></input>
                                 <button className="sendButton" onClick={() => viewUsers("role")}>User's Role</button>
 
                             </div>
                         </div>
+                        <div className="row underline spaceEvenly">
+                            <div className="dataBox">Name</div>
+                            <div className="dataBox">Surname</div>
+                            <div className="dataBox">CodeName</div>
+                            <div className="dataBox">Email</div>
+                            <div className="dataBox">Phone</div>
+                            <div className="dataBox">City</div>
+                            <div className="dataBox">Role</div>
+                        </div>
 
                         {profileData.data.map((val, index) => (
-                            <div className="gwupdatecards" key={index}>
-                                <div className="bbottom row">
-                                    <div>Name: {val.name}</div>
-                                    <div>Surname: {val.surname1}</div>
-                                    <div>CodeName: {val.codename}</div>
-                                    <div>Email: {val.email}</div>
-                                    <div>Phone: {val.phone}</div>
-                                    <div>City: {val.city}</div>
-                                    <div>Role: {val.role}</div>
+                            <div key={index}>
+                                <div className="profileInfo row underline spaceEvenly" onClick={()=>showFunc(val.id)}>
+                                    <div className="dataBox">{val.name}</div>
+                                    <div className="dataBox">{val.surname1}</div>
+                                    <div className="dataBox">{val.codename}</div>
+                                    <div className="dataBox">{val.email}</div>
+                                    <div className="dataBox">{val.phone}</div>
+                                    <div className="dataBox">{val.city}</div>
+                                    <div className="dataBox">{val.role}</div>
                                 </div>
-                                <div className="gwInfo">
-
-                                    <div className="row">
-                                        <button className="sendButton" onClick={() => deleteUser(val.id)}>Delete</button>
-                                        <button className="sendButton" onClick={() => archiveUser(val.id)}>Archive</button>
-                                        <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
-                                    </div>
+                                {(showHide && (buttons.bId === val.id)) && (<div className="row">
+                                    <div className="flexEnd">{buttons.show}</div>
                                 </div>
+                                )}
                             </div>
                         ))}
                     </div>
@@ -273,9 +293,9 @@ const AllProfiles = (props) => {
                         <input className="gwuData" name="isActive" type="text" onChange={updateCard} placeholder="isActive" defaultValue={modify.isActive} />
 
                         <br></br>
-                        <div className="buttons">
+                        <div className="row">
                             <div><button className="sendButton" onClick={() => modifyBack()}>BACK</button></div>
-                            <div><button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button></div>
+                            <div><button className="sendButton" onClick={() => hideCard(modify.id)}>SAVE</button></div>
                         </div>
                     </div>
                 </div>
@@ -285,10 +305,10 @@ const AllProfiles = (props) => {
 
         )
 
-    } else if ((props.credentials.user?.isAdmin) && (profileData?.data)) {
+    } else if ((props.credentials?.user) && (profileData?.data)) {
 
         return (
-            <div className="viewGWupdate">
+            <div className="viewAllProfiles">
                 <div className="content">
                     <div className="newsCard">Last GameWeek Updates</div>
                     {profileData.data.map((val, index) => (

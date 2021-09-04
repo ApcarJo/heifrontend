@@ -14,8 +14,8 @@ const AssetView = (props) => {
     const [card, setCard] = useState('');
 
     const [view, setView] = useState({
-        modifyView: 'modifyCard',
-        modifyViewP: 'profileCard'
+        modifyView: 'hideCard',
+        modifyViewP: 'showCard'
     })
 
     const [selector, setSelector] = useState('');
@@ -125,12 +125,12 @@ const AssetView = (props) => {
             }
         }
         // Switch view implemented
-        const newModifyview = (view.modifyView === 'profileCard') ? 'modifyCard' : 'profileCard';
-        const newModifyviewP = (view.modifyViewP === 'profileCard') ? 'modifyCard' : 'profileCard';
+        const newModifyview = (view.modifyView === 'showCard') ? 'hideCard' : 'showCard';
+        const newModifyviewP = (view.modifyViewP === 'showCard') ? 'hideCard' : 'showCard';
         setView({ modifyViewP: newModifyviewP, modifyView: newModifyview })
     }
 
-    const modifyCard = async (id) => {
+    const hideCard = async (id) => {
         // e.preventDefault();
 
         try {
@@ -213,7 +213,7 @@ const AssetView = (props) => {
                         <br></br>
                         <div className="buttons">
                             <div><button className="sendButton" onClick={() => modifyBack()}>BACK</button></div>
-                            <div><button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button></div>
+                            <div><button className="sendButton" onClick={() => hideCard(modify.id)}>SAVE</button></div>
                         </div>
                     </div>
                 </div>

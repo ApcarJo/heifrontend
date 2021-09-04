@@ -21,8 +21,8 @@ const GWupdate = (props) => {
         });
 
     const [view, setView] = useState({
-        modifyView: 'modifyCard',
-        modifyViewP: 'profileCard'
+        modifyView: 'hideCard',
+        modifyViewP: 'showCard'
     })
 
     const [selector, setSelector] = useState('');
@@ -156,14 +156,14 @@ const GWupdate = (props) => {
         }
 
         // Switch view implemented
-        (view.modifyView === 'profileCard') ? view.modifyView = 'modifyCard' : view.modifyView = 'profileCard';
-        (view.modifyViewP === 'profileCard') ? view.modifyViewP = 'modifyCard' : view.modifyViewP = 'profileCard';
+        (view.modifyView === 'showCard') ? view.modifyView = 'hideCard' : view.modifyView = 'showCard';
+        (view.modifyViewP === 'showCard') ? view.modifyViewP = 'hideCard' : view.modifyViewP = 'showCard';
 
         viewGWUpdates();
 
     }
 
-    const modifyCard = async (id) => {
+    const hideCard = async (id) => {
 
         try {
             let token = props.credentials.token;
@@ -234,7 +234,7 @@ const GWupdate = (props) => {
                         <br></br>
                         <div className="buttons">
                             <button className="sendButton" onClick={()=>modifyBack}>BACK</button>
-                            <button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button>
+                            <button className="sendButton" onClick={() => hideCard(modify.id)}>SAVE</button>
 
                         </div>
                     </div>

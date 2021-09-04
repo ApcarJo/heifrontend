@@ -22,8 +22,8 @@
 //         });
 
 //     const [view, setView] = useState({
-//         modifyView: 'modifyCard',
-//         modifyViewP: 'profileCard'
+//         modifyView: 'hideCard',
+//         modifyViewP: 'showCard'
 //     })
 
 //     const [selector, setSelector] = useState('');
@@ -140,15 +140,15 @@
 
 //         // Switch view implemented
 
-//         (view.modifyView === 'profileCard') ? view.modifyView = 'modifyCard' : view.modifyView = 'profileCard';
+//         (view.modifyView === 'showCard') ? view.modifyView = 'hideCard' : view.modifyView = 'showCard';
 
-//         (view.modifyViewP === 'profileCard') ? view.modifyViewP = 'modifyCard' : view.modifyViewP = 'profileCard';
+//         (view.modifyViewP === 'showCard') ? view.modifyViewP = 'hideCard' : view.modifyViewP = 'showCard';
 
 //         viewTeams();
 
 //     }
 
-//     const modifyCard = async (id) => {
+//     const hideCard = async (id) => {
 
 //         try {
 //             let token = props.credentials.token;
@@ -221,7 +221,7 @@
 //                         <br></br>
 //                         <div className="buttons">
 //                             <button className="sendButton" onClick={()=>modifyBack}>BACK</button>
-//                             <button className="sendButton" onClick={() => modifyCard(modify.id)}>SAVE</button>
+//                             <button className="sendButton" onClick={() => hideCard(modify.id)}>SAVE</button>
 
 //                         </div>
 //                     </div>

@@ -35,7 +35,6 @@ $pal-footer: #444444;
     border: $pal-text 0.05em solid;
     width: 30em;
     padding: 1%;
-    margin-bottom: 1em;
     border-radius: 0.2em;
 }
 
@@ -100,12 +99,12 @@ $pal-footer: #444444;
     background-color: $pal-main;
     border-radius: 0.5em;
     color: $pal-det;
-    height: 2em;
+    height: 3em;
     width: 6em;
-    // margin-right: 0.5em;
-    // margin-left: 0.5em;
-    align-items: space-evenly;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
     &:hover {
+        transition: 0.3s;
         cursor: pointer;
         background-color: $pal-footer;
     }
@@ -118,8 +117,24 @@ $pal-footer: #444444;
 .row {
     @extend .center;
     flex-direction: row;
-    padding: 0.5em;
-    width: 100%;
-    justify-content: space-between;
+}
+
+.underline {
     border-bottom: 0.1em solid $pal-main;
+}
+
+.spaceEvenly {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.dataBox{
+    @extend .center;
+    width: 10em;
+    height: 2em;
+}
+
+.flexEnd {
+    width: 100%;
+    justify-content: flex-end;
 }

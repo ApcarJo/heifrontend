@@ -46,7 +46,7 @@
 //     return (
 //         <div className="createGwuView">
 //             <div className="content">
-//                 <div className="profileCard">
+//                 <div className="showCard">
 //                     <input className="gwuData" name="title" type="text" onChange={updateCard} placeholder="Title" required />
 
 //                     <input className="gwuData" name="roles" type="text" onChange={updateCard} placeholder="Roles" />

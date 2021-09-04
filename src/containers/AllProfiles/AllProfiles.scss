@@ -1,0 +1,18 @@
+
+.profileInfo {
+    transition: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    &.profileInfo:hover {
+        cursor: pointer;
+        transition: 0.3s;
+        background-color: $pal-text-footer;
+        color: $pal-sec;
+    }
+}
+
+.userData {
+    @extend .gwuData;
+    border-radius: 2em;
+    width: 10em;
+    height: 3em;
+}
+
