@@ -21,7 +21,6 @@ const AllProfiles = (props) => {
     })
 
     const [showHide, setShowHide] = useState(false)
-
     const [selector, setSelector] = useState('');
 
 
@@ -31,7 +30,7 @@ const AllProfiles = (props) => {
     }
 
     useEffect(() => {
-        viewUsers("all");
+        viewUsers("All");
     }, []);
 
     const updateSelector = (e) => {
@@ -42,7 +41,7 @@ const AllProfiles = (props) => {
 
         switch (val) {
 
-            case "all":
+            case "All":
 
                 try {
                     let token = props.credentials?.token;
@@ -56,7 +55,7 @@ const AllProfiles = (props) => {
                 }
                 break;
 
-            case "name":
+            case "Name":
                 try {
                     let token = props.credentials?.token;
 
@@ -72,7 +71,7 @@ const AllProfiles = (props) => {
                     console.log(error);
                 }
                 break;
-            case "active":
+            case "Active":
                 try {
                     let token = props.credentials?.token;
 
@@ -85,7 +84,7 @@ const AllProfiles = (props) => {
                 }
                 break;
 
-            case "archive":
+            case "Archive":
                 try {
                     let token = props.credentials?.token;
 
@@ -98,7 +97,7 @@ const AllProfiles = (props) => {
                 }
                 break;
 
-            case "role":
+            case "Role":
                 try {
                     let token = props.credentials?.token;
 
@@ -130,7 +129,7 @@ const AllProfiles = (props) => {
             }
 
             await axios.delete(`https://heibackend.herokuapp.com/api/deleteuser`, { data: body, headers: { 'authorization': 'Bearer ' + token } });
-            viewUsers("all");
+            viewUsers("All");
         } catch (error) {
             console.log(error);
         }
@@ -142,11 +141,11 @@ const AllProfiles = (props) => {
             let token = props.credentials?.token;
 
             let body = {
-                user_id: id,
+                id: id,
             }
 
             await axios.put(`https://heibackend.herokuapp.com/api/archiveuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
-
+            viewUsers("Archive");
         } catch (error) {
             console.log(error);
         }
@@ -160,7 +159,7 @@ const AllProfiles = (props) => {
                     user_id: id
                 }
                 let token = props.credentials?.token;
-
+                setModify();
                 let res = await axios.post(`https://heibackend.herokuapp.com/api/chooseuser`, body, { headers: { 'authorization': 'Bearer ' + token } });
                 setModify(res.data.data);
 
@@ -168,14 +167,14 @@ const AllProfiles = (props) => {
                 console.log(error);
             }
         }
-        // setProfileData();
+
         // Switch view implemented
         const newModifyview = (view.modifyView === 'showCard') ? 'hideCard' : 'showCard';
         const newModifyviewP = (view.modifyViewP === 'showCard') ? 'hideCard' : 'showCard';
-        setView({ modifyViewP: newModifyviewP, modifyView: newModifyview })
+        setView({ modifyViewP: newModifyviewP, modifyView: newModifyview });
     }
 
-    const hideCard = async (id) => {
+    const modifyUser = async (id) => {
         // e.preventDefault();
 
         try {
@@ -206,7 +205,7 @@ const AllProfiles = (props) => {
             const newModifyview = (view.modifyView === 'showCard') ? 'hideCard' : 'showCard';
             const newModifyviewP = (view.modifyViewP === 'showCard') ? 'hideCard' : 'showCard';
             setView({ modifyViewP: newModifyviewP, modifyView: newModifyview })
-
+            viewUsers("All");
 
         } catch (error) {
             console.log(error);
@@ -217,9 +216,9 @@ const AllProfiles = (props) => {
         buttons.bId = id;
         buttons.show = [];
         buttons.show.push(<div className="row flexEnd">
-                    <button className="sendButton" onClick={() => deleteUser(id)}>Delete</button>
-                    <button className="sendButton" onClick={() => archiveUser(id)}>Archive</button>
-                    <button className="sendButton" onClick={() => modifyBack(id)}>Modify</button></div>);
+            <button className="sendButton" onClick={() => deleteUser(id)}>Delete</button>
+            <button className="sendButton" onClick={() => archiveUser(id)}>Archive</button>
+            <button className="sendButton" onClick={() => modifyBack(id)}>Modify</button></div>);
         setShowHide(!showHide)
     }
 
@@ -235,14 +234,14 @@ const AllProfiles = (props) => {
                         <div className="newsCard">Profiles List View
                             <div className="row">
                                 Filter:
-                                <button className="sendButton" name="allUsers" onClick={() => viewUsers("all")}>All Users</button>
-                                <button className="sendButton" name="isActive" onClick={() => viewUsers("active")}>Active Users</button>
-                                <button className="sendButton" onClick={() => viewUsers("archive")}>Archive Users</button>
+                                <button className="sendButton" name="allUsers" onClick={() => viewUsers("All")}>All Users</button>
+                                <button className="sendButton" name="isActive" onClick={() => viewUsers("Active")}>Active Users</button>
+                                <button className="sendButton" onClick={() => viewUsers("Archive")}>Archive Users</button>
 
                                 <input className="userData" name="name" onChange={updateSelector}></input>
-                                <button className="sendButton" onClick={() => viewUsers("name")}>User's Name</button>
+                                <button className="sendButton" onClick={() => viewUsers("Name")}>User's Name</button>
                                 <input className="userData" name="role" onChange={updateSelector}></input>
-                                <button className="sendButton" onClick={() => viewUsers("role")}>User's Role</button>
+                                <button className="sendButton" onClick={() => viewUsers("Role")}>User's Role</button>
 
                             </div>
                         </div>
@@ -258,7 +257,7 @@ const AllProfiles = (props) => {
 
                         {profileData.data.map((val, index) => (
                             <div key={index}>
-                                <div className="profileInfo row underline spaceEvenly" onClick={()=>showFunc(val.id)}>
+                                <div className="profileInfo row underline spaceEvenly" onClick={() => showFunc(val.id)}>
                                     <div className="dataBox">{val.name}</div>
                                     <div className="dataBox">{val.surname1}</div>
                                     <div className="dataBox">{val.codename}</div>
@@ -275,7 +274,7 @@ const AllProfiles = (props) => {
                         ))}
                     </div>
                     {/* Conmuta visibilidad */}
-                    <div className={view.modifyView}>
+                    {modify && (<div className={view.modifyView}>
                         <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
                         <input className="gwuData" name="surname1" type="text" onChange={updateCard} placeholder="Surname2" defaultValue={modify.surname1} />
                         <input className="gwuData" name="surname2" type="text" onChange={updateCard} placeholder="Surname2" defaultValue={modify.surname2} />
@@ -294,10 +293,11 @@ const AllProfiles = (props) => {
 
                         <br></br>
                         <div className="row">
-                            <div><button className="sendButton" onClick={() => modifyBack()}>BACK</button></div>
-                            <div><button className="sendButton" onClick={() => hideCard(modify.id)}>SAVE</button></div>
+                            <button className="sendButton" onClick={() => modifyBack()}>BACK</button>
+                            <button className="sendButton" onClick={() => modifyUser(modify.id)}>SAVE</button>
                         </div>
                     </div>
+                    )}
                 </div>
 
 

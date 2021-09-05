@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Button from '../../components/Button/Button'
 
 const AssetView = (props) => {
 
@@ -12,12 +13,17 @@ const AssetView = (props) => {
     const [assetData, setAssetData] = useState({})
     const [modify, setModify] = useState({})
     const [card, setCard] = useState('');
+    const [buttons, setButtons] = useState({
+        show: [],
+        bId: '',
+    });
 
     const [view, setView] = useState({
         modifyView: 'hideCard',
         modifyViewP: 'showCard'
     })
 
+    const [showHide, setShowHide] = useState(false)
     const [selector, setSelector] = useState('');
 
 
@@ -35,6 +41,10 @@ const AssetView = (props) => {
         setSelector({ ...selector, [e.target.name]: e.target.value })
     }
 
+
+    const goToCreateAsset = () => {
+        history.push("asset")
+    }
     const viewAssetViews = async (val) => {
 
         switch (val) {
@@ -115,8 +125,6 @@ const AssetView = (props) => {
                     Asset_id: id
                 }
                 let token = props.credentials?.token;
-                console.log(token, "es el token", id, "la id es ")
-
                 let res = await axios.post(`https://heibackend.herokuapp.com/api/chooseasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
                 setModify(res.data.data);
 
@@ -149,9 +157,7 @@ const AssetView = (props) => {
                 isActive: card.isActive
             }
 
-
             let res = await axios.put('https://heibackend.herokuapp.com/api/modifyasset', body, { headers: { 'authorization': 'Bearer ' + token } });
-            console.log(res);
 
             setTimeout(() => {
                 history.push(`/assetview`);
@@ -159,6 +165,15 @@ const AssetView = (props) => {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const showFunc = (id) => {
+        buttons.bId = id;
+        buttons.show = [];
+        buttons.show.push(<div className="row flexEnd">
+                    <button className="sendButton" onClick={() => deleteAsset(id)}>Delete</button>
+                    <button className="sendButton" onClick={() => modifyBack(id)}>Modify</button></div>);
+        setShowHide(!showHide)
     }
 
     if ((props.credentials.user?.isAdmin) && (assetData.data)) {
@@ -173,28 +188,42 @@ const AssetView = (props) => {
                             <div className="row">
                                 Filter:
                                 <input className="gwuData" name="name" onChange={updateSelector}></input>
-                                <button className="sendButton" onClick={() => viewAssetViews("name")}>By Name</button>
+                                <button className="sendButton" onClick={() => viewAssetViews("name")}>NAME</button>
 
                                 <input className="gwuData" name="model" onChange={updateSelector}></input>
-                                <button className="sendButton" onClick={() => viewAssetViews("model")}>By Model</button>
+                                <button className="sendButton" onClick={() => viewAssetViews("model")}>MODEL</button>
+                                <button className="sendButton" onClick={() => goToCreateAsset()}> ADD</button>
                             </div>
+                        </div>
+                        <div className="row underline spaceEvenly">
+                            <div className="dataBox">Name</div>
+                            <div className="dataBox">Model</div>
+                            <div className="dataBox">Type</div>
+                            <div className="dataBox">Year</div>
+                            <div className="dataBox">S/N</div>
+                            <div className="dataBox">Warranty</div>
+                            <div className="dataBox">CCC</div>
+                            <div className="dataBox">Quantity</div>
                         </div>
 
                         {assetData.data.map((val, index) => (
-                            <div className="gwupdatecards" key={index}>
-                                <div className="bbottom row">
-                                    <div>Name: {val.name}</div>
-                                    <div>Model: {val.model}</div>
-                                    <div>Type: {val.type}</div>
+                            <div key={index}>
+                                <div className="profileInfo row underline spaceEvenly" onClick={()=>showFunc(val.id)}>
+                                    <div className="dataBox">{val.name}</div>
+                                    <div className="dataBox">{val.model}</div>
+                                    <div className="dataBox">{val.type}</div>
+                                    <div className="dataBox">{val.year}</div>
+                                    <div className="dataBox">{val.serialNumber}</div>
+                                    <div className="dataBox">{val.warrantyExpiracyDate}</div>
+                                    <div className="dataBox">{val.crossCheckCode}</div>
+                                    <div className="dataBox">{val.quantity}</div>
                                 </div>
-                                <div className="gwInfo">
 
-                                    <div>{val.infoUpdate}</div>
-                                    <div className="row">
-                                        <button className="sendButton" onClick={() => deleteAsset(val.id)}>Delete</button>
-                                        <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
-                                    </div>
+                                {(showHide && (buttons.bId === val.id)) && (<div className="row">
+                                    <div className="flexEnd">{buttons.show}</div>
                                 </div>
+                                )}
+
                             </div>
                         ))}
                     </div>
@@ -235,10 +264,6 @@ const AssetView = (props) => {
                                 <div>Name: {val.name}</div>
                                 <div>Model: {val.model}</div>
                                 <div>Type: {val.type}</div>
-                            </div>
-                            <div className="gwInfo">
-
-                                <div>{val.infoUpdate}</div>
                             </div>
                         </div>
                     ))}

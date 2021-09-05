@@ -11,14 +11,10 @@ const GWupdate = (props) => {
     // HOOKS
     const [gwUpdateData, setGwUpdateData] = useState({})
     const [modify, setModify] = useState({})
-    const [card, setCard] = useState(
-        {
-            date: '',
-            title: '',
-            roles: '',
-            infoUpdate: '',
-            img: ''
-        });
+    const [card, setCard] = useState({});
+    const [filterName, setFilterName] = useState({
+        filterType: 'all',
+    });
 
     const [view, setView] = useState({
         modifyView: 'hideCard',
@@ -27,6 +23,9 @@ const GWupdate = (props) => {
 
     const [selector, setSelector] = useState('');
 
+    const goToCreateGwupdate = () => {
+        history.push("gwupdateCreate")
+    }
 
     // Handler
     const updateCard = (e) => {
@@ -39,26 +38,26 @@ const GWupdate = (props) => {
 
 
     useEffect(() => {
-        viewGWUpdates("all");
+        viewGWUpdates("All");
     }, []);
 
 
     const viewGWUpdates = async (val) => {
-
+        setFilterName({...filterName, filterType: val});
+        // setFilterName(val);
         switch (val) {
-            case "all":
+            case "All":
                 try {
                     let token = props.credentials?.token;
 
                     let res = await axios.get(`https://heibackend.herokuapp.com/api/allgwupdates`, { headers: { 'authorization': 'Bearer ' + token } });
-
                     setGwUpdateData(res.data);
 
                 } catch (error) {
                     console.log(error);
                 }
                 break;
-            case "active":
+            case "Active":
                 try {
                     let token = props.credentials?.token;
 
@@ -71,7 +70,7 @@ const GWupdate = (props) => {
                 }
                 break;
 
-            case "title":
+            case "Title":
                 try {
                     let token = props.credentials?.token;
 
@@ -87,7 +86,7 @@ const GWupdate = (props) => {
                     console.log(error);
                 }
                 break;
-            case "archive":
+            case "Archive":
                 try {
                     let token = props.credentials?.token;
 
@@ -99,7 +98,7 @@ const GWupdate = (props) => {
                     console.log(error);
                 }
                 break;
-                default:
+            default:
         }
     }
 
@@ -111,7 +110,7 @@ const GWupdate = (props) => {
                 gwupdate_id: id,
             }
 
-            await axios.delete(`https://heibackend.herokuapp.com/api/deletegwupdate`,  {data: body, headers: { 'authorization': 'Bearer ' + token } });
+            await axios.delete(`https://heibackend.herokuapp.com/api/deletegwupdate`, { data: body, headers: { 'authorization': 'Bearer ' + token } });
 
             viewGWUpdates("all");
         } catch (error) {
@@ -120,17 +119,15 @@ const GWupdate = (props) => {
     }
 
     const archiveGWU = async (id) => {
-
         try {
             let token = props.credentials?.token;
 
             let body = {
                 id: id
             }
-
             await axios.put(`https://heibackend.herokuapp.com/api/archivegwupdate`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
-            viewGWUpdates();
+            viewGWUpdates("archive");
 
         } catch (error) {
             console.log(error);
@@ -156,14 +153,13 @@ const GWupdate = (props) => {
         }
 
         // Switch view implemented
-        (view.modifyView === 'showCard') ? view.modifyView = 'hideCard' : view.modifyView = 'showCard';
-        (view.modifyViewP === 'showCard') ? view.modifyViewP = 'hideCard' : view.modifyViewP = 'showCard';
-
-        viewGWUpdates();
+        const newModifyview = (view.modifyView === 'showCard') ? 'hideCard' : 'showCard';
+        const newModifyviewP = (view.modifyViewP === 'showCard') ? 'hideCard' : 'showCard';
+        setView({ modifyViewP: newModifyviewP, modifyView: newModifyview })
 
     }
 
-    const hideCard = async (id) => {
+    const modifyGWU = async (id) => {
 
         try {
             let token = props.credentials.token;
@@ -179,7 +175,7 @@ const GWupdate = (props) => {
 
             await axios.put('https://heibackend.herokuapp.com/api/modifygwupdate', body, { headers: { 'authorization': 'Bearer ' + token } });
 
-            viewGWUpdates();
+            viewGWUpdates("all");
 
             setTimeout(() => {
                 history.push(`/gwupdate`);
@@ -194,31 +190,33 @@ const GWupdate = (props) => {
             <div className="viewGWupdate">
                 <div className="content">
                     <div className={view.modifyViewP}>
-                        <div className="newsCard">Last GameWeek Updates
+                        <div className="newsCard"><h3>{filterName.filterType} GameWeek Updates</h3>
                             <div className="row">
                                 Filter:
-                                <button className="sendButton" name="isActive" onClick={()=>viewGWUpdates("active")}>Active GWU</button>
-                                <button className="sendButton" onClick={()=>viewGWUpdates("archive")}>Archive GWU</button>
+                                <button className="sendButton" name="allGWu" onClick={() => viewGWUpdates("All")}>All GWU</button>
+                                <button className="sendButton" name="isActive" onClick={() => viewGWUpdates("Active")}>Active GWU</button>
+                                <button className="sendButton" onClick={() => viewGWUpdates("Archive")}>Archive GWU</button>
 
                                 <input className="gwuData" name="title" onChange={updateSelector}></input>
-                                <button className="sendButton" onClick={()=>viewGWUpdates("title")}>GWU's Title</button>
+                                <button className="sendButton" onClick={() => viewGWUpdates("Title")}>GWU's Title</button>
+                                <button className="sendButton" onClick={() => goToCreateGwupdate()}> ADD</button>
 
                             </div>
                         </div>
                         {gwUpdateData.data.map((val, index) => (
                             <div className="gwupdatecards" key={index}>
-                                <div className="bbottom row">
-                                    <div>{val.title}</div>
-                                    <div>{val.roles}</div>
-                                    <div>{val.id}</div>
+                                <div className="row sp">
+                                    <div className="dataBox"> Título: {val.title}</div>
+                                    <div className="dataBox">Roles: {val.roles}</div>
+                                    <div className="dataBox"># {val.id}</div>
                                 </div>
                                 <div className="gwInfo">
-                                    <div className="row">
-                                        <div>{val.infoUpdate}</div>
-                                        <button className="sendButton" onClick={() => deleteGWU(val.id)}>Delete</button>
-                                        <button className="sendButton" onClick={() => archiveGWU(val.id)}>Archive</button>
-                                        <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
-                                    </div>
+                                    <div>{val.infoUpdate}</div>
+                                </div>
+                                <div className="row">
+                                    <button className="sendButton" onClick={() => deleteGWU(val.id)}>Delete</button>
+                                    <button className="sendButton" onClick={() => archiveGWU(val.id)}>Archive</button>
+                                    <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
                                 </div>
                             </div>
                         ))}
@@ -232,9 +230,9 @@ const GWupdate = (props) => {
 
                         <input className="gwuData" name="img" type="text" onChange={updateCard} defaultValue={modify.img} />
                         <br></br>
-                        <div className="buttons">
-                            <button className="sendButton" onClick={()=>modifyBack}>BACK</button>
-                            <button className="sendButton" onClick={() => hideCard(modify.id)}>SAVE</button>
+                        <div className="row">
+                            <button className="sendButton" onClick={() => modifyBack()}>BACK</button>
+                            <button className="sendButton" onClick={() => modifyGWU(modify.id)}>SAVE</button>
 
                         </div>
                     </div>
@@ -256,6 +254,7 @@ const GWupdate = (props) => {
                             <div className="row">
                                 <div>{val.title}</div>
                                 <div>{val.roles}</div>
+                                <div>{val.infoUpdate}</div>
                                 <div>{val.id}</div>
 
                             </div>
