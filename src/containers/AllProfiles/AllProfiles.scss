@@ -10,9 +10,15 @@
 }
 
 .userData {
+    all: unset;
     @extend .gwuData;
+    box-sizing: border-box;
+    border: 0.1em solid $pal-text;
     border-radius: 2em;
     width: 10em;
-    height: 3em;
+    height: 2.5em;
+    &.userData:focus{
+        border: black solid 0.2em;
+    }
 }
 

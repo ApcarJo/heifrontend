@@ -27,15 +27,20 @@ $pal-footer: #444444;
 }
 
 .gwuData {
-    // all:unset;
+    all:unset;
+    box-sizing: border-box;
     overflow: hidden;
     @extend .center;
     align-items: flex-start;
     justify-content: left;
     border: $pal-text 0.05em solid;
     width: 30em;
+    height: 2.5em;
     padding: 1%;
-    border-radius: 0.2em;
+    border-radius: 2em;
+    &.gwuData:focus{
+        border: rgb(0, 0, 0) solid 0.2em;
+    }
 }
 
 

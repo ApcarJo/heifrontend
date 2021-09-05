@@ -17,7 +17,9 @@ const AssetView = (props) => {
         show: [],
         bId: '',
     });
-
+    const [filterName, setFilterName] = useState({
+        filterType: 'All',
+    });
     const [view, setView] = useState({
         modifyView: 'hideCard',
         modifyViewP: 'showCard'
@@ -34,7 +36,7 @@ const AssetView = (props) => {
 
     // eslint-disable-line react-hooks/exhaustive-deps
     useEffect(() => {
-        viewAssetViews("all");
+        viewAssetViews("All");
     }, []);
 
     const updateSelector = (e) => {
@@ -46,10 +48,10 @@ const AssetView = (props) => {
         history.push("asset")
     }
     const viewAssetViews = async (val) => {
-
+        setFilterName({...filterName, filterType: val});
         switch (val) {
 
-            case "all":
+            case "All":
 
                 try {
                     let token = props.credentials?.token;
@@ -63,7 +65,7 @@ const AssetView = (props) => {
                 }
                 break;
 
-            case "name":
+            case "Name":
                 try {
                     let token = props.credentials?.token;
 
@@ -79,7 +81,7 @@ const AssetView = (props) => {
                     console.log(error);
                 }
                 break;
-            case "model":
+            case "Model":
                 try {
                     let token = props.credentials?.token;
 
@@ -111,7 +113,7 @@ const AssetView = (props) => {
 
             await axios.delete(`https://heibackend.herokuapp.com/api/deleteasset`, { data: body, headers: { 'authorization': 'Bearer ' + token } });
 
-            viewAssetViews("all");
+            viewAssetViews("All");
         } catch (error) {
             console.log(error);
         }
@@ -184,14 +186,15 @@ const AssetView = (props) => {
 
                     </div>
                     <div className={view.modifyViewP}>
-                        <div className="newsCard">Asset View
+                        <div className="newsCard"><h3>{filterName.filterType} Asset View</h3>
                             <div className="row">
                                 Filter:
+                                <button className="sendButton" onClick={() => viewAssetViews("All")}>All</button>
                                 <input className="gwuData" name="name" onChange={updateSelector}></input>
-                                <button className="sendButton" onClick={() => viewAssetViews("name")}>NAME</button>
+                                <button className="sendButton" onClick={() => viewAssetViews("Name")}>NAME</button>
 
                                 <input className="gwuData" name="model" onChange={updateSelector}></input>
-                                <button className="sendButton" onClick={() => viewAssetViews("model")}>MODEL</button>
+                                <button className="sendButton" onClick={() => viewAssetViews("Model")}>MODEL</button>
                                 <button className="sendButton" onClick={() => goToCreateAsset()}> ADD</button>
                             </div>
                         </div>
