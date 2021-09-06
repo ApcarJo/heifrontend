@@ -86,6 +86,8 @@ const Stadium = (props) => {
                     console.log(error);
                 }
                 break;
+
+                default:
         }
     }
 

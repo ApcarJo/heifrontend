@@ -86,6 +86,7 @@ const Team = (props) => {
                     console.log(error);
                 }
                 break;
+            default:
         }
     }
 

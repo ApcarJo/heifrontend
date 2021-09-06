@@ -37,15 +37,9 @@ const Header = (props) => {
                     <p>|</p>
                     <div className="linkLogout" onClick={() => logOut()}>LOGOUT</div>
                 </div>
-
             </div>
-
-
-
         )
     } else {
-
-
         return (
             <div className="headerView">
 
