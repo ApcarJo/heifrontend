@@ -28,6 +28,7 @@ const Header = (props) => {
                     <Button path="/gwupdate" destination="GAME WEEK UPDATE" />
                     <Button path="/assetview" destination="INVENTORY" />
                     <Button path="/allprofiles" destination="PROFILES" />
+                    <Button path="/stadiums" destination="STADIUM" />
 
                 </div>
 

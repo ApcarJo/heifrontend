@@ -1,11 +1,15 @@
 
 .profileInfo {
+    box-sizing: border-box;
     transition: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    border: 0.1em $pal-text solid;
+    margin-bottom: 0.2em;
     &.profileInfo:hover {
         cursor: pointer;
-        transition: 0.3s;
+        transition: cubic-bezier(0.68, -0.55, 0.265, 1.55);
         background-color: $pal-text-footer;
         color: $pal-sec;
+        border: 0.2em $pal-text-footer solid;
     }
 }
 

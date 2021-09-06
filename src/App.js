@@ -17,6 +17,7 @@ import AssetView from './containers/Asset/AssetView';
 import AllProfiles from './containers/AllProfiles/AllProfiles';
 import Team from './containers/Team/Team';
 import TeamCreate from './containers/Team/TeamCreate';
+import Stadium from './containers/Stadium/Stadium';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/asset" exact component={Asset} />
           <Route path="/assetview" exact component={AssetView} />
           <Route path="/allprofiles" exact component={AllProfiles} />
+          <Route path="/stadiums" exact component={Stadium} />
           <Route path="/team" exact component={Team} />
           <Route path="/teamcreate" exact component={TeamCreate} />
 

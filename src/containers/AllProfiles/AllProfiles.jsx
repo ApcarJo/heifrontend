@@ -10,7 +10,7 @@ const AllProfiles = (props) => {
     const [profileData, setProfileData] = useState({})
     const [modify, setModify] = useState({})
     const [card, setCard] = useState('');
-    const [buttons, setButtons] = useState({
+    const [buttons] = useState({
         show: [],
         bId: '',
     });
@@ -20,7 +20,7 @@ const AllProfiles = (props) => {
         modifyViewP: 'showCard',
     })
 
-    const [showHide, setShowHide] = useState(false)
+    const [showHide, setShowHide] = useState(false);
     const [selector, setSelector] = useState('');
 
 
@@ -175,7 +175,6 @@ const AllProfiles = (props) => {
     }
 
     const modifyUser = async (id) => {
-        // e.preventDefault();
 
         try {
             let token = props.credentials.token;
@@ -204,7 +203,7 @@ const AllProfiles = (props) => {
 
             const newModifyview = (view.modifyView === 'showCard') ? 'hideCard' : 'showCard';
             const newModifyviewP = (view.modifyViewP === 'showCard') ? 'hideCard' : 'showCard';
-            setView({ modifyViewP: newModifyviewP, modifyView: newModifyview })
+            setView({ modifyViewP: newModifyviewP, modifyView: newModifyview });
             viewUsers("All");
 
         } catch (error) {
@@ -273,7 +272,7 @@ const AllProfiles = (props) => {
                             </div>
                         ))}
                     </div>
-                    {/* Conmuta visibilidad */}
+                    {/* Swtich visibility */}
                     {modify && (<div className={view.modifyView}>
                         <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
                         <input className="gwuData" name="surname1" type="text" onChange={updateCard} placeholder="Surname2" defaultValue={modify.surname1} />
@@ -299,10 +298,7 @@ const AllProfiles = (props) => {
                     </div>
                     )}
                 </div>
-
-
             </div>
-
         )
 
     } else if ((props.credentials?.user) && (profileData?.data)) {

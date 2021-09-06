@@ -10,7 +10,6 @@
 
 //     // HOOKS
 //     const [teamData, setTeamData] = useState({})
-//     const [deleteCard, setDeleteCard] = useState({})
 //     const [modify, setModify] = useState({})
 //     const [card, setCard] = useState(
 //         {
@@ -77,22 +76,10 @@
 //                     let token = props.credentials?.token;
 
 //                     let body = {
-//                         title: selector.title,
+//                         name: selector.name,
 //                     }
 
 //                     let res = await axios.post(`http://127.0.0.1:8000/api/findteam`, body, { headers: { 'authorization': 'Bearer ' + token } });
-
-//                     setTeamData(res.data);
-
-//                 } catch (error) {
-//                     console.log(error);
-//                 }
-//                 break;
-//             case "archive":
-//                 try {
-//                     let token = props.credentials?.token;
-
-//                     let res = await axios.get(`http://127.0.0.1:8000/api/showarchived`, { headers: { 'authorization': 'Bearer ' + token } });
 
 //                     setTeamData(res.data);
 
