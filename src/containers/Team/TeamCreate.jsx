@@ -1,68 +1,90 @@
 
-// import React, { useState } from 'react';
-// import axios from 'axios';
-// import { connect } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-// const TeamCreate = (props) => {
+const StadiumCreate = (props) => {
 
-//     let history = useHistory();
+    let history = useHistory();
 
+    // Hook
+    const [card, setCard] = useState({});
+    const [stadiumData, setStadiumData] = useState({})
 
-//     // Hook
-//     const [team, setTeam] = useState({})
+    // Handler
+    const updateCard = (e) => {
+        setCard({ ...card, [e.target.name]: e.target.value })
+    }
 
+    useEffect(() => {
+        checkStadiums();
+    }, []);
 
-//     // Handler
-//     const updateCard = (e) => {
-//         setCard({ ...card, [e.target.name]: e.target.value })
-//     }
+    const checkStadiums = async () => {
+        try {
+            let token = props.credentials?.token;
 
-//     const createCard = async () => {
-//         // e.preventDefault();
+            let res = await axios.get(`https://heibackend.herokuapp.com/api/allstadiums`, { headers: { 'authorization': 'Bearer ' + token } });
+            setStadiumData(res.data.data);
 
-//         try {
-//             let token = props.credentials.token;
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-//             let body = {
-//                 date: "2021-09-21",
-//                 title: card.title,
-//                 roles: card.roles,
-//                 infoUpdate: card.infoUpdate,
-//                 img: card.img,
-//                 isActive: card.isActive
-//             }
+    console.log(stadiumData)
+    const createCard = async () => {
 
-//             await axios.post('http://127.0.0.1:8000/api/creategwupdate', body, { headers: { 'authorization': 'Bearer ' + token } });
+        try {
+            let token = props.credentials.token;
 
-//             setTimeout(() => {
-//                 history.push(`/gwupdate`);
-//             }, 250);
-//         } catch (error) {
-//             console.log(error);
-//         }
-//     }
+            let body = {
+                name: card.name,
+                isFD: card.isFD,
+                isUCL: card.isUCL,
+                isUEL: card.isUEL,
+                isSC: card.isSC,
+                isCDR: card.isCDR,
+                stadium_id: "2",
+            }
 
-//     return (
-//         <div className="createGwuView">
-//             <div className="content">
-//                 <div className="showCard">
-//                     <input className="gwuData" name="title" type="text" onChange={updateCard} placeholder="Title" required />
+            await axios.post('https://heibackend.herokuapp.com/api/createteam', body, { headers: { 'authorization': 'Bearer ' + token } });
 
-//                     <input className="gwuData" name="roles" type="text" onChange={updateCard} placeholder="Roles" />
+            setTimeout(() => {
+                history.push(`/team`);
+            }, 250);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-//                     <textarea className="gwuData" name="infoUpdate" type="text" onChange={updateCard} placeholder="Info" required />
+    if ((props.credentials.user?.isAdmin)&&(stadiumData.length>1)) {
+    return (
+        <div className="createGwuView">
+            <div className="content">
+                <div className="showCard">
+                    <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="name" required />
+                    <input className="gwuData" name="isFD" type="text" onChange={updateCard} placeholder="isFD" />
+                    <input className="gwuData" name="isUCL" type="text" onChange={updateCard} placeholder="isUCL" />
+                    <input className="gwuData" name="isUEL" type="text" onChange={updateCard} placeholder="isUEL" />
+                    <input className="gwuData" name="isSC" type="text" onChange={updateCard} placeholder="isSC" />
+                    <input className="gwuData" name="isCDR" type="text" onChange={updateCard} placeholder="isCDR" />
+                    <select className="gwuData" name="stadium_id" type="text" onChange={updateCard} required>{                   stadiumData.map((val, index)=> (
+                        <option key={index} value={val.id} placeholder="Choose Stadium">{val.name}</option>
+                    ))} </select>
+                    <br></br>
+                    <button className="sendButton" onClick={() => createCard()}>CREATE</button>
+                </div>
+            </div>
+        </div>
 
-//                     <input className="gwuData" name="img" type="text" onChange={updateCard} placeholder="Img link" required />
-//                     <br></br>
-//                     <button className="sendButton" onClick={() => createCard()}>Create GWU</button>
-//                 </div>
-//             </div>
-//         </div>
+    )
+    } else {
+        return "Loaging";
+       }
+}
 
-//     )
-// }
-
-// export default connect((state) => ({
-//     credentials: state.credentials
-// }))(TeamCreate);
+export default connect((state) => ({
+    credentials: state.credentials
+}))(StadiumCreate);

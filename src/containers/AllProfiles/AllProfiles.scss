@@ -1,6 +1,7 @@
 
 .profileInfo {
     box-sizing: border-box;
+    padding: 1em;
     transition: cubic-bezier(0.455, 0.03, 0.515, 0.955);
     border: 0.1em $pal-text solid;
     margin-bottom: 0.2em;

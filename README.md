@@ -24,10 +24,6 @@ Backend realizado en PHP con Laravel
 - Modificación de GWU
 - Archivar GWU
 
-** Crear api para archivar en backend ruta: findarchivegwupdate
-** Falla el delete
- - Update, cambiado el nombre de la variable de gwupdate_id a id, hay que cambiar en backend y en front ya está cambiado
-
 //Assets
 - Registro de assets
 - Listado de assets
