@@ -306,23 +306,55 @@ const AllProfiles = (props) => {
         return (
             <div className="viewAllProfiles">
                 <div className="content">
-                    <div className="newsCard">Last GameWeek Updates</div>
-                    {profileData.data.map((val, index) => (
-                        <div className="gwupdatecards" key={index}>
-                            <div className="bbottom row">
-                                <div>Name: {val.name}</div>
-                                <div>Surname: {val.surname1}</div>
-                                <div>CodeName: {val.codename}</div>
-                                <div>Email: {val.email}</div>
-                                <div>Phone: {val.phone}</div>
-                                <div>City: {val.city}</div>
-                                <div>Role: {val.role}</div>
-                                <div>Type: {val.type}</div>
+                    <div className="subHeader">
+
+                    </div>
+                    <div className="showCard">
+                        <div className="newsCard">Profiles List View
+                            <div className="row">
+                                Filter:
+                                <button className="sendButton" name="allUsers" onClick={() => viewUsers("All")}>All Users</button>
+                                <button className="sendButton" name="isActive" onClick={() => viewUsers("Active")}>Active Users</button>
+                                <button className="sendButton" onClick={() => viewUsers("Archive")}>Archive Users</button>
+
+                                <input className="userData" name="name" onChange={updateSelector}></input>
+                                <button className="sendButton" onClick={() => viewUsers("Name")}>User's Name</button>
+                                <input className="userData" name="role" onChange={updateSelector}></input>
+                                <button className="sendButton" onClick={() => viewUsers("Role")}>User's Role</button>
+
                             </div>
                         </div>
-                    ))}
+                        <div className="row underline spaceEvenly">
+                            <div className="dataBox">Name</div>
+                            <div className="dataBox">Surname</div>
+                            <div className="dataBox">CodeName</div>
+                            <div className="dataBox">Email</div>
+                            <div className="dataBox">Phone</div>
+                            <div className="dataBox">City</div>
+                            <div className="dataBox">Role</div>
+                        </div>
+
+                        {profileData.data.map((val, index) => (
+                            <div key={index}>
+                                <div className="profileInfo row underline spaceEvenly" onClick={() => showFunc(val.id)}>
+                                    <div className="dataBox">{val.name}</div>
+                                    <div className="dataBox">{val.surname1}</div>
+                                    <div className="dataBox">{val.codename}</div>
+                                    <div className="dataBox">{val.email}</div>
+                                    <div className="dataBox">{val.phone}</div>
+                                    <div className="dataBox">{val.city}</div>
+                                    <div className="dataBox">{val.role}</div>
+                                </div>
+                                {(showHide && (buttons.bId === val.id)) && (<div className="row">
+                                    <div className="flexEnd">{buttons.show}</div>
+                                </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div >
+            </div>
+
         )
     } else {
         return "Loading";

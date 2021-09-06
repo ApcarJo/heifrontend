@@ -94,7 +94,7 @@ const Team = (props) => {
                 stadium_id: id,
             }
 
-            await axios.delete(`https://heibackend.herokuapp.com/api/deletestadiums`,  { data: body, headers: { 'authorization': 'Bearer ' + token } });
+            await axios.delete(`https://heibackend.herokuapp.com/api/deletestadiums`, { data: body, headers: { 'authorization': 'Bearer ' + token } });
 
             viewStadiums("All");
         } catch (error) {
@@ -115,7 +115,7 @@ const Team = (props) => {
                 let res = await axios.post(`https://heibackend.herokuapp.com/api/choosestadium`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
                 res.data.data.map((val) => {
-                setModify(val);
+                    setModify(val);
                 });
 
             } catch (error) {
@@ -196,9 +196,12 @@ const Team = (props) => {
                                     <div className="row">
                                         <div className="dataBox">{val.name}</div>
                                         <div className="dataBox">{val.address}</div>
-                                        <div className="dataBox">{val.contact}</div>
-                                        <div className="dataBox">{(val.isGLT===0) ? "No" : "Yes"}</div>
-                                        <div className="dataBox">{(val.isRobot===0) ? "No" : "Yes"}</div>
+                                        <div className="dataBox">{val.contact}{(showHide && (buttons.bId === val.id)) && (
+                                            <div className="dataBox">{val.contactPhone}</div>
+                                        )}</div>
+                                        
+                                        <div className="dataBox">{(val.isGLT === 0) ? "No" : "Yes"}</div>
+                                        <div className="dataBox">{(val.isRobot === 0) ? "No" : "Yes"}</div>
                                     </div>
 
                                     {(showHide && (buttons.bId === val.id)) && (
@@ -215,7 +218,7 @@ const Team = (props) => {
                             </div>
                         ))}
                     </div>
-                    {/* Swtich visibility */}   
+                    {/* Swtich visibility */}
                     {modify && (<div className={view.modifyView}>
                         <input className="gwuData" name="name" type="text" onChange={updateCard} defaultValue={modify.name} />
 
