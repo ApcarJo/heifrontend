@@ -186,23 +186,20 @@ const AssetView = (props) => {
             <div className="viewAsset">
                 <div className="content">
                     <h3>Modify asset</h3>
-                    <div className="subHeader">
-
-                    </div>
                     <div className={view.modifyViewP}>
                         <div className="newsCard"><h3>{filterName.filterType} Asset View</h3>
                             <div className="row">
                                 Filter:
                                 <button className="sendButton" onClick={() => viewAssetViews("All")}>All</button>
-                                <input className="gwuData" name="name" onChange={updateSelector}></input>
+                                <input className="searchBox" name="name" onChange={updateSelector}></input>
                                 <button className="sendButton" onClick={() => viewAssetViews("Name")}>NAME</button>
 
-                                <input className="gwuData" name="model" onChange={updateSelector}></input>
+                                <input className="searchBox" name="model" onChange={updateSelector}></input>
                                 <button className="sendButton" onClick={() => viewAssetViews("Model")}>MODEL</button>
                                 <button className="sendButton" onClick={() => goToCreateAsset()}> ADD</button>
                             </div>
                         </div>
-                        <div className="row underline spaceEvenly">
+                        <div className="row spaceEvenly">
                             <div className="dataBox">Name</div>
                             <div className="dataBox">Model</div>
                             <div className="dataBox">Type</div>
@@ -235,17 +232,14 @@ const AssetView = (props) => {
                         ))}
                     </div>
                     {modify && (<div className={view.modifyView}>
-                        <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
-
-                        <input className="gwuData" name="model" type="text" onChange={updateCard} placeholder="Model" defaultValue={modify.model} />
-
-                        <input className="gwuData" name="type" type="text" onChange={updateCard} placeholder="Type" defaultValue={modify.type} />
-                        <input className="gwuData" name="serialNumber" type="text" onChange={updateCard} placeholder="Serial Number" defaultValue={modify.sn} />
-                        <input className="gwuData" name="warranty" type="date" onChange={updateCard} placeholder="Warranty Expiracy Date" defaultValue={modify.warranty} />
-                        <input className="gwuData" name="ccc" type="text" onChange={updateCard} placeholder="CrossCheckCode" defaultValue={modify.ccc} />
-                        <input className="gwuData" name="quantity" type="text" onChange={updateCard} placeholder="Quantity" defaultValue={modify.quantity} />
-                        <input className="gwuData" name="year" type="text" onChange={updateCard} placeholder="Purchase Year" defaultValue={modify.year} />
-
+                        <input className="teamDataBox" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
+                        <input className="teamDataBox" name="model" type="text" onChange={updateCard} placeholder="Model" defaultValue={modify.model} />
+                        <input className="teamDataBox" name="type" type="text" onChange={updateCard} placeholder="Type" defaultValue={modify.type} />
+                        <input className="teamDataBox" name="serialNumber" type="text" onChange={updateCard} placeholder="Serial Number" defaultValue={modify.sn} />
+                        <input className="teamDataBox" name="warranty" type="date" onChange={updateCard} placeholder="Warranty Expiracy Date" defaultValue={modify.warranty} />
+                        <input className="teamDataBox" name="ccc" type="text" onChange={updateCard} placeholder="CrossCheckCode" defaultValue={modify.ccc} />
+                        <input className="teamDataBox" name="quantity" type="text" onChange={updateCard} placeholder="Quantity" defaultValue={modify.quantity} />
+                        <input className="teamDataBox" name="year" type="text" onChange={updateCard} placeholder="Purchase Year" defaultValue={modify.year} />
                         <br></br>
                         <div className="row">
                             <div><button className="sendButton" onClick={() => modifyBack()}>BACK</button></div>

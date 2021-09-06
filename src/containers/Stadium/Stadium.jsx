@@ -200,12 +200,14 @@ const Stadium = (props) => {
                                     <div className="row">
                                         <div className="dataBox">{val.name}</div>
                                         <div className="dataBox">{val.address}</div>
-                                        <div className="dataBox">{val.contact}{(showHide && (buttons.bId === val.id)) && (
-                                            <div className="dataBox">{val.contactPhone}</div>
-                                        )}</div>
-                                        
+                                        <div className="dataBox">{val.contact}</div>      
                                         <div className="dataBox">{(val.isGLT === 0) ? "No" : "Yes"}</div>
                                         <div className="dataBox">{(val.isRobot === 0) ? "No" : "Yes"}</div>
+                                    </div>
+                                    <div className="row">
+                                    {(showHide && (buttons.bId === val.id)) && (
+                                            <div className="dataBox">{val.contactPhone}</div>
+                                        )}
                                     </div>
 
                                     {(showHide && (buttons.bId === val.id)) && (
@@ -224,15 +226,20 @@ const Stadium = (props) => {
                     </div>
                     {/* Swtich visibility */}
                     {modify && (<div className={view.modifyView}>
-                        <input className="gwuData" name="name" type="text" onChange={updateCard} defaultValue={modify.name} />
-
-                        <input className="gwuData" name="address" type="text" onChange={updateCard} defaultValue={modify.address} />
-                        <input className="gwuData" name="isGLT" type="text" onChange={updateCard} defaultValue={modify.isGLT} />
-                        <input className="gwuData" name="isRobot" type="text" onChange={updateCard} defaultValue={modify.isRobot} />
-
-                        <textarea className="gwuData" name="contact" type="text" onChange={updateCard} defaultValue={modify.contact} />
-
-                        <input className="gwuData" name="information" type="text" onChange={updateCard} defaultValue={modify.information} />
+                        Stadium Name
+                        <input className="teamDataBox" name="name" type="text" onChange={updateCard} defaultValue={modify.name} />
+                        Address
+                        <input className="teamDataBox" name="address" type="text" onChange={updateCard} defaultValue={modify.address} />
+                        Has GLT
+                        <input className="teamDataBox" name="isGLT" type="text" onChange={updateCard} defaultValue={modify.isGLT} />
+                        Has RRA Robot
+                        <input className="teamDataBox" name="isRobot" type="text" onChange={updateCard} defaultValue={modify.isRobot} />
+                        Contact Name
+                        <input className="teamDataBox" name="contact" type="text" onChange={updateCard} defaultValue={modify.contact} />
+                        Contact Phone
+                        <input className="teamDataBox" name="contactPhone" type="text" onChange={updateCard} defaultValue={modify.contactPhone} />
+                        Info
+                        <input className="teamDataBox" name="information" type="text" onChange={updateCard} defaultValue={modify.information} />
                         <br></br>
                         <div className="row">
                             <button className="sendButton" onClick={() => modifyBack()}>BACK</button>

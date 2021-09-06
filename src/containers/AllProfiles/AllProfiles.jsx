@@ -272,21 +272,36 @@ const AllProfiles = (props) => {
                     </div>
                     {/* Swtich visibility */}
                     {modify && (<div className={view.modifyView}>
-                        <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
-                        <input className="gwuData" name="surname1" type="text" onChange={updateCard} placeholder="Surname2" defaultValue={modify.surname1} />
-                        <input className="gwuData" name="surname2" type="text" onChange={updateCard} placeholder="Surname2" defaultValue={modify.surname2} />
-                        <input className="gwuData" name="codename" type="text" onChange={updateCard} placeholder="Codename" defaultValue={modify.codename} />
-                        <input className="gwuData" name="email" type="text" onChange={updateCard} placeholder="Email" defaultValue={modify.email} />
-                        <input className="gwuData" name="phone" type="text" onChange={updateCard} placeholder="Phone" defaultValue={modify.phone} />
-                        <input className="gwuData" name="nif" type="text" onChange={updateCard} placeholder="NIF" defaultValue={modify.nif} />
-                        <input className="gwuData" name="license" type="text" onChange={updateCard} placeholder="Drive License" defaultValue={modify.license} />
-                        <input className="gwuData" name="postalcode" type="text" onChange={updateCard} placeholder="Postal Code" defaultValue={modify.postalcode} />
-                        <input className="gwuData" name="address" type="text" onChange={updateCard} placeholder="Address" defaultValue={modify.address} />
-                        <input className="gwuData" name="city" type="text" onChange={updateCard} placeholder="City" defaultValue={modify.city} />
-                        <input className="gwuData" name="role" type="text" onChange={updateCard} placeholder="Role" defaultValue={modify.role} />
-                        <input className="gwuData" name="isAdmin" type="text" onChange={updateCard} placeholder="isAdmin" defaultValue={modify.isAdmin} />
-                        <input className="gwuData" name="isArchive" type="text" onChange={updateCard} placeholder="isArchive" defaultValue={modify.isArchive} />
-                        <input className="gwuData" name="isActive" type="text" onChange={updateCard} placeholder="isActive" defaultValue={modify.isActive} />
+                        Name
+                        <input className="teamDataBox" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
+                        Surname
+                        <input className="teamDataBox" name="surname1" type="text" onChange={updateCard} placeholder="Surname2" defaultValue={modify.surname1} />
+                        Surname
+                        <input className="teamDataBox" name="surname2" type="text" onChange={updateCard} placeholder="Surname2" defaultValue={modify.surname2} />
+                        CodeName
+                        <input className="teamDataBox" name="codename" type="text" onChange={updateCard} placeholder="Codename" defaultValue={modify.codename} />
+                        Email
+                        <input className="teamDataBox" name="email" type="text" onChange={updateCard} placeholder="Email" defaultValue={modify.email} />
+                        Phone
+                        <input className="teamDataBox" name="phone" type="text" onChange={updateCard} placeholder="Phone" defaultValue={modify.phone} />
+                        NIF
+                        <input className="teamDataBox" name="nif" type="text" onChange={updateCard} placeholder="NIF" defaultValue={modify.nif} />
+                        Driver Licensee
+                        <input className="teamDataBox" name="license" type="text" onChange={updateCard} placeholder="Drive License" defaultValue={modify.license} />
+                        Postal Code
+                        <input className="teamDataBox" name="postalcode" type="text" onChange={updateCard} placeholder="Postal Code" defaultValue={modify.postalcode} />
+                        Address
+                        <input className="teamDataBox" name="address" type="text" onChange={updateCard} placeholder="Address" defaultValue={modify.address} />
+                        City
+                        <input className="teamDataBox" name="city" type="text" onChange={updateCard} placeholder="City" defaultValue={modify.city} />
+                        Role
+                        <input className="teamDataBox" name="role" type="text" onChange={updateCard} placeholder="Role" defaultValue={modify.role} />
+                        Admin
+                        <input className="teamDataBox" name="isAdmin" type="text" onChange={updateCard} placeholder="isAdmin" defaultValue={modify.isAdmin} />
+                        Archive
+                        <input className="teamDataBox" name="isArchive" type="text" onChange={updateCard} placeholder="isArchive" defaultValue={modify.isArchive} />
+                        Active
+                        <input className="teamDataBox" name="isActive" type="text" onChange={updateCard} placeholder="isActive" defaultValue={modify.isActive} />
 
                         <br></br>
                         <div className="row">

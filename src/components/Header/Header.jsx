@@ -30,7 +30,7 @@ const Header = (props) => {
                     <Button path="/allprofiles" destination="PROFILES" />
                     <Button path="/stadiums" destination="STADIUM" />
                     <Button path="/team" destination="TEAMS" />
-                    <Button path="/teamCreate" destination="TEAMS CREATE" />
+
 
                 </div>
 

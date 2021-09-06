@@ -19,9 +19,16 @@ const GWupdate = (props) => {
     const [view, setView] = useState({
         modifyView: 'hideCard',
         modifyViewP: 'showCard'
-    })
+    });
+
+    const [buttons] = useState({
+        show: [],
+        bId: '',
+    });
 
     const [selector, setSelector] = useState('');
+    const [showHide, setShowHide] = useState(false);
+
 
     const goToCreateGwupdate = () => {
         history.push("gwupdateCreate")
@@ -43,7 +50,7 @@ const GWupdate = (props) => {
 
 
     const viewGWUpdates = async (val) => {
-        setFilterName({...filterName, filterType: val});
+        setFilterName({ ...filterName, filterType: val });
         // setFilterName(val);
         switch (val) {
             case "All":
@@ -172,13 +179,13 @@ const GWupdate = (props) => {
                 img: card.img,
                 isActive: card.isActive
             }
- 
+
             await axios.put('https://heibackend.herokuapp.com/api/modifygwupdate', body, { headers: { 'authorization': 'Bearer ' + token } });
 
             const newModifyview = (view.modifyView === 'showCard') ? 'hideCard' : 'showCard';
             const newModifyviewP = (view.modifyViewP === 'showCard') ? 'hideCard' : 'showCard';
             setView({ modifyViewP: newModifyviewP, modifyView: newModifyview });
-            
+
             viewGWUpdates("All");
 
             setTimeout(() => {
@@ -187,6 +194,16 @@ const GWupdate = (props) => {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const showFunc = (id) => {
+        buttons.bId = id;
+        buttons.show = [];
+        buttons.show.push(<div className="row flexEnd">
+            <button className="sendButton" onClick={() => deleteGWU(id)}>Delete</button>
+            <button className="sendButton" onClick={() => archiveGWU(id)}>Archive</button>
+            <button className="sendButton" onClick={() => modifyBack(id)}>Modify</button></div>)
+        setShowHide(!showHide)
     }
 
     if ((props.credentials.user?.isAdmin) && (gwUpdateData.data)) {
@@ -201,38 +218,41 @@ const GWupdate = (props) => {
                                 <button className="sendButton" name="isActive" onClick={() => viewGWUpdates("Active")}>Active GWU</button>
                                 <button className="sendButton" onClick={() => viewGWUpdates("Archive")}>Archive GWU</button>
 
-                                <input className="gwuData" name="title" onChange={updateSelector}></input>
+                                <input className="searchBox" name="title" onChange={updateSelector}></input>
                                 <button className="sendButton" onClick={() => viewGWUpdates("Title")}>GWU's Title</button>
                                 <button className="sendButton" onClick={() => goToCreateGwupdate()}> ADD</button>
 
                             </div>
                         </div>
                         {gwUpdateData.data.map((val, index) => (
-                            <div className="gwupdatecards" key={index}>
-                                <div className="row sp">
-                                    <div className="dataBox"> Título: {val.title}</div>
-                                    <div className="dataBox">Roles: {val.roles}</div>
-                                    <div className="dataBox"># {val.id}</div>
+                            <div>
+                                <div className="gwupdatecards" key={index} onClick={() => showFunc(val.id)}>
+
+                                    <div className="row">
+                                        <div className="dataBox"> Title: {val.title}</div>
+                                        <div className="dataBox">Roles: {val.roles}</div>
+                                        <div className="dataBox"># {val.id}</div>
+                                    </div>
+                                    <div className="gwInfo">
+                                        <div>{val.infoUpdate}</div>
+                                    </div>
                                 </div>
-                                <div className="gwInfo">
-                                    <div>{val.infoUpdate}</div>
+                                {(showHide && (buttons.bId === val.id)) && (<div className="row">
+                                    <div className="flexEnd">{buttons.show}</div>
                                 </div>
-                                <div className="row">
-                                    <button className="sendButton" onClick={() => deleteGWU(val.id)}>Delete</button>
-                                    <button className="sendButton" onClick={() => archiveGWU(val.id)}>Archive</button>
-                                    <button className="sendButton" onClick={() => modifyBack(val.id)}>Modify</button>
-                                </div>
+                                )}
                             </div>
                         ))}
                     </div>
                     <div className={view.modifyView}>
-                        <input className="gwuData" name="title" type="text" onChange={updateCard} defaultValue={modify.title} />
-
-                        <input className="gwuData" name="roles" type="text" onChange={updateCard} defaultValue={modify.roles} />
-
-                        <textarea className="gwuData" name="infoUpdate" type="text" onChange={updateCard} defaultValue={modify.infoUpdate} />
-
-                        <input className="gwuData" name="img" type="text" onChange={updateCard} defaultValue={modify.img} />
+                        Title
+                        <input className="teamDataBox" name="title" type="text" onChange={updateCard} defaultValue={modify.title} />
+                        Roles
+                        <input className="teamDataBox" name="roles" type="text" onChange={updateCard} defaultValue={modify.roles} />
+                        Info
+                        <textarea className="teamDataBox" name="infoUpdate" type="text" onChange={updateCard} defaultValue={modify.infoUpdate} />
+                        Img Link
+                        <input className="teamDataBox" name="img" type="text" onChange={updateCard} defaultValue={modify.img} />
                         <br></br>
                         <div className="row">
                             <button className="sendButton" onClick={() => modifyBack()}>BACK</button>
