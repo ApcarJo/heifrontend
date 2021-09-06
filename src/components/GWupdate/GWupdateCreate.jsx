@@ -54,15 +54,16 @@ const GWupdateCreate = (props) => {
         <div className="createGwuView">
             <div className="content">
                 <div className="showCard">
-                    <input className="gwuData" name="title" type="text" onChange={updateCard} placeholder="Title" required />
-
-                    <input className="gwuData" name="roles" type="text" onChange={updateCard} placeholder="Roles" />
-
-                    <textarea className="gwuData" name="infoUpdate" type="text" onChange={updateCard} placeholder="Info" required />
-
-                    <input className="gwuData" name="img" type="text" onChange={updateCard} placeholder="Img link" required />
+                    Title
+                    <input className="teamDataBox" name="title" type="text" onChange={updateCard} placeholder="Title" required />
+                    Roles
+                    <input className="teamDataBox" name="roles" type="text" onChange={updateCard} placeholder="Roles" />
+                    Info
+                    <textarea className="teamDataBox" name="infoUpdate" type="text" onChange={updateCard} placeholder="Info" required />
+                    Img Link
+                    <input className="teamDataBox" name="img" type="text" onChange={updateCard} placeholder="Img link" required />
                     <br></br>
-                    <button className="sendButton" onClick={() => createCard()}>Create GWU</button>
+                    <button className="sendButton" onClick={() => createCard()}>CREATE</button>
                 </div>
             </div>
         </div>

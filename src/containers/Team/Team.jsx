@@ -177,7 +177,6 @@ const Team = (props) => {
                     <div className={view.modifyViewP}>
                         <div className="newsCard">
                             <div className="filter row">
-                                Filter:
                                 <button className="sendButton" name="All" onClick={() => viewTeams("All")}>All</button>
                                 <button className="sendButton" name="Active" onClick={() => viewTeams("Active")}>Active</button>
                                 <input className="searchBox" name="name" onChange={updateSelector}></input>
@@ -258,23 +257,55 @@ const Team = (props) => {
         return (
             <div className="viewTeam">
                 <div className="content">
-                    <div className="newsCard">List of the clubs</div>
-                    {teamData.data.map((val, index) => (
-                        <div className="teamcards" key={index}>
-                            <div className="row">
-                                <div>{val.name}</div>
-                                <div>{val.roles}</div>
-                                <div>{val.id}</div>
-
-                            </div>
-                            <div className="gwInfo">
-
-                                <div>{val.infoUpdate}</div>
+                    <h3>Teams</h3>
+                    <div className={"showCard"}>
+                        <div className="newsCard">
+                            <div className="filter row">
+                                <button className="sendButton" name="All" onClick={() => viewTeams("All")}>All</button>
+                                <button className="sendButton" name="Active" onClick={() => viewTeams("Active")}>Active</button>
+                                <input className="searchBox" name="name" onChange={updateSelector}></input>
+                                <button className="sendButton" onClick={() => viewTeams("Name")}>BY NAME</button>
+                                <button className="sendButton" onClick={() => goCreateTeam()}>ADD</button>
                             </div>
                         </div>
-                    ))}
+                        <div className="row spaceEvenly">
+                            <div className="dataBox">ID</div>
+                            <div className="dataBox">Name</div>
+                            <div className="dataBox">Stadium ID</div>
+                        </div>
+                        {teamData.data.map((val, index) => (
+                            <div key={index}>
+                                <div className="profileInfo center spaceEvenly" onClick={() => showFunc(val.id)}>
+                                    <div className="row underline">
+                                        <div className="dataBox">{val.id}</div>
+                                        <div className="dataBox">{val.name}</div>
+                                        <div className="dataBox">{val.stadium_id}</div>
+                                    </div>
+                                    <div className="center">{(showHide && (buttons.bId === val.id)) && (
+
+                                        <div className="row">
+                                            <div className="center">
+                                                <div className="dataBox">isFD</div>
+                                                <div className="dataBox">isUCL</div>
+                                                <div className="dataBox">isUEL</div>
+                                                <div className="dataBox">isSC</div>
+                                                <div className="dataBox">isCDR</div>
+                                            </div>
+                                            <div className="center">
+                                                <div className="dataBox">{(val.isFD === 0) ? "No" : "Yes"}</div>
+                                                <div className="dataBox">{(val.isUCL === 0) ? "No" : "Yes"}</div>
+                                                <div className="dataBox">{(val.isUEL === 0) ? "No" : "Yes"}</div>
+                                                <div className="dataBox">{(val.isSC === 0) ? "No" : "Yes"}</div>
+                                                <div className="dataBox">{(val.isCDR === 0) ? "No" : "Yes"}</div>
+                                            </div>
+                                        </div>
+                                    )}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            </div >
         )
     } else {
         return "Loading";

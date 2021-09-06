@@ -93,7 +93,7 @@ const Asset = (props) => {
                         <input className="input" name="quantity" type="number" onChange={updateitem} placeholder="quantity" required />
                     </div>
                     <br></br>
-                    <button className="sendButton" onClick={() => createAsset()}>Save</button>
+                    <button className="sendButton" onClick={() => createAsset()}>CREATE</button>
                     <div className="msg">{msg}</div>
                 </div>
             </div>

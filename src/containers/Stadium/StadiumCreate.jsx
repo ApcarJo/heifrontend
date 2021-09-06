@@ -60,7 +60,7 @@ const StadiumCreate = (props) => {
                     <input className="gwuData" name="tvCompound" type="text" onChange={updateCard} placeholder="tvCompound" />
                     <input className="gwuData" name="information" type="text" onChange={updateCard} placeholder="information" />
                     <br></br>
-                    <button className="sendButton" onClick={() => createCard()}>Create GWU</button>
+                    <button className="sendButton" onClick={() => createCard()}>CREATE</button>
                 </div>
             </div>
         </div>

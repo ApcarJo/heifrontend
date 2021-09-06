@@ -1,8 +1,9 @@
 
 .profileInfo {
     box-sizing: border-box;
-    padding: 1em;
+    padding: 0.3em;
     transition: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    border-radius: 0.3em;
     border: 0.1em $pal-text solid;
     margin-bottom: 0.2em;
     &.profileInfo:hover {
@@ -26,3 +27,9 @@
     }
 }
 
+@media (max-width: 50em){
+    .profileInfo {
+        padding: 0.1em;
+    }
+
+}

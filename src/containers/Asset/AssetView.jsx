@@ -189,7 +189,6 @@ const AssetView = (props) => {
                     <div className={view.modifyViewP}>
                         <div className="newsCard"><h3>{filterName.filterType} Asset View</h3>
                             <div className="row">
-                                Filter:
                                 <button className="sendButton" onClick={() => viewAssetViews("All")}>All</button>
                                 <input className="searchBox" name="name" onChange={updateSelector}></input>
                                 <button className="sendButton" onClick={() => viewAssetViews("Name")}>NAME</button>
@@ -199,7 +198,7 @@ const AssetView = (props) => {
                                 <button className="sendButton" onClick={() => goToCreateAsset()}> ADD</button>
                             </div>
                         </div>
-                        <div className="row spaceEvenly">
+                        <div className="row spaceEvenly column">
                             <div className="dataBox">Name</div>
                             <div className="dataBox">Model</div>
                             <div className="dataBox">Type</div>
@@ -257,20 +256,50 @@ const AssetView = (props) => {
     } else if (assetData.data) {
 
         return (
-            <div className="viewGWupdate">
-                <div className="content">
-                    <div className="newsCard">Last GameWeek 3 Updates</div>
+            <div className="viewAsset">
+            <div className="content">
+                <h3>Modify asset</h3>
+                <div className={"showCard"}>
+                    <div className="newsCard"><h3>{filterName.filterType} Asset View</h3>
+                        <div className="row">
+                            <button className="sendButton" onClick={() => viewAssetViews("All")}>All</button>
+                            <input className="searchBox" name="name" onChange={updateSelector}></input>
+                            <button className="sendButton" onClick={() => viewAssetViews("Name")}>NAME</button>
+
+                            <input className="searchBox" name="model" onChange={updateSelector}></input>
+                            <button className="sendButton" onClick={() => viewAssetViews("Model")}>MODEL</button>
+                            <button className="sendButton" onClick={() => goToCreateAsset()}> ADD</button>
+                        </div>
+                    </div>
+                    <div className="row spaceEvenly column">
+                        <div className="dataBox">Name</div>
+                        <div className="dataBox">Model</div>
+                        <div className="dataBox">Type</div>
+                        <div className="dataBox">Year</div>
+                        <div className="dataBox">S/N</div>
+                        <div className="dataBox">Warranty</div>
+                        <div className="dataBox">CCC</div>
+                        <div className="dataBox">Quantity</div>
+                    </div>
+
                     {assetData.data.map((val, index) => (
-                        <div className="gwupdatecards" key={index}>
-                            <div className="row">
-                                <div>Name: {val.name}</div>
-                                <div>Model: {val.model}</div>
-                                <div>Type: {val.type}</div>
+                        <div key={index}>
+                            <div className="profileInfo row underline spaceEvenly" onClick={()=>showFunc(val.id)}>
+                                <div className="dataBox">{val.name}</div>
+                                <div className="dataBox">{val.model}</div>
+                                <div className="dataBox">{val.type}</div>
+                                <div className="dataBox">{val.year}</div>
+                                <div className="dataBox">{val.serialNumber}</div>
+                                <div className="dataBox">{val.warrantyExpiracyDate}</div>
+                                <div className="dataBox">{val.crossCheckCode}</div>
+                                <div className="dataBox">{val.quantity}</div>
                             </div>
                         </div>
                     ))}
-                </div>
+                </div>  
             </div>
+        </div>
+
         )
     } else {
         return "Loading";

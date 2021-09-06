@@ -1,12 +1,4 @@
 
-.gwupdatecards {
-    @extend .center;
-    justify-content: flex-start;
-    height: 12em;
-    width: 40em;
-    border: 0.2em solid black;
-    margin: 1em;
-}
 
 .gwInfo {
     box-sizing: border-box;
@@ -20,13 +12,15 @@
 
 .gwupdatecards {
     @extend .center;
-    transition: 1s;
-    background-color: white;
+    width: 30em;
+    transition: 0.5s;
+    background-color: $pal-sec;
     color: $pal-text;
     border-radius: 0.5em;
-    border-width: 0.2em 0.1em;
-}
-
-.bbottom {
-    border-bottom: 0.1em solid $pal-main;
+    border: 0.1em solid black;
+    &.gwupdatecards:hover{
+        transition: 0.2s;
+        background-color: $pal-det;
+        cursor: pointer;
+    }
 }

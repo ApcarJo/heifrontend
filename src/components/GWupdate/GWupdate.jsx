@@ -213,7 +213,6 @@ const GWupdate = (props) => {
                     <div className={view.modifyViewP}>
                         <div className="newsCard"><h3>{filterName.filterType} GameWeek Updates</h3>
                             <div className="row">
-                                Filter:
                                 <button className="sendButton" name="allGWu" onClick={() => viewGWUpdates("All")}>All GWU</button>
                                 <button className="sendButton" name="isActive" onClick={() => viewGWUpdates("Active")}>Active GWU</button>
                                 <button className="sendButton" onClick={() => viewGWUpdates("Archive")}>Archive GWU</button>

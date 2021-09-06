@@ -230,7 +230,6 @@ const AllProfiles = (props) => {
                     <div className={view.modifyViewP}>
                         <div className="newsCard">
                             <div className="row">
-                                Filter:
                                 <button className="sendButton" name="allUsers" onClick={() => viewUsers("All")}>All Users</button>
                                 <button className="sendButton" name="isActive" onClick={() => viewUsers("Active")}>Active Users</button>
                                 <button className="sendButton" onClick={() => viewUsers("Archive")}>Archive Users</button>
@@ -325,7 +324,6 @@ const AllProfiles = (props) => {
                     <div className="showCard">
                         <div className="newsCard">Profiles List View
                             <div className="row">
-                                Filter:
                                 <button className="sendButton" name="allUsers" onClick={() => viewUsers("All")}>All Users</button>
                                 <button className="sendButton" name="isActive" onClick={() => viewUsers("Active")}>Active Users</button>
                                 <button className="sendButton" onClick={() => viewUsers("Archive")}>Archive Users</button>

@@ -178,7 +178,6 @@ const Stadium = (props) => {
                     <div className={view.modifyViewP}>
                         <div className="newsCard">
                             <div className="row">
-                                Filter:
                                 <button className="sendButton" name="All" onClick={() => viewStadiums("All")}>ALL</button>
                                 <button className="sendButton" name="Active" onClick={() => viewStadiums("Active")}>ACTIVE</button>
                                 <input className="searchBox" name="name" onChange={updateSelector}></input>
@@ -196,7 +195,7 @@ const Stadium = (props) => {
                         </div>
                         {stadiumData.data.map((val, index) => (
                             <div key={index}>
-                                <div className="profileInfo center spaceEvenly" onClick={() => showFunc(val.id)}>
+                                <div className="center spaceEvenly profileInfo" onClick={() => showFunc(val.id)}>
                                     <div className="row">
                                         <div className="dataBox">{val.name}</div>
                                         <div className="dataBox">{val.address}</div>
