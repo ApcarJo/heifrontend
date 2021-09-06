@@ -172,10 +172,14 @@ const GWupdate = (props) => {
                 img: card.img,
                 isActive: card.isActive
             }
-
+ 
             await axios.put('https://heibackend.herokuapp.com/api/modifygwupdate', body, { headers: { 'authorization': 'Bearer ' + token } });
 
-            viewGWUpdates("all");
+            const newModifyview = (view.modifyView === 'showCard') ? 'hideCard' : 'showCard';
+            const newModifyviewP = (view.modifyViewP === 'showCard') ? 'hideCard' : 'showCard';
+            setView({ modifyViewP: newModifyviewP, modifyView: newModifyview });
+            
+            viewGWUpdates("All");
 
             setTimeout(() => {
                 history.push(`/gwupdate`);

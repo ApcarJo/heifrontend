@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Button from '../../components/Button/Button'
 
 const AssetView = (props) => {
 
@@ -123,22 +122,25 @@ const AssetView = (props) => {
 
         if (id) {
             try {
+
                 let body = {
                     asset_id: id
                 }
                 let token = props.credentials?.token;
-                let res = await axios.post(`https://heibackend.herokuapp.com/api/chooseasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
+                let res = await axios.post(`https://heibackend.herokuapp.com/api/chooseasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
                 setModify(res.data.data);
 
             } catch (error) {
                 console.log(error);
             }
         }
+
         // Switch view implemented
         const newModifyview = (view.modifyView === 'showCard') ? 'hideCard' : 'showCard';
         const newModifyviewP = (view.modifyViewP === 'showCard') ? 'hideCard' : 'showCard';
         setView({ modifyViewP: newModifyviewP, modifyView: newModifyview })
+
     }
 
     const hideCard = async (id) => {

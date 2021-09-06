@@ -119,9 +119,8 @@ const Team = (props) => {
                 setModify();
                 let res = await axios.post(`https://heibackend.herokuapp.com/api/chooseteam`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
-                res.data.data.map((val) => {
-                    setModify(val);
-                });
+                setModify(res.data.data);
+
 
             } catch (error) {
                 console.log(error);
