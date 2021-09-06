@@ -1,22 +1,12 @@
 
-.gwupdatecards {
+.teamDataBox{
     @extend .center;
-    justify-content: flex-start;
-    height: 12em;
-    width: 40em;
-    border: 0.2em solid black;
-    margin: 1em;
-}
-
-.gwupdatecards {
-    @extend .center;
-    transition: 1s;
-    background-color: white;
-    color: $pal-text;
+    box-sizing: border-box;
+    overflow: hidden;
+    align-items: flex-start;
+    justify-content: left;
+    width: 30em;
     border-radius: 0.5em;
-    border-width: 0.2em 0.1em;
-}
-
-.bbottom {
-    border-bottom: 0.1em solid $pal-main;
+    padding: 1em;
+    margin-bottom: 1em;
 }

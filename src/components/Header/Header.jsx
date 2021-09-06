@@ -54,12 +54,6 @@ const Header = (props) => {
                 <div className="headerLinks">
                     <Button path="/" destination="HOME" />
                     <Button path="/contact" destination="CONTACT" />
-                    <Button path="/gwupdate" destination="gwupdate" />
-                    <Button path="/gwschedule" destination="GWSCHEDULE" />
-                    <Button path="/gwupdatecreate" destination="gwupdatecreate" />
-                    <Button path="/asset" destination="Asset" />
-                    <Button path="/assetview" destination="assetview" />
-                    <Button path="/allprofiles" destination="allprofiles" />
                 </div>
 
                 <div className="headerUser">

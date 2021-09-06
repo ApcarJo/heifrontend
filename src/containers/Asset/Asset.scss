@@ -1,10 +1,5 @@
 
 
-.viewRegister {
-    @extend .center;
-    height: 100vh;
-}
-
 .AssetCard {
     @extend .loginCard;
     color: $pal-det;

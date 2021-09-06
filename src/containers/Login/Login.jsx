@@ -67,8 +67,6 @@ const Login = (props) => {
             let res = await axios.post(`https://heibackend.herokuapp.com/api/login`, body);
             props.dispatch({ type: LOGIN, payload: res.data });
 
-            console.log("esto es res", res);
-
             // redirección
             setTimeout(() => {
                 history.push(`/profile`);

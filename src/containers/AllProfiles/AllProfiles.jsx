@@ -226,25 +226,23 @@ const AllProfiles = (props) => {
         return (
             <div className="viewAllProfiles">
                 <div className="content">
-                    <div className="subHeader">
-
-                    </div>
+                    <h3>Profiles List View</h3>
                     <div className={view.modifyViewP}>
-                        <div className="newsCard">Profiles List View
+                        <div className="newsCard">
                             <div className="row">
                                 Filter:
                                 <button className="sendButton" name="allUsers" onClick={() => viewUsers("All")}>All Users</button>
                                 <button className="sendButton" name="isActive" onClick={() => viewUsers("Active")}>Active Users</button>
                                 <button className="sendButton" onClick={() => viewUsers("Archive")}>Archive Users</button>
 
-                                <input className="userData" name="name" onChange={updateSelector}></input>
+                                <input className="searchBox" name="name" onChange={updateSelector}></input>
                                 <button className="sendButton" onClick={() => viewUsers("Name")}>User's Name</button>
-                                <input className="userData" name="role" onChange={updateSelector}></input>
+                                <input className="searchBox" name="role" onChange={updateSelector}></input>
                                 <button className="sendButton" onClick={() => viewUsers("Role")}>User's Role</button>
 
                             </div>
                         </div>
-                        <div className="row underline spaceEvenly">
+                        <div className="row spaceEvenly">
                             <div className="dataBox">Name</div>
                             <div className="dataBox">Surname</div>
                             <div className="dataBox">CodeName</div>

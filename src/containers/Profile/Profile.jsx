@@ -83,6 +83,7 @@ const Profile = (props) => {
         return (
             <div className="viewProfile">
                 <div className="content">
+                    <h3>PROFILE</h3>
                     <div className={view.modifyViewP}>
                         <div className="labelData">Name</div>
                         <div className="profileData" >{userData.name}</div>

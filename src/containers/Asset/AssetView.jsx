@@ -124,10 +124,11 @@ const AssetView = (props) => {
         if (id) {
             try {
                 let body = {
-                    Asset_id: id
+                    asset_id: id
                 }
                 let token = props.credentials?.token;
                 let res = await axios.post(`https://heibackend.herokuapp.com/api/chooseasset`, body, { headers: { 'authorization': 'Bearer ' + token } });
+
                 setModify(res.data.data);
 
             } catch (error) {
@@ -159,7 +160,7 @@ const AssetView = (props) => {
                 isActive: card.isActive
             }
 
-            let res = await axios.put('https://heibackend.herokuapp.com/api/modifyasset', body, { headers: { 'authorization': 'Bearer ' + token } });
+            await axios.put('https://heibackend.herokuapp.com/api/modifyasset', body, { headers: { 'authorization': 'Bearer ' + token } });
 
             setTimeout(() => {
                 history.push(`/assetview`);
@@ -182,6 +183,7 @@ const AssetView = (props) => {
         return (
             <div className="viewAsset">
                 <div className="content">
+                    <h3>Modify asset</h3>
                     <div className="subHeader">
 
                     </div>
@@ -230,7 +232,7 @@ const AssetView = (props) => {
                             </div>
                         ))}
                     </div>
-                    <div className={view.modifyView}>
+                    {modify && (<div className={view.modifyView}>
                         <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="Name" defaultValue={modify.name} />
 
                         <input className="gwuData" name="model" type="text" onChange={updateCard} placeholder="Model" defaultValue={modify.model} />
@@ -243,11 +245,12 @@ const AssetView = (props) => {
                         <input className="gwuData" name="year" type="text" onChange={updateCard} placeholder="Purchase Year" defaultValue={modify.year} />
 
                         <br></br>
-                        <div className="buttons">
+                        <div className="row">
                             <div><button className="sendButton" onClick={() => modifyBack()}>BACK</button></div>
                             <div><button className="sendButton" onClick={() => hideCard(modify.id)}>SAVE</button></div>
                         </div>
                     </div>
+                    )}
                 </div>
 
 

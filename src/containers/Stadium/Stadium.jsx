@@ -175,19 +175,20 @@ const Stadium = (props) => {
         return (
             <div className="viewStadium">
                 <div className="content">
+                    <h3>STADIUMS</h3>
                     <div className={view.modifyViewP}>
-                        <div className="newsCard">STADIUMS
+                        <div className="newsCard">
                             <div className="row">
                                 Filter:
                                 <button className="sendButton" name="All" onClick={() => viewStadiums("All")}>ALL</button>
                                 <button className="sendButton" name="Active" onClick={() => viewStadiums("Active")}>ACTIVE</button>
-                                <input className="gwuData" name="name" onChange={updateSelector}></input>
+                                <input className="searchBox" name="name" onChange={updateSelector}></input>
                                 <button className="sendButton" onClick={() => viewStadiums("Name")}>BY NAME</button>
                                 <button className="sendButton" onClick={() => goToCreateStadium()}> ADD</button>
 
                             </div>
                         </div>
-                        <div className="row underline spaceEvenly">
+                        <div className="row spaceEvenly">
                             <div className="dataBox">Name</div>
                             <div className="dataBox">Address</div>
                             <div className="dataBox">Contact</div>

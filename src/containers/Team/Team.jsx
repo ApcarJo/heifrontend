@@ -111,15 +111,13 @@ const Team = (props) => {
             try {
 
                 let body = {
-                    stadium_id: id
+                    team_id: id
                 }
                 let token = props.credentials?.token;
-                setModify();
+                // setModify();
                 let res = await axios.post(`https://heibackend.herokuapp.com/api/chooseteam`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
-                res.data.data.map((val) => {
-                    setModify(val);
-                });
+                console.log(res.data)
 
             } catch (error) {
                 console.log(error);
@@ -144,7 +142,6 @@ const Team = (props) => {
                 isUEL: card.isUEL,
                 isSC: card.isSC,
                 isCDR: card.isCDR,
-                stadium_id: card.stadium_id
             }
 
             await axios.put('https://heibackend.herokuapp.com/api/modifyteam', body, { headers: { 'authorization': 'Bearer ' + token } });
@@ -171,15 +168,16 @@ const Team = (props) => {
 
     if ((props.credentials.user?.isAdmin) && (teamData.data)) {
         return (
-            <div className="viewStadium">
+            <div className="viewTeam">
                 <div className="content">
+                    <h3>Teams</h3>
                     <div className={view.modifyViewP}>
-                        <div className="newsCard">STADIUMS
-                            <div className="row">
+                        <div className="newsCard">
+                            <div className="filter row">
                                 Filter:
                                 <button className="sendButton" name="All" onClick={() => viewTeams("All")}>All</button>
                                 <button className="sendButton" name="Active" onClick={() => viewTeams("Active")}>Active</button>
-                                <input className="gwuData" name="name" onChange={updateSelector}></input>
+                                <input className="searchBox" name="name" onChange={updateSelector}></input>
                                 <button className="sendButton" onClick={() => viewTeams("Name")}>BY NAME</button>
                                 <button className="sendButton" onClick={() => goCreateTeam()}>ADD</button>
                             </div>
@@ -227,15 +225,15 @@ const Team = (props) => {
                     </div>
                     {/* Swtich visibility */}
                     {modify && (<div className={view.modifyView}>
-                        <input className="gwuData" name="name" type="text" onChange={updateCard} defaultValue={modify.name} />
+                        <input className="teamDataBox" name="name" type="text" onChange={updateCard} defaultValue={modify.name} />
 
-                        <input className="gwuData" name="address" type="text" onChange={updateCard} defaultValue={modify.address} />
-                        <input className="gwuData" name="isGLT" type="text" onChange={updateCard} defaultValue={modify.isGLT} />
-                        <input className="gwuData" name="isRobot" type="text" onChange={updateCard} defaultValue={modify.isRobot} />
+                        <input className="teamDataBox" name="isFD" type="text" onChange={updateCard} defaultValue={modify.isFD} />
+                        <input className="teamDataBox" name="isUCL" type="text" onChange={updateCard} defaultValue={modify.isUCL} />
+                        <input className="teamDataBox" name="isUEL" type="text" onChange={updateCard} defaultValue={modify.isUEL} />
+                        <textarea className="teamDataBox" name="isSC" type="text" onChange={updateCard} defaultValue={modify.contact} />
+                        <input className="teamDataBox" name="isCDR" type="text" onChange={updateCard} defaultValue={modify.information} />
+ 
 
-                        <textarea className="gwuData" name="contact" type="text" onChange={updateCard} defaultValue={modify.contact} />
-
-                        <input className="gwuData" name="information" type="text" onChange={updateCard} defaultValue={modify.information} />
                         <br></br>
                         <div className="row">
                             <button className="sendButton" onClick={() => modifyBack()}>BACK</button>

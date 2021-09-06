@@ -33,7 +33,6 @@ const StadiumCreate = (props) => {
         }
     }
 
-    console.log(stadiumData)
     const createCard = async () => {
 
         try {
@@ -46,7 +45,7 @@ const StadiumCreate = (props) => {
                 isUEL: card.isUEL,
                 isSC: card.isSC,
                 isCDR: card.isCDR,
-                stadium_id: "2",
+                stadium_id: card.stadium_id,
             }
 
             await axios.post('https://heibackend.herokuapp.com/api/createteam', body, { headers: { 'authorization': 'Bearer ' + token } });
@@ -59,30 +58,41 @@ const StadiumCreate = (props) => {
         }
     }
 
-    if ((props.credentials.user?.isAdmin)&&(stadiumData.length>1)) {
-    return (
-        <div className="createGwuView">
-            <div className="content">
-                <div className="showCard">
-                    <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="name" required />
-                    <input className="gwuData" name="isFD" type="text" onChange={updateCard} placeholder="isFD" />
-                    <input className="gwuData" name="isUCL" type="text" onChange={updateCard} placeholder="isUCL" />
-                    <input className="gwuData" name="isUEL" type="text" onChange={updateCard} placeholder="isUEL" />
-                    <input className="gwuData" name="isSC" type="text" onChange={updateCard} placeholder="isSC" />
-                    <input className="gwuData" name="isCDR" type="text" onChange={updateCard} placeholder="isCDR" />
-                    <select className="gwuData" name="stadium_id" type="text" onChange={updateCard} required>{                   stadiumData.map((val, index)=> (
-                        <option key={index} value={val.id} placeholder="Choose Stadium">{val.name}</option>
-                    ))} </select>
-                    <br></br>
-                    <button className="sendButton" onClick={() => createCard()}>CREATE</button>
+    if ((props.credentials.user?.isAdmin) && (stadiumData.length > 0)) {
+        return (
+            <div className="createGwuView">
+                <div className="content">
+                    <h3>Create new team</h3>
+                    <div className="showCard">
+                        Name of the Club
+                        <input className="teamDataBox" name="name" type="text" onChange={updateCard} placeholder="name" required />
+                        First Divison
+                        <input className="teamDataBox" name="isFD" type="text" onChange={updateCard} placeholder="isFD" />
+                        UEFA Champions League
+                        <input className="teamDataBox" name="isUCL" type="text" onChange={updateCard} placeholder="isUCL" />
+                        UEFA Europe League
+                        <input className="teamDataBox" name="isUEL" type="text" onChange={updateCard} placeholder="isUEL" />
+                        Spain Super Coup
+                        <input className="teamDataBox" name="isSC" type="text" onChange={updateCard} placeholder="isSC" />
+                        Copa del Rey
+                        <input className="teamDataBox" name="isCDR" type="text" onChange={updateCard} placeholder="isCDR" />
+                        Stadium Name
+                        <select className="teamDataBox" name="stadium_id" type="text" onChange={updateCard} required>
+                            <option value="Null" selected> "Choose Stadium" </option>
+                            {stadiumData.map((val, index) => (
+                                <option key={index} value={val.id} >{val.name}</option>
+                            ))}
+                        </select>
+                        <br></br>
+                        <button className="sendButton" onClick={() => createCard()}>CREATE</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    )
+        )
     } else {
         return "Loaging";
-       }
+    }
 }
 
 export default connect((state) => ({
