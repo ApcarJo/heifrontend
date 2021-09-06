@@ -111,13 +111,17 @@ const Team = (props) => {
             try {
 
                 let body = {
-                    team_id: id
+                    team_id: id,
                 }
+
                 let token = props.credentials?.token;
-                // setModify();
+
+                setModify();
                 let res = await axios.post(`https://heibackend.herokuapp.com/api/chooseteam`, body, { headers: { 'authorization': 'Bearer ' + token } });
 
-                console.log(res.data)
+                res.data.data.map((val) => {
+                    setModify(val);
+                });
 
             } catch (error) {
                 console.log(error);
@@ -226,13 +230,11 @@ const Team = (props) => {
                     {/* Swtich visibility */}
                     {modify && (<div className={view.modifyView}>
                         <input className="teamDataBox" name="name" type="text" onChange={updateCard} defaultValue={modify.name} />
-
                         <input className="teamDataBox" name="isFD" type="text" onChange={updateCard} defaultValue={modify.isFD} />
                         <input className="teamDataBox" name="isUCL" type="text" onChange={updateCard} defaultValue={modify.isUCL} />
                         <input className="teamDataBox" name="isUEL" type="text" onChange={updateCard} defaultValue={modify.isUEL} />
                         <textarea className="teamDataBox" name="isSC" type="text" onChange={updateCard} defaultValue={modify.contact} />
                         <input className="teamDataBox" name="isCDR" type="text" onChange={updateCard} defaultValue={modify.information} />
- 
 
                         <br></br>
                         <div className="row">
