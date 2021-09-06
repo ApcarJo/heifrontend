@@ -228,12 +228,18 @@ const Team = (props) => {
                     </div>
                     {/* Swtich visibility */}
                     {modify && (<div className={view.modifyView}>
+                        Name
                         <input className="teamDataBox" name="name" type="text" onChange={updateCard} defaultValue={modify.name} />
+                        First Division
                         <input className="teamDataBox" name="isFD" type="text" onChange={updateCard} defaultValue={modify.isFD} />
+                        UEFA Champions League
                         <input className="teamDataBox" name="isUCL" type="text" onChange={updateCard} defaultValue={modify.isUCL} />
+                        Uefa Europa League
                         <input className="teamDataBox" name="isUEL" type="text" onChange={updateCard} defaultValue={modify.isUEL} />
-                        <textarea className="teamDataBox" name="isSC" type="text" onChange={updateCard} defaultValue={modify.contact} />
-                        <input className="teamDataBox" name="isCDR" type="text" onChange={updateCard} defaultValue={modify.information} />
+                        SuperCup
+                        <input className="teamDataBox" name="isSC" type="text" onChange={updateCard} defaultValue={modify.isSC} />
+                        Copa del Rey
+                        <input className="teamDataBox" name="isCDR" type="text" onChange={updateCard} defaultValue={modify.isCDR} />
 
                         <br></br>
                         <div className="row">

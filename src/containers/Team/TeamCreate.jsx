@@ -41,10 +41,6 @@ const StadiumCreate = (props) => {
             let body = {
                 name: card.name,
                 isFD: card.isFD,
-                isUCL: card.isUCL,
-                isUEL: card.isUEL,
-                isSC: card.isSC,
-                isCDR: card.isCDR,
                 stadium_id: card.stadium_id,
             }
 
@@ -68,14 +64,6 @@ const StadiumCreate = (props) => {
                         <input className="teamDataBox" name="name" type="text" onChange={updateCard} placeholder="name" required />
                         First Divison
                         <input className="teamDataBox" name="isFD" type="text" onChange={updateCard} placeholder="isFD" />
-                        UEFA Champions League
-                        <input className="teamDataBox" name="isUCL" type="text" onChange={updateCard} placeholder="isUCL" />
-                        UEFA Europe League
-                        <input className="teamDataBox" name="isUEL" type="text" onChange={updateCard} placeholder="isUEL" />
-                        Spain Super Coup
-                        <input className="teamDataBox" name="isSC" type="text" onChange={updateCard} placeholder="isSC" />
-                        Copa del Rey
-                        <input className="teamDataBox" name="isCDR" type="text" onChange={updateCard} placeholder="isCDR" />
                         Stadium Name
                         <select className="teamDataBox" name="stadium_id" type="text" onChange={updateCard} required>
                             <option value="Null" selected> "Choose Stadium" </option>
