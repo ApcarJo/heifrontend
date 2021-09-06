@@ -1,43 +1,21 @@
 
-Web App para la gestión diaria del trabajo que se realiza en HawkEye Innovations España.
+Web App para la gestión diaria principal del trabajo que se realiza diaria y semanalmente en la empresa en la que trabajo actualmente. Las funciones principales de uso están desarrolladas y actualmente sería de gran ayuda si llegara a implementarse.
 
-Frontend realizado en HTML5, SASS y JavaScript con React y Redux
-Backend realizado en PHP con Laravel
+Frontend realizado en HTML5, SASS y JavaScript con React y Redux, deployado en Amazon Web Services.
 
-//Usuarios - Funciones:
-- Registro de usuario
-- Login de usuario
-- Modificación del perfil
+https://main.d2if9d9z0lsipr.amplifyapp.com/
 
-//Admin Funciones:
-- Modificación de perfiles
-- Listado de todos los usuarios
-- Búsqueda por nombre de usuario
-- Búsqueda de usuarios activos
-- Búsqueda de usuarios archivados
-- Archivar usuarios
+Backend realizado en PHP con Laravel, deployado en Heroku.
 
+El backend está desarrollado con las rutas necesarias para que esta web app pueda seguir desarrollándose hasta su objetivo final en cuanto a funcionalidades.
+Se queda sin desarrollar en frontend la creación de VANs, el calendario de disponibilidad de los usuarios y las jornadas semanales con información adquirida de las demás tablas.
 
-//GWupdates - Funciones Admin
-- Creación del Game Week Update semanal (GWU)
-- Listado de GWUs
-- Modificación de GWU
-- Archivar GWU
+La app permite crear una base de datos con CRUDS completos y visualización de las distintas tablas a través de distintos filtros: usuarios (en registro) estadios, equipos, inventario y actualización de jornadas.
 
-//Assets
-- Registro de assets
-- Listado de assets
-- Modificación de assets
-- 
+El registro y el login da acceso a la visualización de las distintas vistas y solo siendo admin se accede a la gestión para modificar, añadir, borrar y/o archivar.
 
-** Error 401 para la creación del asset, cambiar en el controlador el request type a simplemente id.
+La app está desarrollada para que después de la creación básica de algunos modelos se complete el perfil más adelante (es muy común en la empresa no disponer de toda la información necesaria de cada elemento).
 
-// Jornadas
-** Creacion de jornadas, equipos para la jornada, empleados para la jornada, van para la jornada.
+Para acceder a los controles de gestión el admin debe pulsar encima de los elementos para que aparezcan los botones de acceso, además de información completa del elemento.
 
-// Inventario, garantías
-
-A falta de implementar.
-
-- Componente escalable y automático de generación de vistas para creación, listado y modificación. Usaría arrays predefinidos con los valores de las tablas a poder rellenar, modificar y listar (filtros incluídos), sin tener que volver a repetir para cada vista toda la estructura completa.
-
+En el caso de no ser admin solo se muestra la información completa.
