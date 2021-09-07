@@ -119,7 +119,7 @@ const GWupdate = (props) => {
 
             await axios.delete(`https://heibackend.herokuapp.com/api/deletegwupdate`, { data: body, headers: { 'authorization': 'Bearer ' + token } });
 
-            viewGWUpdates("all");
+            viewGWUpdates("All");
         } catch (error) {
             console.log(error);
         }
