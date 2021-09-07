@@ -227,9 +227,9 @@ const GWupdate = (props) => {
                             <div>
                                 <div className="gwupdatecards" key={index} onClick={() => showFunc(val.id)}>
 
-                                    <div className="row">
-                                        <div className="dataBox"> Title: {val.title}</div>
-                                        <div className="dataBox">Roles: {val.roles}</div>
+                                    <div className="row padd">
+                                        <div className="dataBox">{val.title}</div>
+                                        <div className="dataBox">{val.roles}</div>
                                         <div className="dataBox"># {val.id}</div>
                                     </div>
                                     <div className="gwInfo">

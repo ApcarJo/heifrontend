@@ -252,7 +252,7 @@ const AllProfiles = (props) => {
                         </div>
 
                         {profileData.data.map((val, index) => (
-                            <div key={index}>
+                            <div className="center" key={index}>
                                 <div className="profileInfo row underline spaceEvenly" onClick={() => showFunc(val.id)}>
                                     <div className="dataBox">{val.name}</div>
                                     <div className="dataBox">{val.surname1}</div>
@@ -262,6 +262,26 @@ const AllProfiles = (props) => {
                                     <div className="dataBox">{val.city}</div>
                                     <div className="dataBox">{val.role}</div>
                                 </div>
+                                {(showHide && (buttons.bId === val.id)) && (<div className="center profileInfo">
+                                    <div className="row spaceEvenly">
+                                        <div className="dataBox">Address</div>
+                                        <div className="dataBox">City</div>
+                                        <div className="dataBox">PC</div>
+                                        <div className="dataBox">Nif</div>
+                                        <div className="dataBox">License</div>
+                                        <div className="dataBox">Active</div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="dataBox">{val.address}</div>
+                                        <div className="dataBox">{val.city}</div>
+                                        <div className="dataBox">{val.postalcode}</div>
+                                        <div className="dataBox">{val.nif}</div>
+                                        <div className="dataBox">{(val.license) ? "Yes" : "No"}</div>
+                                        <div className="dataBox">{(val.isActive) ? "Yes" : "No"}</div>
+                                    </div>
+                                </div>
+                                )}
+
                                 {(showHide && (buttons.bId === val.id)) && (<div className="row">
                                     <div className="flexEnd">{buttons.show}</div>
                                 </div>

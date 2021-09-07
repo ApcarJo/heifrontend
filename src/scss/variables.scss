@@ -154,6 +154,7 @@ $pal-footer: #444444;
 
 .dataBox{
     @extend .center;
+    padding: 0.5em;
     width: 10em;
     height: 2em;
 }
