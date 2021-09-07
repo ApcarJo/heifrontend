@@ -12,7 +12,7 @@ const AssetView = (props) => {
     const [assetData, setAssetData] = useState({})
     const [modify, setModify] = useState({})
     const [card, setCard] = useState('');
-    const [buttons, setButtons] = useState({
+    const [buttons] = useState({
         show: [],
         bId: '',
     });
