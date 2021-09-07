@@ -225,9 +225,14 @@ const GWupdate = (props) => {
                         </div>
                         {gwUpdateData.data.map((val, index) => (
                             <div>
+                                <div className="row spaceEvenly">
+                                    <div className="dataBox">Title</div>
+                                    <div className="dataBox">Roles</div>
+                                    <div className="dataBox">ID</div>
+                                </div>
                                 <div className="gwupdatecards" key={index} onClick={() => showFunc(val.id)}>
 
-                                    <div className="row padd">
+                                    <div className="row padd underline">
                                         <div className="dataBox">{val.title}</div>
                                         <div className="dataBox">{val.roles}</div>
                                         <div className="dataBox"># {val.id}</div>

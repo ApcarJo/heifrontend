@@ -204,13 +204,13 @@ const Stadium = (props) => {
                                         <div className="dataBox">{(val.isRobot === 0) ? "No" : "Yes"}</div>
                                     </div>
                                     {(showHide && (buttons.bId === val.id)) && (<div className="center">
-                                        <div className="row underline">
+                                        <div className="row gwInfo">
                                             <div className="dataBox">Contact</div>
                                             <div className="dataBox">Phone</div>
                                             <div className="dataBox">Docs</div>
                                             <div className="dataBox">TV Compound</div>
                                         </div>
-                                        <div className="row">
+                                        <div className="row underline">
                                             <div className="dataBox">{val.contact}</div>
                                             <div className="dataBox">{val.contactPhone}</div>
                                             <div className="dataBox">{val.docsLink}</div>
