@@ -47,7 +47,7 @@ const AssetView = (props) => {
         history.push("asset")
     }
     const viewAssetViews = async (val) => {
-        setFilterName({...filterName, filterType: val});
+        setFilterName({ ...filterName, filterType: val });
         switch (val) {
 
             case "All":
@@ -150,7 +150,7 @@ const AssetView = (props) => {
             let token = props.credentials.token;
 
             let body = {
-                Asset_id: id,
+                asset_id: id,
                 name: card.name,
                 model: card.model,
                 type: card.type,
@@ -164,9 +164,13 @@ const AssetView = (props) => {
 
             await axios.put('https://heibackend.herokuapp.com/api/modifyasset', body, { headers: { 'authorization': 'Bearer ' + token } });
 
-            setTimeout(() => {
-                history.push(`/assetview`);
-            }, 250);
+            // Switch view implemented
+            const newModifyview = (view.modifyView === 'showCard') ? 'hideCard' : 'showCard';
+            const newModifyviewP = (view.modifyViewP === 'showCard') ? 'hideCard' : 'showCard';
+            setView({ modifyViewP: newModifyviewP, modifyView: newModifyview })
+
+            viewAssetViews("All");
+
         } catch (error) {
             console.log(error);
         }
@@ -176,8 +180,8 @@ const AssetView = (props) => {
         buttons.bId = id;
         buttons.show = [];
         buttons.show.push(<div className="row flexEnd">
-                    <button className="sendButton" onClick={() => deleteAsset(id)}>Delete</button>
-                    <button className="sendButton" onClick={() => modifyBack(id)}>Modify</button></div>);
+            <button className="sendButton" onClick={() => deleteAsset(id)}>Delete</button>
+            <button className="sendButton" onClick={() => modifyBack(id)}>Modify</button></div>);
         setShowHide(!showHide)
     }
 
@@ -202,25 +206,32 @@ const AssetView = (props) => {
                             <div className="dataBox">Name</div>
                             <div className="dataBox">Model</div>
                             <div className="dataBox">Type</div>
-                            <div className="dataBox">Year</div>
-                            <div className="dataBox">S/N</div>
-                            <div className="dataBox">Warranty</div>
-                            <div className="dataBox">CCC</div>
                             <div className="dataBox">Quantity</div>
                         </div>
 
                         {assetData.data.map((val, index) => (
                             <div key={index}>
-                                <div className="profileInfo row underline spaceEvenly" onClick={()=>showFunc(val.id)}>
+                                <div className="profileInfo row underline spaceEvenly" onClick={() => showFunc(val.id)}>
                                     <div className="dataBox">{val.name}</div>
                                     <div className="dataBox">{val.model}</div>
                                     <div className="dataBox">{val.type}</div>
-                                    <div className="dataBox">{val.year}</div>
-                                    <div className="dataBox">{val.serialNumber}</div>
-                                    <div className="dataBox">{val.warrantyExpiracyDate}</div>
-                                    <div className="dataBox">{val.crossCheckCode}</div>
                                     <div className="dataBox">{val.quantity}</div>
                                 </div>
+                                {(showHide && (buttons.bId === val.id)) && (<div className="center profileInfo">
+                                    <div className="row underline">
+                                        <div className="dataBox">Year</div>
+                                        <div className="dataBox">S/N</div>
+                                        <div className="dataBox">Warranty</div>
+                                        <div className="dataBox">CCC</div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="dataBox">{val.year}</div>
+                                        <div className="dataBox">{val.serialNumber}</div>
+                                        <div className="dataBox">{val.warrantyExpiracyDate}</div>
+                                        <div className="dataBox">{val.crossCheckCode}</div>
+                                    </div>
+                                </div>
+                                )}
 
                                 {(showHide && (buttons.bId === val.id)) && (<div className="row">
                                     <div className="flexEnd">{buttons.show}</div>
@@ -257,48 +268,48 @@ const AssetView = (props) => {
 
         return (
             <div className="viewAsset">
-            <div className="content">
-                <h3>Modify asset</h3>
-                <div className={"showCard"}>
-                    <div className="newsCard"><h3>{filterName.filterType} Asset View</h3>
-                        <div className="row">
-                            <button className="sendButton" onClick={() => viewAssetViews("All")}>All</button>
-                            <input className="searchBox" name="name" onChange={updateSelector}></input>
-                            <button className="sendButton" onClick={() => viewAssetViews("Name")}>NAME</button>
+                <div className="content">
+                    <h3>Modify asset</h3>
+                    <div className={"showCard"}>
+                        <div className="newsCard"><h3>{filterName.filterType} Asset View</h3>
+                            <div className="row">
+                                <button className="sendButton" onClick={() => viewAssetViews("All")}>All</button>
+                                <input className="searchBox" name="name" onChange={updateSelector}></input>
+                                <button className="sendButton" onClick={() => viewAssetViews("Name")}>NAME</button>
 
-                            <input className="searchBox" name="model" onChange={updateSelector}></input>
-                            <button className="sendButton" onClick={() => viewAssetViews("Model")}>MODEL</button>
-                            <button className="sendButton" onClick={() => goToCreateAsset()}> ADD</button>
-                        </div>
-                    </div>
-                    <div className="row spaceEvenly column">
-                        <div className="dataBox">Name</div>
-                        <div className="dataBox">Model</div>
-                        <div className="dataBox">Type</div>
-                        <div className="dataBox">Year</div>
-                        <div className="dataBox">S/N</div>
-                        <div className="dataBox">Warranty</div>
-                        <div className="dataBox">CCC</div>
-                        <div className="dataBox">Quantity</div>
-                    </div>
-
-                    {assetData.data.map((val, index) => (
-                        <div key={index}>
-                            <div className="profileInfo row underline spaceEvenly" onClick={()=>showFunc(val.id)}>
-                                <div className="dataBox">{val.name}</div>
-                                <div className="dataBox">{val.model}</div>
-                                <div className="dataBox">{val.type}</div>
-                                <div className="dataBox">{val.year}</div>
-                                <div className="dataBox">{val.serialNumber}</div>
-                                <div className="dataBox">{val.warrantyExpiracyDate}</div>
-                                <div className="dataBox">{val.crossCheckCode}</div>
-                                <div className="dataBox">{val.quantity}</div>
+                                <input className="searchBox" name="model" onChange={updateSelector}></input>
+                                <button className="sendButton" onClick={() => viewAssetViews("Model")}>MODEL</button>
+                                <button className="sendButton" onClick={() => goToCreateAsset()}> ADD</button>
                             </div>
                         </div>
-                    ))}
-                </div>  
+                        <div className="row spaceEvenly column">
+                            <div className="dataBox">Name</div>
+                            <div className="dataBox">Model</div>
+                            <div className="dataBox">Type</div>
+                            <div className="dataBox">Year</div>
+                            <div className="dataBox">S/N</div>
+                            <div className="dataBox">Warranty</div>
+                            <div className="dataBox">CCC</div>
+                            <div className="dataBox">Quantity</div>
+                        </div>
+
+                        {assetData.data.map((val, index) => (
+                            <div key={index}>
+                                <div className="profileInfo row underline spaceEvenly" onClick={() => showFunc(val.id)}>
+                                    <div className="dataBox">{val.name}</div>
+                                    <div className="dataBox">{val.model}</div>
+                                    <div className="dataBox">{val.type}</div>
+                                    <div className="dataBox">{val.year}</div>
+                                    <div className="dataBox">{val.serialNumber}</div>
+                                    <div className="dataBox">{val.warrantyExpiracyDate}</div>
+                                    <div className="dataBox">{val.crossCheckCode}</div>
+                                    <div className="dataBox">{val.quantity}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
-        </div>
 
         )
     } else {

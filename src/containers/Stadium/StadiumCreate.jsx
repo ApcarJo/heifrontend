@@ -50,15 +50,24 @@ const StadiumCreate = (props) => {
         <div className="createGwuView">
             <div className="content">
                 <div className="showCard">
-                    <input className="gwuData" name="name" type="text" onChange={updateCard} placeholder="name" required />
-                    <input className="gwuData" name="address" type="text" onChange={updateCard} placeholder="address" />
-                    <input className="gwuData" name="contact" type="text" onChange={updateCard} placeholder="contact" />
-                    <input className="gwuData" name="contactPhone" type="text" onChange={updateCard} placeholder="contactPhone" />
-                    <input className="gwuData" name="isGLT" type="text" onChange={updateCard} placeholder="isGLT" />
-                    <input className="gwuData" name="isRobot" type="text" onChange={updateCard} placeholder="isRobot" />
-                    <input className="gwuData" name="docsLink" type="text" onChange={updateCard} placeholder="docs Link" />
-                    <input className="gwuData" name="tvCompound" type="text" onChange={updateCard} placeholder="tvCompound" />
-                    <input className="gwuData" name="information" type="text" onChange={updateCard} placeholder="information" />
+                    Name
+                    <input className="teamDataBox" name="name" type="text" onChange={updateCard} placeholder="name" required />
+                    Address
+                    <input className="teamDataBox" name="address" type="text" onChange={updateCard} placeholder="address" />
+                    Contact
+                    <input className="teamDataBox" name="contact" type="text" onChange={updateCard} placeholder="contact" />
+                    Contact Phone
+                    <input className="teamDataBox" name="contactPhone" type="text" onChange={updateCard} placeholder="contactPhone" />
+                    GLT status
+                    <input className="teamDataBox" name="isGLT" type="text" onChange={updateCard} placeholder="isGLT" />
+                    RRA Type
+                    <input className="teamDataBox" name="isRobot" type="text" onChange={updateCard} placeholder="isRobot" />
+                    Documents Link
+                    <input className="teamDataBox" name="docsLink" type="text" onChange={updateCard} placeholder="docs Link" />
+                    Picture of TV Compound
+                    <input className="teamDataBox" name="tvCompound" type="text" onChange={updateCard} placeholder="tvCompound" />
+                    Info
+                    <input className="teamDataBox" name="information" type="text" onChange={updateCard} placeholder="information" />
                     <br></br>
                     <button className="sendButton" onClick={() => createCard()}>CREATE</button>
                 </div>

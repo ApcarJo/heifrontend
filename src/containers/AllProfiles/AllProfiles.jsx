@@ -263,7 +263,7 @@ const AllProfiles = (props) => {
                                     <div className="dataBox">{val.role}</div>
                                 </div>
                                 {(showHide && (buttons.bId === val.id)) && (<div className="center profileInfo">
-                                    <div className="row spaceEvenly">
+                                    <div className="row underline">
                                         <div className="dataBox">Address</div>
                                         <div className="dataBox">City</div>
                                         <div className="dataBox">PC</div>

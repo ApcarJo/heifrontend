@@ -87,7 +87,7 @@ const Stadium = (props) => {
                 }
                 break;
 
-                default:
+            default:
         }
     }
 
@@ -191,25 +191,33 @@ const Stadium = (props) => {
                         <div className="row spaceEvenly">
                             <div className="dataBox">Name</div>
                             <div className="dataBox">Address</div>
-                            <div className="dataBox">Contact</div>
                             <div className="dataBox">GLT</div>
                             <div className="dataBox">Robot</div>
                         </div>
                         {stadiumData.data.map((val, index) => (
                             <div key={index}>
                                 <div className="center spaceEvenly profileInfo" onClick={() => showFunc(val.id)}>
-                                    <div className="row">
+                                    <div className="row underline">
                                         <div className="dataBox">{val.name}</div>
                                         <div className="dataBox">{val.address}</div>
-                                        <div className="dataBox">{val.contact}</div>      
                                         <div className="dataBox">{(val.isGLT === 0) ? "No" : "Yes"}</div>
                                         <div className="dataBox">{(val.isRobot === 0) ? "No" : "Yes"}</div>
                                     </div>
-                                    <div className="row">
-                                    {(showHide && (buttons.bId === val.id)) && (
+                                    {(showHide && (buttons.bId === val.id)) && (<div className="center">
+                                        <div className="row underline">
+                                            <div className="dataBox">Contact</div>
+                                            <div className="dataBox">Phone</div>
+                                            <div className="dataBox">Docs</div>
+                                            <div className="dataBox">TV Compound</div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="dataBox">{val.contact}</div>
                                             <div className="dataBox">{val.contactPhone}</div>
-                                        )}
+                                            <div className="dataBox">{val.docsLink}</div>
+                                            <div className="dataBox">{val.tvCompound}</div>
+                                        </div>
                                     </div>
+                                    )}
 
                                     {(showHide && (buttons.bId === val.id)) && (
                                         <div className="gwInfo">
@@ -239,6 +247,10 @@ const Stadium = (props) => {
                         <input className="teamDataBox" name="contact" type="text" onChange={updateCard} defaultValue={modify.contact} />
                         Contact Phone
                         <input className="teamDataBox" name="contactPhone" type="text" onChange={updateCard} defaultValue={modify.contactPhone} />
+                        Documents Link
+                        <input className="teamDataBox" name="docsLink" type="text" onChange={updateCard} placeholder="docs Link" />
+                        Picture of TV Compound
+                        <input className="teamDataBox" name="tvCompound" type="text" onChange={updateCard} placeholder="tvCompound" />
                         Info
                         <input className="teamDataBox" name="information" type="text" onChange={updateCard} defaultValue={modify.information} />
                         <br></br>

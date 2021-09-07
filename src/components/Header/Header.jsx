@@ -23,8 +23,6 @@ const Header = (props) => {
 
                 <div className="headerLinks">
                     <Button path="/" destination="HOME" />
-                    <Button path="/profile" destination="PROFILE" />
-                    <Button path="/calendar" destination="CALENDAR" />
                     <Button path="/gwupdate" destination="GAME WEEK UPDATE" />
                     <Button path="/assetview" destination="INVENTORY" />
                     <Button path="/allprofiles" destination="PROFILES" />
