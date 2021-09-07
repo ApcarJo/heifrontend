@@ -268,23 +268,59 @@ const Stadium = (props) => {
     } else if (stadiumData.data) {
 
         return (
-            <div className="viewTeam">
+            <div className="viewStadium">
                 <div className="content">
-                    <div className="newsCard">List of the clubs</div>
-                    {stadiumData.data.map((val, index) => (
-                        <div className="teamcards" key={index}>
+                    <h3>STADIUMS</h3>
+                    <div className="showCard">
+                        <div className="newsCard">
                             <div className="row">
-                                <div>{val.name}</div>
-                                <div>{val.roles}</div>
-                                <div>{val.id}</div>
+                                <button className="sendButton" name="All" onClick={() => viewStadiums("All")}>ALL</button>
+                                <button className="sendButton" name="Active" onClick={() => viewStadiums("Active")}>ACTIVE</button>
+                                <input className="searchBox" name="name" onChange={updateSelector}></input>
+                                <button className="sendButton" onClick={() => viewStadiums("Name")}>BY NAME</button>
 
-                            </div>
-                            <div className="gwInfo">
-
-                                <div>{val.infoUpdate}</div>
                             </div>
                         </div>
-                    ))}
+                        <div className="row spaceEvenly">
+                            <div className="dataBox">Name</div>
+                            <div className="dataBox">Address</div>
+                            <div className="dataBox">GLT</div>
+                            <div className="dataBox">Robot</div>
+                        </div>
+                        {stadiumData.data.map((val, index) => (
+                            <div key={index}>
+                                <div className="center spaceEvenly profileInfo" onClick={() => showFunc(val.id)}>
+                                    <div className="row underline">
+                                        <div className="dataBox">{val.name}</div>
+                                        <div className="dataBox">{val.address}</div>
+                                        <div className="dataBox">{(val.isGLT === 0) ? "No" : "Yes"}</div>
+                                        <div className="dataBox">{(val.isRobot === 0) ? "No" : "Yes"}</div>
+                                    </div>
+                                    {(showHide && (buttons.bId === val.id)) && (<div className="center">
+                                        <div className="row gwInfo">
+                                            <div className="dataBox">Contact</div>
+                                            <div className="dataBox">Phone</div>
+                                            <div className="dataBox">Docs</div>
+                                            <div className="dataBox">TV Compound</div>
+                                        </div>
+                                        <div className="row underline">
+                                            <div className="dataBox">{val.contact}</div>
+                                            <div className="dataBox">{val.contactPhone}</div>
+                                            <div className="dataBox">{val.docsLink}</div>
+                                            <div className="dataBox">{val.tvCompound}</div>
+                                        </div>
+                                    </div>
+                                    )}
+
+                                    {(showHide && (buttons.bId === val.id)) && (
+                                        <div className="gwInfo">
+                                            <div>{val.information}</div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>   
                 </div>
             </div>
         )

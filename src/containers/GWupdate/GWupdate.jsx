@@ -276,22 +276,38 @@ const GWupdate = (props) => {
         return (
             <div className="viewGWupdate">
                 <div className="content">
-                    <div className="newsCard">Last GameWeek 3 Updates</div>
-                    {gwUpdateData.data.map((val, index) => (
-                        <div className="gwupdatecards" key={index}>
+                    <div className={"showCard"}>
+                        <div className="newsCard"><h3>{filterName.filterType} GameWeek Updates</h3>
                             <div className="row">
-                                <div>{val.title}</div>
-                                <div>{val.roles}</div>
-                                <div>{val.infoUpdate}</div>
-                                <div>{val.id}</div>
+                                <button className="sendButton" name="allGWu" onClick={() => viewGWUpdates("All")}>All GWU</button>
+                                <button className="sendButton" name="isActive" onClick={() => viewGWUpdates("Active")}>Active GWU</button>
 
-                            </div>
-                            <div className="gwInfo">
+                                <input className="searchBox" name="title" onChange={updateSelector}></input>
+                                <button className="sendButton" onClick={() => viewGWUpdates("Title")}>GWU's Title</button>
 
-                                <div>{val.infoUpdate}</div>
                             </div>
                         </div>
-                    ))}
+                        {gwUpdateData.data.map((val, index) => (
+                            <div>
+                                <div className="row spaceEvenly">
+                                    <div className="dataBox">Title</div>
+                                    <div className="dataBox">Roles</div>
+                                    <div className="dataBox">ID</div>
+                                </div>
+                                <div className="gwupdatecards" key={index} onClick={() => showFunc(val.id)}>
+
+                                    <div className="row padd underline">
+                                        <div className="dataBox">{val.title}</div>
+                                        <div className="dataBox">{val.roles}</div>
+                                        <div className="dataBox"># {val.id}</div>
+                                    </div>
+                                    <div className="gwInfo">
+                                        <div>{val.infoUpdate}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         )

@@ -279,17 +279,12 @@ const AssetView = (props) => {
 
                                 <input className="searchBox" name="model" onChange={updateSelector}></input>
                                 <button className="sendButton" onClick={() => viewAssetViews("Model")}>MODEL</button>
-                                <button className="sendButton" onClick={() => goToCreateAsset()}> ADD</button>
                             </div>
                         </div>
                         <div className="row spaceEvenly column">
                             <div className="dataBox">Name</div>
                             <div className="dataBox">Model</div>
                             <div className="dataBox">Type</div>
-                            <div className="dataBox">Year</div>
-                            <div className="dataBox">S/N</div>
-                            <div className="dataBox">Warranty</div>
-                            <div className="dataBox">CCC</div>
                             <div className="dataBox">Quantity</div>
                         </div>
 
@@ -299,12 +294,29 @@ const AssetView = (props) => {
                                     <div className="dataBox">{val.name}</div>
                                     <div className="dataBox">{val.model}</div>
                                     <div className="dataBox">{val.type}</div>
-                                    <div className="dataBox">{val.year}</div>
-                                    <div className="dataBox">{val.serialNumber}</div>
-                                    <div className="dataBox">{val.warrantyExpiracyDate}</div>
-                                    <div className="dataBox">{val.crossCheckCode}</div>
                                     <div className="dataBox">{val.quantity}</div>
                                 </div>
+                                {(showHide && (buttons.bId === val.id)) && (<div className="center profileInfo">
+                                    <div className="row underline">
+                                        <div className="dataBox">Year</div>
+                                        <div className="dataBox">S/N</div>
+                                        <div className="dataBox">Warranty</div>
+                                        <div className="dataBox">CCC</div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="dataBox">{val.year}</div>
+                                        <div className="dataBox">{val.serialNumber}</div>
+                                        <div className="dataBox">{val.warrantyExpiracyDate}</div>
+                                        <div className="dataBox">{val.crossCheckCode}</div>
+                                    </div>
+                                </div>
+                                )}
+
+                                {(showHide && (buttons.bId === val.id)) && (<div className="row">
+                                    <div className="flexEnd">{buttons.show}</div>
+                                </div>
+                                )}
+
                             </div>
                         ))}
                     </div>

@@ -266,7 +266,6 @@ const Team = (props) => {
                                 <button className="sendButton" name="Active" onClick={() => viewTeams("Active")}>Active</button>
                                 <input className="searchBox" name="name" onChange={updateSelector}></input>
                                 <button className="sendButton" onClick={() => viewTeams("Name")}>BY NAME</button>
-                                <button className="sendButton" onClick={() => goCreateTeam()}>ADD</button>
                             </div>
                         </div>
                         <div className="row spaceEvenly">

@@ -43,9 +43,11 @@ La opción de archivar permite dejar de visualizar elementos que no son actuales
 
 La app está desarrollada para que después de la creación básica de algunos modelos se complete el perfil más adelante (es muy común en la empresa no disponer de toda la información necesaria de cada elemento).
 
-
+<img src="src/img/createTeam.png" width="1000">
 
 Para acceder a los controles de gestión el admin debe pulsar encima de los elementos para que aparezcan los botones de acceso, además de información completa del elemento.
+
+<img src="src/img/accessAdmin.png" width="1000">
 
 En el caso de no ser admin solo se muestra la información completa.
 
