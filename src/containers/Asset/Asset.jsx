@@ -63,35 +63,26 @@ const Asset = (props) => {
         <div className="viewAsset">
             <div className="content">
                 <h3>Asset</h3>
-                <div className="AssetCard">
-                    <div className="AssetInput">
-                        <input className="input" name="name" type="text" onChange={updateitem} placeholder="name" required />
-                    </div>
-                    <div className="AssetInput">
-                        <input className="input" name="model" type="text" onChange={updateitem} placeholder="model" required />
-                    </div>
-                    <div className="AssetInput">
-                        <input className="input" name="type" type="text" onChange={updateitem} placeholder="type" required />
-                    </div>
-                    <div className="AssetInput">
-                        <input className="input" name="kit_van_id" onChange={updateitem} placeholder="kit_van_id" required />
-                    </div>
-                    <div className="AssetInput">
-                        <input className="input" name="serialNumber" type="text" onChange={updateitem} placeholder="serialNumber" required />
-                    </div>
-                    <div className="AssetInput">
-                        <input className="input" name="ccc" type="text" onChange={updateitem} placeholder="CrossCheckCode" required />
-                    </div>
-                    <div className="AssetInput">
-                        <input className="input" name="year" type="string" onChange={updateitem} placeholder="Purchase Year Date" required />
-                    </div>
-                    <div className="AssetInput">
+                <div className="showCard">
+                        Name
+                        <input className="teamDataBox" name="name" type="text" onChange={updateitem} placeholder="name" required />
+                        Model
+                        <input className="teamDataBox" name="model" type="text" onChange={updateitem} placeholder="model" required />
+                        Type
+                        <input className="teamDataBox" name="type" type="text" onChange={updateitem} placeholder="type" required />
+                        Kit_Van
+                        <input className="teamDataBox" name="kit_van_id" onChange={updateitem} placeholder="kit_van_id" required />
+                        Serial Number
+                        <input className="teamDataBox" name="serialNumber" type="text" onChange={updateitem} placeholder="serialNumber" required />
+                        Cross Check Code
+                        <input className="teamDataBox" name="ccc" type="text" onChange={updateitem} placeholder="CrossCheckCode" required />
+                        Purchase Year
+                        <input className="teamDataBox" name="year" type="string" onChange={updateitem} placeholder="Purchase Year Date" required />
                         Warranty Expiration Date
-                        <input className="input" name="warranty" type="date" onChange={updateitem} placeholder="Warranty Expiration Date" required />
-                    </div>
-                    <div className="AssetInput">
-                        <input className="input" name="quantity" type="number" onChange={updateitem} placeholder="quantity" required />
-                    </div>
+                        <input className="teamDataBox" name="warranty" type="date" onChange={updateitem} placeholder="Warranty Expiration Date" required />
+                        Quantity
+                        <input className="teamDataBox" name="quantity" type="number" onChange={updateitem} placeholder="quantity" required />
+
                     <br></br>
                     <button className="sendButton" onClick={() => createAsset()}>CREATE</button>
                     <div className="msg">{msg}</div>
