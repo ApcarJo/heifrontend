@@ -1,10 +1,9 @@
-import Datepicker from "../../components/Datepicker/Datepicker";
+import GWupdate from '../GWupdate/GWupdate';
 
 const Home = () => 
     (
         <div className="viewHome">
-            <div className="content">Hello, this is Home</div>
-            <Datepicker />
+            <GWupdate></GWupdate>
         </div>
     ) 
 

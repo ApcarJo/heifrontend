@@ -8,7 +8,11 @@ https://main.d2if9d9z0lsipr.amplifyapp.com/
 Backend realizado en PHP con Laravel, deployado en Heroku.
 
 El backend está desarrollado con las rutas necesarias para que esta web app pueda seguir desarrollándose hasta su objetivo final en cuanto a funcionalidades.
-Se queda sin desarrollar en frontend la creación de VANs, el calendario de disponibilidad de los usuarios y las jornadas semanales con información adquirida de las demás tablas.
+Se queda sin desarrollar en frontend:
+- Creación de VANs
+- Itemización de Vehículo a VANS
+- Calendario de disponibilidad de los usuarios
+- Calendario de disponibilidad para las jornadas con información adquirida de las demás tablas.
 
 La app permite crear una base de datos con CRUDS completos y visualización de las distintas tablas a través de distintos filtros: usuarios (en registro) estadios, equipos, inventario y actualización de jornadas.
 
